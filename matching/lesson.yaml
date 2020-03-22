@@ -5,6 +5,13 @@
   Type: Standard
   Organization: Minerva University
   Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the CS112 Swirl lesson on Matching. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
 
 - Class: cmd_question
   Output: First, load the package Matching.
@@ -47,7 +54,8 @@
   Hint: 
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this quiz on Leanpub?"
+  Output: "Would you like the code-generator to generate a code for you? 
+      Note, once you're done, paste the code here: https://forms.gle/5efsAYGNF1ppSagA8"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941)

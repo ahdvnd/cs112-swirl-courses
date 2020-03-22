@@ -3,5 +3,10 @@
 
 # install_course_github("ahdvnd", "swirl-tbp", "cs112")
 
+library(swirl)
+library(swirlify)
 uninstall_all_courses()
 install_course_github("ahdvnd", "cs112-swirl-courses")
+
+swirl()
+demo_lesson()
