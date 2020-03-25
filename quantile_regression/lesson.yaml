@@ -27,7 +27,7 @@
   Output: Use code to look at the first few rows of the dataset.
   CorrectAnswer: head(peacekeeping)
   AnswerTests: omnitest(correctExpr='head(peacekeeping)')
-  Hint: Use your head :)
+  Hint: Use your head
   
 - Class: mult_question
   Output: The outcome variable is pbs2s3. What kind of a variable do you think it is?
@@ -100,12 +100,6 @@
   CorrectAnswer: genout <- GenMatch(X = X, Tr = peacekeeping$untype4)
   AnswerTests: any_of_exprs('genout <- GenMatch(X = X, Tr = peacekeeping$untype4)', 'genout <- GenMatch(Tr = peacekeeping$untype4, X = X)')
   Hint: 
-  
-- Class: exact_question
-  Output: In what generation was the solution found?
-  CorrectAnswer: 1
-  AnswerTests: omnitest(correctVal = 1)
-  Hint: This should be displayed when you run the GenMatch() function.
 
 - Class: cmd_question
   Output: Now that we have the weight, use them in the Match function to match 
@@ -156,17 +150,21 @@
   AnswerTests: any_of_exprs('library("quantreg")', 'library(quantreg)')
   Hint: 
   
-- Class: text
-  Output: We are going to use the 'mtcars' data that comes with R. The data
-      is alreay loaded in your environment.
+- Class: cmd_question
+  Output: We are going to use the 'engel' data that comes with the package.
+      The original Engel data is from 1857 and is on the relationship between 
+      food expenditure and household income. Load the data into your environment.
+  CorrectAnswer: data(engel)
+  AnswerTests: omnitest(correctExpr='data(engel)')
+  Hint: Use the data() function.
       
 - Class: text
   Output: We can perform quantile regression using the 'rq' function in the
       package 'quantreg'. We can specify a 'tau' option which tells 'rq' 
       which conditional quantile we want. The default value for 'tau' 
       is 0.5 which corresponds to median regression. To fit a quantile
-      regression of miles per gallon vs. car weight we use 
-      'rqfit <- rq(mpg ~ wt, data = mtcars)'
+      regression of food expenditure on income we can use 
+      'rqfit <- rq(foodexp ~ income, tau = .5, data = engel)'
       
 - Class: cmd_question
   Output: Look at the summary of the result but using the object we 
@@ -183,25 +181,29 @@
 - Class: cmd_question
   Output: Now that you learned how to use the 'rq' function,
       find the quantile effect for the first quartile (tau = 0.25)!
-  CorrectAnswer: rq(mpg ~ wt, data = mtcars, tau = 0.25)
-  AnswerTests: omnitest(correctExpr='rq(mpg ~ wt, data = mtcars, tau = 0.25)')
-  Hint: Did you type 0.25 or .25?
+  CorrectAnswer: rq(foodexp ~ income, tau = 0.25, data = engel)
+  AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = 0.25, data = engel)')
+  Hint: 
 
 - Class: figure
   Output: We can also plot the quantile regression line using the 'plot' and
-      'abline' functions in R. 
-      plot(mpg ~ wt, data = mtcars, pch = 16, main = "mpg ~ wt")
-      abline(lm(mpg ~ wt, data = mtcars), col = "red", lty = 2)
-      abline(rq(mpg ~ wt, data = mtcars), col = "blue", lty = 2)
-      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2)
+      'abline' functions in R.\n
+      plot(foodexp ~ income, data = engel, pch = 16, main = "foodexp ~ income");
+      abline(lm(foodexp ~ income, data = engel), col = "red", lty = 2);
+      abline(rq(foodexp ~ income, data = engel), col = "blue", lty = 2);
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2);
       The quantile regression line is in blue and the linear regression line is
       in red.
   Figure: plot_qr.R
   FigureType: new
   
-- Class: text
-  Output: Median regression (i.e. 50th quantile regression) is sometimes
-      preferred to linear regression because it is 'robust to outliers'.
+- Class: mult_question
+  Output: In general, which regresion do you think is more robust
+      to outliers?
+  AnswerChoices: Median Regression;Linear Regression
+  CorrectAnswer: Median Regression
+  AnswerTests: omnitest(correctVal='Median Regression')
+  Hint: 
 
 - Class: mult_question
   Output: Would you like the code-generator to generate a code for you?
