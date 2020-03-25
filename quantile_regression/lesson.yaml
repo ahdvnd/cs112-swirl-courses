@@ -136,19 +136,12 @@
       the conditional mean function as a linear combination of the predictors, 
       quantile regression estimates the conditional quantile function as 
       a linear combination of the predictors.
-      
-- Class: cmd_question
-  Output: We can perform quantile regression in R easily with the 'quantreg' package.
-      First, install the package.
-  CorrectAnswer: install.packages("quantreg")
-  AnswerTests: omnitest(correctExpr='install.packages("quantreg")')
-  Hint: 
   
 - Class: cmd_question
   Output: Then load the package.
   CorrectAnswer: library(quantreg)
   AnswerTests: any_of_exprs('library("quantreg")', 'library(quantreg)')
-  Hint: 
+  Hint: Make sure to first install the package if you don't have it installed.
   
 - Class: cmd_question
   Output: We are going to use the 'engel' data that comes with the package.
