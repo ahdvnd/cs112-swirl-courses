@@ -76,15 +76,13 @@
  
  cs112_credit <- function(val){
     selection <- getState()$val
-    if(selection == c("Yes", "No")){
-       message("Copy the code below as your answer")
+    if(selection == "Yes"){
+       message("Copy and paste the code below as your answer")
        message("#########################\n")
        message(keygen(val), "\n")
        message("#########################")
-       message("and paste it in the link below")
-       message("https://forms.gle/5efsAYGNF1ppSagA8")
        return(TRUE)
-    } else {
+    } else if(selection == "No"){
        return(TRUE)
     }
  } 

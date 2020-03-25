@@ -7,20 +7,20 @@
 
 # library(swirl)
 library(swirlify)
-uninstall_all_courses()
-install_course_github("ahdvnd", "cs112-swirl-courses")
-
 demo_lesson()
 
 # devtools::install_github("jtleek/swirl")
 
 
 # install_course(swc_path = "/Users/Hadzzz/Google Drive/minerva_related/CS112/cs112-swirl-courses.swc")
-
-devtools::install_github("ahdvnd/swirlplus", ref = "assign", force = TRUE)
-
+library(devtools)
+install_github("ahdvnd/swirlplus", force = TRUE)
 library(swirl)
+uninstall_all_courses()
+install_course_github("ahdvnd", "cs112-swirl-courses")
 swirl()
+
+
 
 
 

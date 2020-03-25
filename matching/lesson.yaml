@@ -54,8 +54,7 @@
   Hint: 
 
 - Class: mult_question
-  Output: "Would you like the code-generator to generate a code for you? 
-      Note, once you're done, paste the code here: https://forms.gle/5efsAYGNF1ppSagA8"
+  Output: "Would you like the code-generator to generate a code for you?
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941)
