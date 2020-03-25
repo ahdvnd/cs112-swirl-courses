@@ -6,21 +6,141 @@
   Organization: Minerva University
   Version: 2.4.5
   
+- Class: text
+  Output: Welcome to the CS112 Swirl lesson on Quantile Regression. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      
+- Class: text
+  Output: Lucky for you, the data is automatically loaded and is in your environment.
+      The object is called `peacekeeping`. All the missing values are already removed.
+
+- Class: exact_question
+  Output: How many observations are in the dataset?
+  CorrectAnswer: 122
+  AnswerTests: omnitest(correctVal = 122)
+  Hint: Do you really need a hint for this?
+  
+- Class: cmd_question
+  Output: Use code to look at the first few rows of the dataset.
+  CorrectAnswer: head(peacekeeping)
+  AnswerTests: omnitest(correctExpr='head(peacekeeping)')
+  Hint: Use your head :)
+  
+- Class: mult_question
+  Output: The outcome variable is pbs2s3. What kind of a variable is it?
+  AnswerChoices: Binary;Continuous;Character;Logical
+  CorrectAnswer: Binary
+  AnswerTests: omnitest(correctVal='Binary')
+  Hint: 
+  
+- Class: mult_question
+  Output: Since your variable is binary, what function is best for running
+      logisting regression in R?
+  AnswerChoices: glm();glm() with attribute family set to binomial;lm();lm() with attribute family set to binomial
+  CorrectAnswer: glm() with attribute family set to binomial
+  AnswerTests: omnitest(correctVal='glm() with attribute family set to binomial')
+  Hint: Look at your notes for the class on logistic regression.
+  
+- Class: exact_question
+  Output: Your treatment variabls is untype4. How many 
+      observations are in the treatment group?
+  CorrectAnswer: 7
+  AnswerTests: omnitest(correctVal = 7)
+  Hint: 
+  
+- Class: cmd_question
+  Output: Now, estimate the effect of treatment (untype4) on the outcome (pbs2s3) using the covariates
+      'wartype + logcost + wardur + factnum + factnum2 + trnsfcap +  treaty + develop + exp + decade'
+      using a logistic regression in the order they appear here and assign it
+      to an object called simple_reg.
+  CorrectAnswer: simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
+  AnswerTests: any_of_exprs('simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)', 'simple_reg <- glm(peacekeeping$pbs2s3 ~ peacekeeping$untype4 + peacekeeping$wartype + peacekeeping$logcost + peacekeeping$wardur + peacekeeping$factnum + peacekeeping$factnum2 + peacekeeping$trnsfcap + peacekeeping$treaty + peacekeeping$develop + peacekeeping$exp + peacekeeping$decade, family= binomial)')
+  Hint: Use <- for assignment rather than =.
+
+- Class: mult_question
+  Output: Is the coefficient on untype4 statistically significant at 95%?
+  AnswerChoices: Yes;No;Not enough information
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+  Hint: You can look at the summary of your regression or use the command confint(simple_reg)!
+
+- Class: cmd_question
+  Output: Now, we are going to use genetic matching algorithm to perform matching.
+      Load the package Matching. 
+  CorrectAnswer: library(Matching)
+  AnswerTests: omnitest(correctExpr='library(Matching)')
+  Hint: 
+
+- Class: text
+  Output: Remember, GenMatch uses the rgenoud genetic
+      algorithm, so you might need to execute the following 
+      install.packages("rgenoud") and then library(rgenoud). 
+      Hit enter to continue.
+  
+- Class: cmd_question
+  Output: For your convenience, we have already created a subset of the data
+      that only contains the 10 covariates you need to match on. This data set is
+      called X. Use X and the treatment variable (untype4) to find the weights from
+      the genetic matching algorithm and assign the result to an object called genout.
+      Leave all other parameters as their default values.
+  CorrectAnswer: genout <- GenMatch(X = X, Tr = peacekeeping$untype4)
+  AnswerTests: any_of_exprs('genout <- GenMatch(X = X, Tr = peacekeeping$untype4)', 'genout <- GenMatch(Tr = peacekeeping$untype4, X = X)')
+  Hint: 
+  
+- Class: exact_question
+  Output: In what generation was the solution found?
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal = 1)
+  Hint: This should be displayed when you run the GenMatch() function.
+
+- Class: cmd_question
+  Output: Now that we have the weight, use them in the Match function to match 
+      your data based on the covariates and assign the result to an object called matchout.gen.
+  CorrectAnswer: matchout.gen <- Match(X = X, Tr = peacekeeping$untype4, Y = peacekeeping$pbs2s3, Weight.matrix=genout)
+  AnswerTests: any_of_exprs('matchout.gen <- Match(Y = peacekeeping$pbs2s3, X = X, Tr = peacekeeping$untype4, Weight.matrix=genout)', 'matchout.gen <- Match(Y = peacekeeping$pbs2s3, Tr = peacekeeping$untype4, X = X, Weight.matrix=genout)')
+  Hint: Don't forget to include the covariate subset X and your outcome variable. Don't specify any other element in your Match() function.
+  
+- Class: cmd_question
+  Output: 
+  CorrectAnswer: 
+  AnswerTests: omnitest(correctExpr='rr <- Match(Y=lalonde$re78, Tr= lalonde$treat, X=X, M=1)')
+  Hint: 
+  
 - Class: cmd_question
   NumTimes: 1
   Token: |
-      num1 = sample(1:10, 1)
-      num2 = sample(1:10, 1)
-  Output: How do you find the sum of <num1> and <num2>?
-  CorrectAnswer: <num1> + <num2>
-  AnswerTests: omnitest(correctExpr='<num1> + <num2>')
-  HintFunction: 
+      num1 = sample(1:7, 1)
+  Output: You can obtain the potential outcomes both under treatment and under
+      no treatment using matchout.gen$index.treated and matchout.gen$index.control.
+      How do you find the treatment effect for the matched item number <num1>?
+  CorrectAnswer: matchout.gen$index.treated[<num1>] - matchout.gen$index.control[<num1>]
+  AnswerTests: omnitest(correctExpr='matchout.gen$index.treated[<num1>] - matchout.gen$index.control[<num1>]')
+  Hint: Note that you just need to show your code and not the numerical answer.
 
+- Class: cmd_question
+  Output: How do you find the median treatment effect? (just show your code)
+  CorrectAnswer: median(matchout.gen$index.treated) - median(matchout.gen$index.control)
+  AnswerTests: omnitest(correctExpr='median(matchout.gen$index.treated) - median(matchout.gen$index.control)')
+  Hint:  
 
+- Class: exact_question
+  Output: What is the average treatment effect? (round to two decimals)
+  CorrectAnswer: 27.86
+  AnswerTests: omnitest(correctVal = 27.86)
+  Hint: Use the mean function.
+
+- Class: exact_question
+  Output: What is the median treatment effect? (round to two decimals)
+  CorrectAnswer: 23
+  AnswerTests: omnitest(correctVal = 23)
+  Hint: Use the mean function.
+  
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this quiz on Leanpub?"
+  Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941, "ql")
   Hint:
-
