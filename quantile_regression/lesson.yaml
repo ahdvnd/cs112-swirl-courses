@@ -182,7 +182,7 @@
       
 - Class: cmd_question
   Output: Now that you learned how to use the 'rq' function,
-  find the quantile effect for the first quartile (tau = 0.25)!
+      find the quantile effect for the first quartile (tau = 0.25)!
   CorrectAnswer: rq(mpg ~ wt, data = mtcars, tau = 0.25)
   AnswerTests: omnitest(correctExpr='rq(mpg ~ wt, data = mtcars, tau = 0.25)')
   Hint: Did you type 0.25 or .25? :)
