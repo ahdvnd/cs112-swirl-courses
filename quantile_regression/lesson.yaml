@@ -21,6 +21,6 @@
   Output: "Would you like to receive credit for completing this quiz on Leanpub?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
-  AnswerTests: cs112_credit(941)
+  AnswerTests: cs112_credit(941, "ql")
   Hint:
 

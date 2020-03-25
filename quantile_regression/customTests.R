@@ -1,15 +1,15 @@
 # Put custom tests in this file.
-      
-      # Uncommenting the following line of code will disable
-      # auto-detection of new variables and thus prevent swirl from
-      # executing every command twice, which can slow things down.
-      
-      # AUTO_DETECT_NEWVAR <- FALSE
-      
-      # However, this means that you should detect user-created
-      # variables when appropriate. The answer test, creates_new_var()
-      # can be used for for the purpose, but it also re-evaluates the
-      # expression which the user entered, so care must be taken.
+
+# Uncommenting the following line of code will disable
+# auto-detection of new variables and thus prevent swirl from
+# executing every command twice, which can slow things down.
+
+# AUTO_DETECT_NEWVAR <- FALSE
+
+# However, this means that you should detect user-created
+# variables when appropriate. The answer test, creates_new_var()
+# can be used for for the purpose, but it also re-evaluates the
+# expression which the user entered, so care must be taken.
 
 # # Get the swirl state
 # getState <- function(){
@@ -53,36 +53,40 @@
 # }
 
 
- getState <- function(){
-    # Whenever swirl is running, its callback is at the top of its call stack.
-    # Swirl's state, named e, is stored in the environment of the callback.
-    environment(sys.function(1))$e
- }
- 
- keygen <- function(val){
-    set.seed(val)
-    pran <- function(n = 1){
-       replicate(n, sample(c(LETTERS, letters, 0:9), 1))
-    }
-    ks <- replicate(10, paste0(pran(4), collapse = ""))
-    set.seed(NULL)
-    pn <- sample(1:16, 1)
-    kn <- sample(1:10, 1)
-    sss <- paste(sample(c(LETTERS, letters, 0:9), 16-pn), collapse = "")
-    eee <- paste(sample(c(LETTERS, letters, 0:9), pn), collapse = "")
-    paste0("CS112", sss, ks[kn], eee)  
- }
- 
- 
- cs112_credit <- function(val){
-    selection <- getState()$val
-    if(selection == "Yes"){
-       message("Copy and paste the code below as your answer")
-       message("#########################\n")
-       message(keygen(val), "\n")
-       message("#########################")
-       return(TRUE)
-    } else if(selection == "No"){
-       return(TRUE)
-    }
- } 
+getState <- function(){
+  # Whenever swirl is running, its callback is at the top of its call stack.
+  # Swirl's state, named e, is stored in the environment of the callback.
+  environment(sys.function(1))$e
+}
+
+keygen <- function(val, char){
+  set.seed(val)
+  pran <- function(n = 1){
+    replicate(n, sample(c(LETTERS, letters, 0:9), 1))
+  }
+  ks <- replicate(10, paste0(pran(4), collapse = ""))
+  set.seed(NULL)
+  pn <- sample(1:16, 1)
+  kn <- sample(1:10, 1)
+  sss <- paste(sample(c(LETTERS, letters, 0:9), 16-pn), collapse = "")
+  eee <- paste(sample(c(LETTERS, letters, 0:9), pn), collapse = "")
+  paste0("CS112", sss, char, ks[kn], eee)  
+}
+
+
+cs112_credit <- function(val, char){
+  selection <- getState()$val
+  if(selection %in% c("Yes", "No")){
+    message("#########################")
+    message("Copy the code below as your answer")
+    message("#########################")
+    message(keygen(val, char))
+    message("#########################")
+    message("and paste it in the link below")
+    message("https://forms.gle/5efsAYGNF1ppSagA8")
+    message("#########################")
+    return(TRUE)
+  } else {
+    return(TRUE)
+  }
+} 
