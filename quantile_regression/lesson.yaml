@@ -115,7 +115,7 @@
   Hint: Don't forget to include the covariate subset X and your outcome variable. Don't specify any other element in your Match() function.
   
 - Class: text
-  Output: You can obtain the potential outcomes both under treatment and under
+  Output: You can obtain the potential outcomes both under treatment and under 
       no treatment by finding the indices of matched units using matchout.gen$index.treated
       and matchout.gen$index.control.
 
@@ -186,25 +186,13 @@
   CorrectAnswer: rq(mpg ~ wt, data = mtcars, tau = 0.25)
   AnswerTests: omnitest(correctExpr='rq(mpg ~ wt, data = mtcars, tau = 0.25)')
   Hint: Did you type 0.25 or .25? :)
-
-- Class: figure
-  Output: We can also plot the quantile regression line using the 'plot' and
-      'abline' functions in R. 
-      plot(mpg ~ wt, data = mtcars, pch = 16, main = "mpg ~ wt")
-      abline(lm(mpg ~ wt, data = mtcars), col = "red", lty = 2)
-      abline(rq(mpg ~ wt, data = mtcars), col = "blue", lty = 2)
-      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2)
-      The quantile regression line is in blue and the linear regression line is
-      in red.
-  Figure: plot_qr.R
-  FigureType: new
   
 - Class: text
   Output: Median regression (i.e. 50th quantile regression) is sometimes
       preferred to linear regression because it is 'robust to outliers'.
 
 - Class: mult_question
-  Output: "Would you like the code-generator to generate a code for you?"
+  Output: Would you like the code-generator to generate a code for you?
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941, "ql")
