@@ -76,7 +76,7 @@
  
  cs112_credit <- function(val){
     selection <- getState()$val
-    if(selection == c("Yes", "No")){
+    if(selection %in% c("Yes", "No")){
        message("Copy the code below as your answer")
        message("#########################\n")
        message(keygen(val), "\n")
