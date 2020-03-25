@@ -54,7 +54,7 @@
   Hint: 
 
 - Class: mult_question
-  Output: "Would you like the code-generator to generate a code for you?
+  Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941)
