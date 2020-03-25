@@ -201,7 +201,7 @@
   
 - Class: text
   Output: Median regression (i.e. 50th quantile regression) is sometimes
-  preferred to linear regression because it is 'robust to outliers'.
+      preferred to linear regression because it is 'robust to outliers'.
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
