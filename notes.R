@@ -22,6 +22,10 @@ swirl()
 
 
 
+## Things to do for adding lessons
+## add lesson to manifest
+## set_lesson()
+## pack_course()
 
 
 
