@@ -30,7 +30,7 @@
   Hint: Use your head :)
   
 - Class: mult_question
-  Output: The outcome variable is pbs2s3. What kind of a variable is it?
+  Output: The outcome variable is pbs2s3. What kind of a variable do you think it is?
   AnswerChoices: Binary;Continuous;Character;Logical
   CorrectAnswer: Binary
   AnswerTests: omnitest(correctVal='Binary')
@@ -56,9 +56,16 @@
 - Class: cmd_question
   Output: Now, estimate the effect of treatment (untype4) on the outcome (pbs2s3) using the covariates
       'wartype + logcost + wardur + factnum + factnum2 + trnsfcap +  treaty + develop + exp + decade'
-      using a logistic regression in the order they appear here.
-  CorrectAnswer: glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
-  AnswerTests: any_of_exprs('glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)', 'glm(peacekeeping$pbs2s3 ~ peacekeeping$untype4 + peacekeeping$wartype + peacekeeping$logcost + peacekeeping$wardur + peacekeeping$factnum + peacekeeping$factnum2 + peacekeeping$trnsfcap + peacekeeping$treaty + peacekeeping$develop + peacekeeping$exp + peacekeeping$decade, family= binomial)')
+      using a logistic regression in the order they appear here and assign it
+      to an object called simple_reg.
+  CorrectAnswer: simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
+  AnswerTests: any_of_exprs('simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)', 'simple_reg <- glm(peacekeeping$pbs2s3 ~ peacekeeping$untype4 + peacekeeping$wartype + peacekeeping$logcost + peacekeeping$wardur + peacekeeping$factnum + peacekeeping$factnum2 + peacekeeping$trnsfcap + peacekeeping$treaty + peacekeeping$develop + peacekeeping$exp + peacekeeping$decade, family= binomial)')
+  Hint: Make sure you use '<-' for assignment and not '='.
+  
+- Class: cmd_question
+  Output: Look at the summary of your regression.
+  CorrectAnswer: summary(simple_reg)
+  AnswerTests: omnitest(correctExpr='summary(simple_reg)')
   Hint: 
 
 - Class: mult_question
@@ -66,7 +73,10 @@
   AnswerChoices: Yes;No;Not enough information
   CorrectAnswer: Yes
   AnswerTests: omnitest(correctVal='Yes')
-  Hint: You can look at the summary of your regression or use the command confint(simple_reg)!
+  Hint: You can look at the summary of your regression or use the command confint(simple_reg)! 
+      You may have to leave swirl to be able to run your code. Once your ran
+      type swirl() and the same name you used initially to pick up where you 
+      left.
 
 - Class: cmd_question
   Output: Now, we are going to use genetic matching algorithm to perform matching.
@@ -115,12 +125,6 @@
   AnswerTests: omnitest(correctExpr='matchout.gen$index.treated[<num1>] - matchout.gen$index.control[<num1>]')
   Hint: Note that you just need to show your code and not the numerical answer.
 
-- Class: cmd_question
-  Output: How do you find the median treatment effect? (just show your code)
-  CorrectAnswer: median(matchout.gen$index.treated) - median(matchout.gen$index.control)
-  AnswerTests: omnitest(correctExpr='median(matchout.gen$index.treated) - median(matchout.gen$index.control)')
-  Hint:  
-
 - Class: exact_question
   Output: What is the average treatment effect? (round to two decimals)
   CorrectAnswer: 27.86
@@ -131,7 +135,7 @@
   Output: What is the median treatment effect? (round to two decimals)
   CorrectAnswer: 23
   AnswerTests: omnitest(correctVal = 23)
-  Hint: Use the mean function.
+  Hint: Ju
   
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
