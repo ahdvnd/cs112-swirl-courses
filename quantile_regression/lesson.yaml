@@ -177,12 +177,23 @@
   Output: In the table above, the 'lower bd' and 'upper bd' columns
       represent the endpoints of confidence intervals for the model 
       coefficients.
-      
+  
 - Class: cmd_question
+  NumTimes: 1
+  Token: |
+      num1 = sample(seq(0.25, 0.75, 0.25),1)
   Output: Now that you learned how to use the 'rq' function,
-      find the quantile effect for the first quartile (tau = 0.25)!
-  CorrectAnswer: rq(foodexp ~ income, tau = 0.25, data = engel)
-  AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = 0.25, data = engel)')
+      find the quantile effect for the first quartile (tau = <num1>)!
+  CorrectAnswer: rq(foodexp ~ income, tau = <num1>, data = engel)
+  AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = <num1>, data = engel)')
+  HintFunction: 
+
+- Class: cmd_question
+  Output: We can also pass a vector of scalars to tau for calculating 
+      the quantile effects for various quantiles. Try passing the vector 
+      c(0.25, 0.50, 0.75) to the tau and find the coefficients.
+  CorrectAnswer: rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)
+  AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)')
   Hint: 
 
 - Class: figure
