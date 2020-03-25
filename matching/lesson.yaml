@@ -57,6 +57,6 @@
   Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
-  AnswerTests: cs112_credit(941)
+  AnswerTests: cs112_credit(941, "mch")
   Hint:
 

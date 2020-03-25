@@ -59,7 +59,7 @@
     environment(sys.function(1))$e
  }
  
- keygen <- function(val){
+ keygen <- function(val, char){
     set.seed(val)
     pran <- function(n = 1){
        replicate(n, sample(c(LETTERS, letters, 0:9), 1))
@@ -70,19 +70,21 @@
     kn <- sample(1:10, 1)
     sss <- paste(sample(c(LETTERS, letters, 0:9), 16-pn), collapse = "")
     eee <- paste(sample(c(LETTERS, letters, 0:9), pn), collapse = "")
-    paste0("CS112", sss, ks[kn], eee)  
+    paste0("CS112", sss, char, ks[kn], eee)  
  }
  
  
- cs112_credit <- function(val){
+ cs112_credit <- function(val, char){
     selection <- getState()$val
     if(selection %in% c("Yes", "No")){
+       message("#########################")
        message("Copy the code below as your answer")
-       message("#########################\n")
-       message(keygen(val), "\n")
+       message("#########################")
+       message(keygen(val, char))
        message("#########################")
        message("and paste it in the link below")
        message("https://forms.gle/5efsAYGNF1ppSagA8")
+       message("#########################")
        return(TRUE)
     } else {
        return(TRUE)
