@@ -19,3 +19,6 @@ X = cbind(peacekeeping$wartype, peacekeeping$logcost, peacekeeping$wardur,
           peacekeeping$factnum, peacekeeping$factnum2, peacekeeping$trnsfcap,
           peacekeeping$treaty, peacekeeping$develop, peacekeeping$exp, 
           peacekeeping$decade)
+
+data(mtcars)
+mtcars

@@ -114,29 +114,95 @@
   AnswerTests: any_of_exprs('matchout.gen <- Match(Y = peacekeeping$pbs2s3, X = X, Tr = peacekeeping$untype4, Weight.matrix=genout)', 'matchout.gen <- Match(Y = peacekeeping$pbs2s3, Tr = peacekeeping$untype4, X = X, Weight.matrix=genout)')
   Hint: Don't forget to include the covariate subset X and your outcome variable. Don't specify any other element in your Match() function.
   
-- Class: cmd_question
-  NumTimes: 1
-  Token: |
-      num1 = sample(1:7, 1)
+- Class: text
   Output: You can obtain the potential outcomes both under treatment and under
-      no treatment using matchout.gen$index.treated and matchout.gen$index.control.
-      How do you find the treatment effect for the matched item number <num1>?
-  CorrectAnswer: matchout.gen$index.treated[<num1>] - matchout.gen$index.control[<num1>]
-  AnswerTests: omnitest(correctExpr='matchout.gen$index.treated[<num1>] - matchout.gen$index.control[<num1>]')
-  Hint: Note that you just need to show your code and not the numerical answer.
+      no treatment by finding the indices of matched units using matchout.gen$index.treated
+      and matchout.gen$index.control.
 
 - Class: exact_question
   Output: What is the average treatment effect? (round to two decimals)
-  CorrectAnswer: 27.86
-  AnswerTests: omnitest(correctVal = 27.86)
+  CorrectAnswer: 0.43
+  AnswerTests: omnitest(correctVal = 0.43)
   Hint: Use the mean function.
 
 - Class: exact_question
   Output: What is the median treatment effect? (round to two decimals)
-  CorrectAnswer: 23
-  AnswerTests: omnitest(correctVal = 23)
-  Hint: Ju
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal = 1)
+  Hint: Use the median function.
   
+- Class: text
+  Output: Congratulations! You have finished the first part of this exercise.
+      In this exercise, we will learn how to do quantile regression in R.
+      Hit enter to continue.
+      
+- Class: text
+  Output: Quantile regression is a regression method for estimating these
+      conditional quantile functions. Just as linear regression estimates 
+      the conditional mean function as a linear combination of the predictors, 
+      quantile regression estimates the conditional quantile function as 
+      a linear combination of the predictors.
+      
+- Class: cmd_question
+  Output: We can perform quantile regression in R easily with the 'quantreg' package.
+      First, install the package.
+  CorrectAnswer: install.packages("quantreg")
+  AnswerTests: omnitest(correctExpr='install.packages("quantreg")')
+  Hint: 
+  
+- Class: cmd_question
+  Output: Then load the package.
+  CorrectAnswer: library(quantreg)
+  AnswerTests: any_of_exprs('library("quantreg")', 'library(quantreg)')
+  Hint: 
+  
+- Class: text
+  Output: We are going to use the 'mtcars' data that comes with R. The data
+      is alreay loaded in your environment.
+      
+- Class: text
+  Output: We can perform quantile regression using the 'rq' function in the
+      package 'quantreg'. We can specify a 'tau' option which tells 'rq' 
+      which conditional quantile we want. The default value for 'tau' 
+      is 0.5 which corresponds to median regression. To fit a quantile
+      regression of miles per gallon vs. car weight we use 
+      'rqfit <- rq(mpg ~ wt, data = mtcars)'
+      
+- Class: cmd_question
+  Output: Look at the summary of the result but using the object we 
+      created above (rqfit).
+  CorrectAnswer: summary(rqfit)
+  AnswerTests: omnitest(correctExpr='summary(rqfit)')
+  Hint: 
+
+- Class: text
+  Output: In the table above, the 'lower bd' and 'upper bd' columns
+      represent the endpoints of confidence intervals for the model 
+      coefficients.
+      
+- Class: cmd_question
+  Output: Now that you learned how to use the 'rq' function,
+  find the quantile effect for the first quartile (tau = 0.25)!
+  CorrectAnswer: rq(mpg ~ wt, data = mtcars, tau = 0.25)
+  AnswerTests: omnitest(correctExpr='rq(mpg ~ wt, data = mtcars, tau = 0.25)')
+  Hint: Did you type 0.25 or .25? :)
+
+- Class: figure
+  Output: We can also plot the quantile regression line using the 'plot' and
+      'abline' functions in R. 
+      plot(mpg ~ wt, data = mtcars, pch = 16, main = "mpg ~ wt")
+      abline(lm(mpg ~ wt, data = mtcars), col = "red", lty = 2)
+      abline(rq(mpg ~ wt, data = mtcars), col = "blue", lty = 2)
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2)
+      The quantile regression line is in blue and the linear regression line is
+      in red.
+  Figure: plot_qr.R
+  FigureType: new
+  
+- Class: text
+  Output: Median regression (i.e. 50th quantile regression) is sometimes
+  preferred to linear regression because it is 'robust to outliers'.
+
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
