@@ -34,7 +34,9 @@
   AnswerChoices: Binary;Continuous;Character;Logical
   CorrectAnswer: Binary
   AnswerTests: omnitest(correctVal='Binary')
-  Hint: 
+  Hint: You may have to leave swirl to be able to run your code. Once your ran
+      type swirl() and the same name you used initially to pick up where you 
+      left.
   
 - Class: mult_question
   Output: Since your variable is binary, what function is best for running
@@ -54,11 +56,10 @@
 - Class: cmd_question
   Output: Now, estimate the effect of treatment (untype4) on the outcome (pbs2s3) using the covariates
       'wartype + logcost + wardur + factnum + factnum2 + trnsfcap +  treaty + develop + exp + decade'
-      using a logistic regression in the order they appear here and assign it
-      to an object called simple_reg.
-  CorrectAnswer: simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
-  AnswerTests: any_of_exprs('simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)', 'simple_reg <- glm(peacekeeping$pbs2s3 ~ peacekeeping$untype4 + peacekeeping$wartype + peacekeeping$logcost + peacekeeping$wardur + peacekeeping$factnum + peacekeeping$factnum2 + peacekeeping$trnsfcap + peacekeeping$treaty + peacekeeping$develop + peacekeeping$exp + peacekeeping$decade, family= binomial)')
-  Hint: Use <- for assignment rather than =.
+      using a logistic regression in the order they appear here.
+  CorrectAnswer: glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
+  AnswerTests: any_of_exprs('glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)', 'glm(peacekeeping$pbs2s3 ~ peacekeeping$untype4 + peacekeeping$wartype + peacekeeping$logcost + peacekeeping$wardur + peacekeeping$factnum + peacekeeping$factnum2 + peacekeeping$trnsfcap + peacekeeping$treaty + peacekeeping$develop + peacekeeping$exp + peacekeeping$decade, family= binomial)')
+  Hint: 
 
 - Class: mult_question
   Output: Is the coefficient on untype4 statistically significant at 95%?
@@ -102,12 +103,6 @@
   CorrectAnswer: matchout.gen <- Match(X = X, Tr = peacekeeping$untype4, Y = peacekeeping$pbs2s3, Weight.matrix=genout)
   AnswerTests: any_of_exprs('matchout.gen <- Match(Y = peacekeeping$pbs2s3, X = X, Tr = peacekeeping$untype4, Weight.matrix=genout)', 'matchout.gen <- Match(Y = peacekeeping$pbs2s3, Tr = peacekeeping$untype4, X = X, Weight.matrix=genout)')
   Hint: Don't forget to include the covariate subset X and your outcome variable. Don't specify any other element in your Match() function.
-  
-- Class: cmd_question
-  Output: 
-  CorrectAnswer: 
-  AnswerTests: omnitest(correctExpr='rr <- Match(Y=lalonde$re78, Tr= lalonde$treat, X=X, M=1)')
-  Hint: 
   
 - Class: cmd_question
   NumTimes: 1
