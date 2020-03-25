@@ -185,7 +185,19 @@
       find the quantile effect for the first quartile (tau = 0.25)!
   CorrectAnswer: rq(mpg ~ wt, data = mtcars, tau = 0.25)
   AnswerTests: omnitest(correctExpr='rq(mpg ~ wt, data = mtcars, tau = 0.25)')
-  Hint: Did you type 0.25 or .25? :)
+  Hint: Did you type 0.25 or .25?
+
+- Class: figure
+  Output: We can also plot the quantile regression line using the 'plot' and
+      'abline' functions in R. 
+      plot(mpg ~ wt, data = mtcars, pch = 16, main = "mpg ~ wt")
+      abline(lm(mpg ~ wt, data = mtcars), col = "red", lty = 2)
+      abline(rq(mpg ~ wt, data = mtcars), col = "blue", lty = 2)
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2)
+      The quantile regression line is in blue and the linear regression line is
+      in red.
+  Figure: plot_qr.R
+  FigureType: new
   
 - Class: text
   Output: Median regression (i.e. 50th quantile regression) is sometimes

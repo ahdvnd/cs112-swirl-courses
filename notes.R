@@ -17,6 +17,7 @@ library(devtools)
 install_github("ahdvnd/swirlplus", force = TRUE)
 library(swirl)
 uninstall_all_courses()
+1
 install_course_github("ahdvnd", "cs112-swirl-courses")
 # if not working, restart your session
 swirl()
