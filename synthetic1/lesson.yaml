@@ -14,6 +14,14 @@
       swirl() again. However, make sure you use the same name you always use!
 
 - Class: cmd_question
+  Output: We first need to install the package 'Synth'.
+      You can use the command install.packages("Synth") or 
+      install.packages('Synth', repos='http://cran.rstudio.com/').
+  CorrectAnswer: install.packages('Synth', repos='http://cran.rstudio.com/')
+  AnswerTests: any_of_exprs('install.packages('Synth', repos='http://cran.rstudio.com/')', 'install.packages("Synth")')
+  Hint:
+
+- Class: cmd_question
   Output: Now, load the package.
   CorrectAnswer: library(Synth)
   AnswerTests: omnitest(correctExpr='library(Synth)')
@@ -37,6 +45,18 @@
   CorrectAnswer: 2000
   AnswerTests: omnitest(correctVal = 2000)
   Hint: Look at the variable year.
+  
+- Class: figure
+  Output: We can also plot the quantile regression line using the 'plot' and
+      'abline' functions in R.\n
+      plot(foodexp ~ income, data = engel, pch = 16, main = "foodexp ~ income");
+      abline(lm(foodexp ~ income, data = engel), col = "red", lty = 2);
+      abline(rq(foodexp ~ income, data = engel), col = "blue", lty = 2);
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2);
+      The quantile regression line is in blue and the linear regression line is
+      in red.
+  Figure: data_prep.R
+  FigureType: new
   
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
