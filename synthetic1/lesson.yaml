@@ -47,19 +47,55 @@
   Hint: Look at the variable year.
   
 - Class: figure
-  Output: We can also plot the quantile regression line using the 'plot' and
-      'abline' functions in R.\n
-      plot(foodexp ~ income, data = engel, pch = 16, main = "foodexp ~ income");
-      abline(lm(foodexp ~ income, data = engel), col = "red", lty = 2);
-      abline(rq(foodexp ~ income, data = engel), col = "blue", lty = 2);
-      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2);
-      The quantile regression line is in blue and the linear regression line is
-      in red.
+  Output: In the synth.data dataset, the predictors are X1, X2, and X3, and 
+      Y is the outcome variable. Variables unit.num and name are unit identifiers.
+      Unit 7 is the treatment unit and units 29, 2, 13, 17, 32, and 38 are control units.
+      For your convenience, we have already converted the panel dataset 
+      to a object suitable for running the synth() function by using the dataprep()
+      function. The output is called dataprep.out. Hit enter to continue.
   Figure: data_prep.R
   FigureType: new
   
+- Class: cmd_question
+  Output: Use the subject dataprep.out and the Synth() function to identify the weights
+      that create the best possible synthetic control unit for the treated and
+      assign the result to an object called synth.out.
+  CorrectAnswer: synth.out <- synth(dataprep.out)
+  AnswerTests: onitest(correctExpr='synth.out <- synth(dataprep.out)')
+  Hint: Did you use <- instead of = ?
+  
+- Class: cmd_question
+  Output: Run synth.out$solution.w to check the weights you obtained.
+  CorrectAnswer: synth.out$solution.w
+  AnswerTests: onitest(correctExpr='synth.out$solution.w')
+  Hint: 
+  
 - Class: mult_question
-  Output: "Would you like the code-generator to generate a code for you?"
+  Output: Based on your results in the previous step, 
+      which control unit has the highest weight?
+  AnswerChoices: 17;29;32;38
+  CorrectAnswer: 32
+  AnswerTests: omnitest(correctVal='32')
+  Hint:
+  
+- Class: figure
+  Output: We can summarise the result of the synth() function. To get summary
+      tables for all information, we can use the synth.tab() function in order
+      to compare the treatment and the synthetic control units across the 
+      predictors. The table is shown in your console. Hit enter to continue!
+  Figure: synth_table.R
+  FigureType: new
+  
+- Class: figure
+  Output: We can also look at the summary plots for outcome trajectories 
+      of the treated and the synthetic control unit using the path.plot()
+      function. The figure is shown here. Hit enter to continue!
+  Figure: path_plot.R
+  FigureType: new
+
+- Class: mult_question
+  Output: Congratulations! You have reached the end of the lesson on synthetic
+      control using the Synth package. Would you like the code-generator to generate a code for you?
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941, "sth")
