@@ -57,11 +57,11 @@
   FigureType: new
   
 - Class: cmd_question
-  Output: Use the subject dataprep.out and the Synth() function to identify the weights
+  Output: Use the subject dataprep.out and the synth() function to identify the weights
       that create the best possible synthetic control unit for the treated and
       assign the result to an object called synth.out.
   CorrectAnswer: synth.out <- synth(dataprep.out)
-  AnswerTests: onitest(correctExpr='synth.out <- synth(dataprep.out)')
+  AnswerTests: omnitest(correctExpr='synth.out <- synth(dataprep.out)')
   Hint: Did you use <- instead of = ?
   
 - Class: cmd_question
