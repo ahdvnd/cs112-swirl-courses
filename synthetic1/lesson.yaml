@@ -16,9 +16,9 @@
 - Class: cmd_question
   Output: We first need to install the package 'Synth'.
       You can use the command install.packages("Synth") or 
-      install.packages('Synth', repos='http://cran.rstudio.com/').
-  CorrectAnswer: install.packages("Synth", repos='http://cran.rstudio.com/')
-  AnswerTests: any_of_exprs('install.packages("Synth", repos='http://cran.rstudio.com/')', 'install.packages("Synth")')
+      install.packages("Synth", repos="http://cran.rstudio.com/").
+  CorrectAnswer: install.packages("Synth", repos="http://cran.rstudio.com/")
+  AnswerTests: any_of_exprs('install.packages("Synth", repos="http://cran.rstudio.com/")', 'install.packages("Synth")')
   Hint:
 
 - Class: cmd_question
