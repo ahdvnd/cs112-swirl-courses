@@ -61,7 +61,7 @@
 - Class: cmd_question
   Output: Run synth.out$solution.w to check the weights you obtained.
   CorrectAnswer: synth.out$solution.w
-  AnswerTests: onitest(correctExpr='synth.out$solution.w')
+  AnswerTests: omnitest(correctExpr='synth.out$solution.w')
   Hint: 
   
 - Class: mult_question
