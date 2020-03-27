@@ -1,0 +1,67 @@
+- Class: meta
+  Course: CS112
+  Lesson: Basics of Synthetic Control
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the CS112 Swirl lesson on Basics of Synthetic Control. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+
+- Class: cmd_question
+  Output: We first need to install the package 'Synth'.
+      You can use the command install.packages("Synth") or 
+      install.packages('Synth', repos='http://cran.rstudio.com/').
+  CorrectAnswer: install.packages('Synth', repos='http://cran.rstudio.com/')
+  AnswerTest: any_of_exprs('install.packages('Synth', repos='http://cran.rstudio.com/')', 'install.packages("Synth")')
+  Hint:
+
+- Class: cmd_question
+  Output: Now, load the package.
+  CorrectAnswer: library(Synth)
+  AnswerTests: omnitest(correctExpr='library(Synth)')
+  Hint: 
+  
+- Class: cmd_question
+  Output: We are going to use the simple toy data that come with the package.
+      This dataset is called 'synth.data'. Load the data into your environment.
+  CorrectAnswer: data(synth.data)
+  AnswerTests: omnitest(correctExpr='data(synth.data)')
+  Hint: You need to use the data() function.
+  
+- Class: exact_question
+  Output: What's the earliest year the data covers?
+  CorrectAnswer: 1980
+  AnswerTests: omnitest(correctVal = 1980)
+  Hint: Look at the variable year.
+
+- Class: exact_question
+  Output: What's the latest year the data covers?
+  CorrectAnswer: 2000
+  AnswerTests: omnitest(correctVal = 2000)
+  Hint: Look at the variable year.
+  
+- Class: figure
+  Output: We can also plot the quantile regression line using the 'plot' and
+      'abline' functions in R.\n
+      plot(foodexp ~ income, data = engel, pch = 16, main = "foodexp ~ income");
+      abline(lm(foodexp ~ income, data = engel), col = "red", lty = 2);
+      abline(rq(foodexp ~ income, data = engel), col = "blue", lty = 2);
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2);
+      The quantile regression line is in blue and the linear regression line is
+      in red.
+  Figure: data_prep.R
+  FigureType: new
+  
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "sth")
+  Hint:
+

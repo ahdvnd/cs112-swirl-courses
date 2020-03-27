@@ -1,15 +1,20 @@
-# google_form_decode("https://docs.google.com/spreadsheets/d/e/2PACX-1vQCAQ5AzDnc9p-4mk463_UEnL197cIBaTxPe-OxP88I3kxc2jqT29GzgEC3W0LkCysei2iZsxMDhBeM/pub?gid=1186532089&single=true&output=csv")
-
-
-# install_course_github("ahdvnd", "swirl-tbp", "cs112")
-# devtools::install_github("gdancik/swirl-tbp", ref = "assign", force = TRUE)
-
 
 # library(swirl)
 library(swirlify)
 demo_lesson()
 
 # devtools::install_github("jtleek/swirl")
+
+## Things to do for adding lessons
+## add lesson to manifest
+## set_lesson()
+## pack
+
+
+
+
+
+
 
 
 # install_course(swc_path = "/Users/Hadzzz/Google Drive/minerva_related/CS112/cs112-swirl-courses.swc")
@@ -24,10 +29,20 @@ swirl()
 
 
 
-## Things to do for adding lessons
-## add lesson to manifest
-## set_lesson()
-## pack
+
+
+simple_reg <- glm(pbs2s3 ~ untype4 + wartype + logcost + wardur + factnum + factnum2 + trnsfcap + treaty + develop + exp + decade, family= binomial, data = peacekeeping)
+summary(simple_reg)
+genout <- GenMatch(X = X, Tr = peacekeeping$untype4)
+matchout.gen <- Match(X = X, Tr = peacekeeping$untype4, Y = peacekeeping$pbs2s3, Weight.matrix=genout)
+
+library(quantreg)
+rqfit <- rq(foodexp ~ income, tau = .5, data = engel)
+summary(rqfit)
+rq(foodexp ~ income, tau = , data = engel)
+rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)
+
+
 
 
 
