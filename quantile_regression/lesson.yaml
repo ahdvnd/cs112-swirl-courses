@@ -97,7 +97,7 @@
       your data based on the covariates and assign the result to an object called matchout.gen.
   CorrectAnswer: matchout.gen <- Match(X = X, Tr = peacekeeping$untype4, Y = peacekeeping$pbs2s3, Weight.matrix=genout)
   AnswerTests: any_of_exprs('matchout.gen <- Match(Y = peacekeeping$pbs2s3, X = X, Tr = peacekeeping$untype4, Weight.matrix=genout)', 'matchout.gen <- Match(Y = peacekeeping$pbs2s3, Tr = peacekeeping$untype4, X = X, Weight.matrix=genout)')
-  Hint: Don't forget to include the covariate subset X and your outcome variable. Don't specify any other element in your Match() function.
+  Hint: Don't forget to include the covariate subset X, the treatment variable, and your outcome variable. Don't specify any other element in your Match() function.
   
 - Class: text
   Output: You can obtain the potential outcomes both under treatment and under 
@@ -174,7 +174,7 @@
   Token: |
       num1 = sample(seq(0.25, 0.75, 0.25),1)
   Output: Now that you learned how to use the 'rq' function,
-      find the quantile effect for the first quartile (tau = <num1>)!
+      find the quantile effect for the quartile (tau = <num1>)!
       Do NOT assign to any object.
   CorrectAnswer: rq(foodexp ~ income, tau = <num1>, data = engel)
   AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = <num1>, data = engel)')
