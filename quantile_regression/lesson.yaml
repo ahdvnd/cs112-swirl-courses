@@ -30,15 +30,6 @@
   Hint: Use your head
   
 - Class: mult_question
-  Output: The outcome variable is pbs2s3. What kind of a variable do you think it is?
-  AnswerChoices: Binary;Continuous;Character;Logical
-  CorrectAnswer: Binary
-  AnswerTests: omnitest(correctVal='Binary')
-  Hint: You may have to leave swirl to be able to run your code. Once your ran
-      type swirl() and the same name you used initially to pick up where you 
-      left.
-  
-- Class: mult_question
   Output: Since your variable is binary, what function is best for running
       logisting regression in R?
   AnswerChoices: glm();glm() with attribute family set to binomial;lm();lm() with attribute family set to binomial
@@ -184,6 +175,7 @@
       num1 = sample(seq(0.25, 0.75, 0.25),1)
   Output: Now that you learned how to use the 'rq' function,
       find the quantile effect for the first quartile (tau = <num1>)!
+      Do NOT assign to any object.
   CorrectAnswer: rq(foodexp ~ income, tau = <num1>, data = engel)
   AnswerTests: omnitest(correctExpr='rq(foodexp ~ income, tau = <num1>, data = engel)')
   HintFunction: 
