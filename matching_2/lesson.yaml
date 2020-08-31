@@ -1,0 +1,62 @@
+- Class: meta
+  Course: CS112
+  Lesson: Basics of Matching
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the CS112 Swirl lesson on Matching. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+
+- Class: cmd_question
+  Output: First, load the package Matching.
+  CorrectAnswer: library(Matching)
+  AnswerTests: omnitest(correctExpr='library(Matching)')
+  Hint: You need to use the library() function.
+  
+- Class: cmd_question
+  Output: Then load the data lalonde from the package Matching.
+  CorrectAnswer: data(lalonde)
+  AnswerTests: omnitest(correctExpr='data(lalonde)')
+  Hint: You need to use the data() function.
+  
+- Class: cmd_question
+  Output: Now, estimate the propensity score using the covariates 'age, age^2, educ, educ^2, black, hisp, married' in the order they appear and assign it to an object called glm1.
+  CorrectAnswer: glm1 <- glm(treat ~ age + I(age^2) + educ + I(educ^2) + black + hisp + married, family=binomial, data=lalonde)
+  AnswerTests: omnitest(correctExpr='glm1 <- glm(treat ~ age + I(age^2) + educ + I(educ^2) + black + hisp + married, family=binomial, data=lalonde)')
+  Hint: Note the treatment variable is your dependent variable. Also, you need to use a logistic regression.
+  
+- Class: cmd_question
+  Output: Now that you have estimated the propensity score, assign the predicted value of the propensity score to an object called X.
+  CorrectAnswer: X <- glm1$fitted.values
+  AnswerTests: omnitest(correctExpr='X <- glm1$fitted.values')
+  Hint: 
+  
+- Class: cmd_question
+  NumTimes: 1
+  Token: |
+      num1 = sample(1:nrow(lalonde),1)
+  Output: How do you find the <num1>th element of the vector X.
+  CorrectAnswer: X[<num1>]
+  AnswerTests: omnitest(correctExpr='X[<num1>]')
+  HintFunction: 
+  
+- Class: cmd_question
+  Output: In this step, we are going to do a one-to-one matching with replacement (the "M=1" option). 
+    Use the appropriate function from the Matching library and assign the result to an object called rr.
+  CorrectAnswer: rr <- Match(Y=lalonde$re78, Tr= lalonde$treat, X=X, M=1)
+  AnswerTests: omnitest(correctExpr='rr <- Match(Y=lalonde$re78, Tr= lalonde$treat, X=X, M=1)')
+  Hint: 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "mch")
+  Hint:
+
