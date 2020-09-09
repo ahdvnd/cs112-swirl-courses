@@ -1,49 +1,52 @@
 - Class: meta
   Course: CS112
-  Lesson: Statistical Learning
+  Lesson: Session 3 Statistical Learning
   Author: Michael Chen
   Type: Standard
   Organization: Minerva University
   Version: 2.4.5
   
 - Class: text
-  Output: Welcome to the CS112 Swirl lesson on Matching. 
+  Output: Welcome to the CS112 Swirl lesson on Statistical learning. 
       Please note that you can use the function rpt() to go back to the
       previous question. To end your Swirl session, you can type bye().
       After you exit a lesson, you can always resume a lesson by typing 
       swirl() again. However, make sure you use the same name you always use!
 
 - Class: text
-  Output: In this lesson, you will learn how to 1) generate a dataset (n=200) based on an equation, 2) randomly split generated dataset into a training and a test set, 3) save datasets as .csv files.
-      There are 3 independent variables (x1, x2, x3) and 1 dependent variable (y). The following formula defines their relationship, y = 1000*x1 + 100*x2 + 10*x3 + noise.
+  Output: In this lesson, you will learn how to generate a dataset (n=200) based on an equation.
+      There are 3 independent variables (x1, x2, x3) and 1 dependent variable (y). 
+      The following formula defines their relationship, y = 1000*x1 + 100*x2 + 10*x3 + noise.
 
 - Class: cmd_question
-  Output: First, we create the first independent variable, x1. It follows a uniform distribution between 0 and 1.
+  Output: Let's create the first independent variable, x1. It follows a uniform distribution between 0 and 1.
+      Make sure you save it to an object called x1. Create 200 observations.
   CorrectAnswer: x1 <- runif(200)
   AnswerTests: any_of_exprs('x1 <- runif(200)', 'x1 <- runif(n=200)')
   Hint: You need to use the runif() function, and assign it to x1. 
   
 - Class: cmd_question
   Output: Second, we create the second independent variable, x2. It follows a normal distribution with mean of 0 and variance of 1.
+      Create 200 observations.
   CorrectAnswer: x2 <- rnorm(200)
-  AnswerTests: any_of_exprs('x2 <- rnorm(200)', 'x2 <- rnorm(n=200, mean=0, sd=1)')
+  AnswerTests: any_of_exprs('x2 <- rnorm(200)', 'x2 <- rnorm(n=200, mean=0, sd=1)', 'x2 <- rnorm(n=200, sd=1, mean=0)')
   Hint: You need to use the rnorm() function, and assign it to x2. 
 
 - Class: cmd_question
   Output: Third, we create the third independent variable, x3. It is a binary variable that is either 0 or 1.
   CorrectAnswer: x3 <- sample(0:1, 200, replace=TRUE)
-  AnswerTests: omnitest(correctExpr='x3 <- sample(0:1, 200, replace=TRUE)')
-  Hint: You need to use the sample() function. Change this to fit the question, sample(0:10, 10, replace=TRUE).
+  AnswerTests: omnitest(correctExpr = 'x3 <- sample(0:1, 200, replace = TRUE)')
+  Hint: You need to use the sample() function. Change this to fit the question, sample(0:10, 10, replace=TRUE). Make sure you save it to object x3.
   
 - Class: cmd_question
   Output: Now you can create the dependent variable, y, based on the values created and the formula, y = 1000*x1 + 100*x2 + 10*x3. Noise will be 10*rnorm(200).
   CorrectAnswer: y <- 1000*x1 + 100*x2 + 10*x3 + 10*rnorm(200)
   AnswerTests: omnitest(correctExpr='y <- 1000*x1 + 100*x2 + 10*x3 + 10*rnorm(200)')
-  Hint: You need to include the noise after the independent variables.
+  Hint: You need to include the noise after the independent variables. Make sure you use <- instead of the = sign.
     
 - Class: cmd_question
   Output: To wrap it up, you should create a dataframe to combine the independent variables and the dependent variable. 
-    Use the appropriate function to combine the variables to a dataframe called df.
+      Use the appropriate function to combine the variables to a dataframe called df.
   CorrectAnswer: df <- data.frame(x1, x2, x3, y)
   AnswerTests: omnitest(correctExpr='df <- data.frame(x1, x2, x3, y)')
   Hint: You need to put the variables in this order, x1, x2, x3, y. 
@@ -52,6 +55,5 @@
   Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
-  AnswerTests: cs112_credit(941, "mch")
+  AnswerTests: cs112_credit(941, "s3")
   Hint:
-
