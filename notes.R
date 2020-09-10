@@ -1,7 +1,7 @@
 # install.packages("swirl")
 # library(swirl)
 library(swirlify)
-# demo_lesson()
+demo_lesson()
 
 # devtools::install_github("jtleek/swirl")
 
