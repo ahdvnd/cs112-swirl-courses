@@ -17,7 +17,7 @@
   Output: In this lesson, you will learn how to generate a dataset (n=200) based on an equation.
       There are 3 independent variables (x1, x2, x3) and 1 dependent variable (y). 
       The following formula defines their relationship, y = 1000*x1 + 100*x2 + 10*x3 + noise.
-
+      
 - Class: cmd_question
   Output: Let's create the first independent variable, x1. It follows a uniform distribution between 0 and 1.
       Make sure you save it to an object called x1. Create 200 observations.

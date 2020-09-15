@@ -27,7 +27,7 @@ install_github("ahdvnd/swirlplus", force = TRUE)
 
 
 
-## This you have to do everytime you open your RStudio to use swril
+## This you have to do everytime you open your RStudio to use swirl
 library(swirl)
 # don’t need to do this step if doing this for the first time
 uninstall_all_courses()

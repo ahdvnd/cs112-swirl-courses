@@ -1,0 +1,61 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 4 Linear Regression
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 4, Linear Regression. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+
+- Class: text
+  Output: In this lesson, you will learn how to 1) save a dataframe as a csv file and 2) calculate the test set root mean squared error (RMSE) and R-squared. 
+      
+- Class: text
+  Output: The training and test data will be provided, named as train_df and test_df respectively. 
+      The functions to calculate RMSE and R-squared is also provided, named as calc_rmse() and calc_rsquared() respectively.
+
+- Class: cmd_question
+  Output: With the provided dataset, test_df, let's save it as csv so other people can easily use it. 
+      Make sure you name the csv as test_set.csv and set row.names as FALSE.
+  CorrectAnswer: write.csv(test_df, file = "test_set.csv", row.names = FALSE)
+  AnswerTests: omnitest(correctVal = 'write.csv(test_df, file = "test_set.csv", row.names = FALSE)')
+  Hint: Modify this expression, write.csv(df1, file = "dv.csv", row.names = FALSE), to get the right answer.
+  
+- Class: cmd_question
+  Output: Next, we want to calculate the RMSE and R-squared of the test set. Before that, we need to train a linear regression with the provided data, train_df. 
+      Create an object called lm1 to save the linear regression.
+  CorrectAnswer: lm1 <- lm(y ~ x1 + x2 + x3, data=train_df)
+  AnswerTests: any_of_exprs('lm1 <- lm(y ~ x1 + x2 + x3, data=train_df)', 'lm1 <- lm(train_df$y ~ train_df$x1 + train_df$x2 + train_df$x3)')
+  Hint: Make sure you put the independent variables in ascending order.
+
+- Class: cmd_question
+  Output: We also want to generate the predicted y values for the test set, based on the linear regression we just created. 
+      Make sure you save it as y_pred. 
+  CorrectAnswer: y_pred <- predict(lm1, test_df)
+  AnswerTests: any_of_exprs('y_pred <- predict(lm1, test_df)')
+  Hint: Use the predict() function, and include the linear regression object (lm1) and test set (test_df) in the argument. 
+
+- Class: exact_question
+  Output: Now we are going to calculate the RMSE from the provided function, calc_rmse(). This function has two arguments (inputs), true y and predicted y. 
+  CorrectAnswer: calc_rmse(y_pred, y_true)
+  AnswerTests: omnitest(correctVal = calc_rmse(y_pred, y_true))
+  Hint: Fill in the arguments for calc_rmse(). Remember the arguments are y_pred and y_true. 
+
+- Class: exact_question
+  Output: Now we are going to calculate the R-squared from the provided function, calc_rsquared(). This function also has two arguments (inputs), true y and predicted y. 
+  CorrectAnswer: calc_rsquared(y_pred, y_true)
+  AnswerTests: omnitest(correctVal = calc_rsquared(y_pred, y_true))
+  Hint: Fill in the arguments for calc_rsquared().
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s4")
+  Hint:
