@@ -1,15 +1,12 @@
-# install.packages("swirl")
-# library(swirl)
+install.packages("swirl")
+library(swirl)
 library(swirlify)
 demo_lesson()
 
-# devtools::install_github("jtleek/swirl")
-
 ## Things to do for adding lessons
 ## add lesson to manifest
-## set_lesson()
-## pack
-
+set_lesson()
+pack_course()
 
 
 
@@ -32,6 +29,7 @@ library(swirl)
 # don’t need to do this step if doing this for the first time
 uninstall_all_courses()
 # this installs the lessons content
+1
 install_course_github("ahdvnd", "cs112-swirl-courses")
 # if not working, restart your session
 # run the below command for starting swirl

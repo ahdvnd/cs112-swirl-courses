@@ -35,7 +35,7 @@
 - Class: cmd_question
   Output: Third, we create the third independent variable, x3. It is a binary variable that is either 0 or 1.
   CorrectAnswer: x3 <- sample(0:1, 200, replace=TRUE)
-  AnswerTests: omnitest(correctExpr = 'x3 <- sample(0:1, 200, replace = TRUE)')
+  AnswerTests: any_of_exprs('x3 <- sample(0:1, 200, replace = TRUE)', 'x3 <- sample(c(0,1), 200, replace = TRUE)')
   Hint: You need to use the sample() function. Change this to fit the question, sample(0:10, 10, replace=TRUE). Make sure you save it to object x3.
   
 - Class: cmd_question
