@@ -36,9 +36,6 @@
   AnswerTests: any_of_exprs('lm1 <- lm(re78 ~ age + educ + I(age*educ), data=lalonde)', 'lm1 <- lm(re78 ~ age*educ, data=lalonde)', 'lm1 <- lm(lalonde$re78 ~ lalonde$age + I(lalonde$age*lalonde$educ))', 'lm1 <- lm(lalonde$re78 ~ (lalonde$age)*(lalonde*educ))')
   Hint: Use the I() function to "isolate" the interaction terms age and educ. This is best practice when adding interaction terms in linear regressions.
 
-- Class: text
-  Output: 
-
 - Class: cmd_question
   Output: With the trained linear regression, we are now going to use 
       simulation (which has many useful features that will be introduced 
