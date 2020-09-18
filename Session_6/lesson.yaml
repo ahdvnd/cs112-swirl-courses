@@ -1,0 +1,183 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 6 Logistic Regression
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 6, logistic regression. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+
+- Class: text
+  Output: In this exercise, we'll be working with heart attack data from Kaggle.
+      The data includes patients' data on the presence of heart disease 
+      but also other characteristics such as demographic variables. We want to see
+      how using a logistic regression we can predict the probability of having
+      a heart disease given a person characteristics.
+
+- Class: cmd_question
+  Output: Let's load the dataset first. The dataset's url is
+      https://bit.ly/heart_attack_data and is in .csv format. Use the appropriate
+      function to load the dataset first and save it to an object called ha_data.
+  CorrectAnswer: ha_data <- read.csv("https://bit.ly/heart_attack_data")
+  AnswerTests: any_of_exprs('ha_data <- read.csv("https://bit.ly/heart_attack_data")')
+  Hint: Which function do we usually use to import csv files? 
+      You don't need to use any other argument. Make sure you use "<-"
+      for assignment and not "=".
+
+- Class: text
+  Output: As we said, the data includes patients' data on the presence of heart
+      disease but also other characteristics such as demographic
+      variables. The variable 'target' captures the presence of a heart disease.
+      It is integer valued 0 = no/less chance of heart attack 
+      and 1 = more chance of heart attack.
+      
+- Class: cmd_question
+  Output: Write a function that tells you how many variables are in the dataset.
+  CorrectAnswer: ncol(ha_data)
+  AnswerTests: omnitest(correctVal = ncol(ha_data))
+  Hint: There are various ways to do this. Function nrow() gives you the number
+      of rows in the dataset. Find which function gives you the number of columns
+      in a dataset.
+  
+- Class: cmd_question
+  Output: Let's take a look at the dataset by using the function head().
+  CorrectAnswer: head(ha_data)
+  AnswerTests: omnitest(correctVal = head(ha_data))
+  Hint: You don't need a hint for this :)
+
+- Class: text
+  Output: Go to this link to read more about the variables in the dataset. 
+      https://www.kaggle.com/nareshbhat/health-care-data-set-on-heart-attack-possibility
+
+- Class: cmd_question
+  Output: The variable chest pain (represented as cp in the data) takes 4 different
+      types indicated by numbers from 1-4. Becuase cp is a categorical variable but
+      summarized by numbers, we can't use it directly in our regression because
+      the regression models is going to assume it's a numerical variable rather
+      than categorical. So we need to convert this variable to categorical using
+      the as.factor() function. Use this function on the variable and save the result
+      to the same object ha_data$cp.
+  CorrectAnswer: ha_data$cp <- as.factor(ha_data$cp)
+  AnswerTests: any_of_exprs('ha_data$cp <- as.factor(ha_data$cp)')
+  Hint: Make sure you use "<-" for assignment and not "=".
+
+- Class: text
+  Output: Now, let's get ready to do some regression analysis. Because the outcome
+      variable (target) is binary, we will use a logistic regression in order to 
+      predict it. Press any key to continue!
+
+- Class: cmd_question
+  Output: Let's split the data to test and train. For that, you can simply run
+      this code train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5)). 
+      This code just creates the indices for the training data.
+  CorrectAnswer: train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5))
+  AnswerTests: any_of_exprs('train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5))')
+  Hint: Just copy and run the code in the question text with the semicolons in between.
+
+- Class: cmd_question
+  Output: Now, let's create the training set by using the indices we created in
+      previous step. You can simply run the code ha_train<-ha_data[train_ind,]
+  CorrectAnswer: ha_train<-ha_data[train_ind,]
+  AnswerTests: any_of_exprs('ha_train<-ha_data[train_ind,]')
+  Hint: Just copy and run the code in the question text with the semicolons in between.
+
+- Class: cmd_question
+  Output: Finally, let's create the test set by using the indices we created in
+      previous step. You can simply run the code ha_test<-ha_data[-train_ind,]
+  CorrectAnswer: ha_test<-ha_data[-train_ind,]
+  AnswerTests: any_of_exprs('ha_test<-ha_data[-train_ind,]')
+  Hint: Just copy and run the code in the question text with the semicolons in between.
+
+- Class: cmd_question
+  Output: To perform logistic regression, we use the glm() function instead of 
+      the usual lm() function we've been using so far for regression analysis. glm
+      stands for generalized linear models. glm() works the same way as lm() except
+      at the end, you should determine the family of model you would like to use.
+      We're going to use logistic regression, so we use family = binomial at the end.
+      Note that we'll be using the ha_train data.
+      Let's regress target on age, sex, chest pain type (cp), esting blood pressure (trestbps),
+      cholestoral (chol), fasting blood sugar (fbs), resting electrocardiographic 
+      results (restecg), and maximum heart rate achieved (thalach). Save the result
+      to an object called logistic01.
+  CorrectAnswer: logistic01 <- glm(target ~ age + sex + cp + trestbps + chol + fbs + restecg + thalach, data = ha_train, family = binomial)
+  AnswerTests: any_of_exprs('logistic01 <- glm(target ~ age + sex + cp + trestbps + chol + fbs + restecg + thalach, data = ha_train, family = binomial)', 'logistic01 <- glm(target ~ age + sex + cp + trestbps + chol + fbs + restecg + thalach, data = ha_train, family = "binomial")', 'logistic01 <- glm(target ~ age + sex + cp + trestbps + chol + fbs + restecg + thalach, family = "binomial", data = ha_train)', 'logistic01 <- glm(target ~ age + sex + cp + trestbps + chol + fbs + restecg + thalach, family = binomial, data = ha_train)', 'logistic01 <- glm(ha_train$target ~ ha_train$age + ha_train$sex + ha_train$cp + ha_train$trestbps + ha_train$chol + ha_train$fbs + ha_train$restecg + ha_train$thalach, family = binomial)')
+  Hint: Make sure you specify the family as binomial and that you are using the 
+      data ha_train. Also did you save the 
+      result to the object name? Also, while the order of variables in a 
+      regression in R is not important, it's important in swirl. Please enter them
+      in the order specified above.
+
+- Class: cmd_question
+  Output: We can see how good our model is by going "in the wild" and using 
+      the model with the test daya. The predict() function can be used to 
+      predict the probability that a person will have a heart disease, given 
+      values of the predictors using the test data ha_test. So make sure you 
+      use the argument newdata = ha_test.
+      In using the function, we specify type="response" option which tells R 
+      to output everything in terms of probabilities rather than the logistic
+      values of Y. Use the function and find store the results to an object
+      called predicted_vals.
+  CorrectAnswer: predicted_vals <- predict(logistic01, type="response", newdata = ha_test)
+  AnswerTests: any_of_exprs('predicted_vals <- predict(logistic01, type="response", newdata = ha_test)', 'predicted_vals <- predict(logistic01, newdata = ha_test, type="response")')
+  Hint: Make sure you specify type as "response" and use argument newdata = ha_test. Also did you save the results
+      into an object?
+      
+- Class: cmd_question
+  Output: The object predicted_vals that we just created is a vector. Let's look
+      the first 10 elements of the vector.
+  CorrectAnswer: predicted_vals[1:10]
+  AnswerTests: any_of_exprs('predicted_vals[1:10]', 'head(predicted_vals, 10)')
+  Hint: Did you use brackets?
+
+- Class: text
+  Output: The predicted values that we estimated using the test data in the 
+      previous step are numbers that can be anything between 0 and 1. 
+      These predicted values are NOT really comparable to the observed outcomes 
+      stored in the variable 'target' in the test data that are either 0 or 1.
+      In the next step, we will convert the predicted values to values of 0 
+      and 1 for better comparison.
+
+- Class: cmd_question
+  Output: To convert the predicted values to only zeros and ones, we can set a rule.
+      We can say that if the predicted outcomes are less than 0.5, change them to 0,
+      and if they are equal or greater than 0.5, change them to 1. This is arbitrary
+      rule but it'll help up compare the predicted and the observed outcomes. Run
+      this code without modifying it predicted_vals_binary <- ifelse(predicted_vals < 0.5, 0, 1)
+      which basically creates a new variable that is 0 for observations of predicted_Vals
+      that are less than 0.5 and 1 otherwise.
+  CorrectAnswer: predicted_vals_binary <- ifelse(predicted_vals < 0.5, 0, 1)
+  AnswerTests: any_of_exprs('predicted_vals_binary <- ifelse(predicted_vals < 0.5, 0, 1)')
+  Hint: Did you run predicted_vals_binary <- ifelse(predicted_vals < 0.5, 0, 1)
+
+- Class: cmd_question
+  Output: We can now compare the predicted outcomes to the observed outcomes. Let's
+      create a table that shows the values of the binary predicted outcome
+      (predicted_vals_binary) against the observed outcome (ha_test$target). See
+      how you can use the table() function.
+  CorrectAnswer: table(predicted_vals_binary, ha_test$target)
+  AnswerTests: any_of_exprs('table(predicted_vals_binary, ha_test$target)')
+  Hint: Make sure you first input predicted values and then the observed values in
+      the table function.
+
+- Class: mult_question
+  Output: The table should show what percentage of those who didn't have heart
+      disease but our model predicted as having a heart disease and vice versa.
+      Do you think the accuracy of our model is satisfactory?
+  AnswerChoices: Yes;No
+  CorrectAnswer: No
+  AnswerTests: omnitest(correctVal='No')
+  Hint: Look at the summary of your regression by using the summary() function,
+      and look at the last column.
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s6")
+  Hint:

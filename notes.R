@@ -1,3 +1,8 @@
+## for packing a course, we need to use swirlify
+## but swirlify does not work with Aboozar's version 
+## of the swirl so we should install swirl from CRAN
+## but for running the courses we should go back to 
+## Aboozar's version.
 install.packages("swirl")
 library(swirl)
 library(swirlify)
@@ -6,6 +11,8 @@ demo_lesson()
 ## Things to do for adding lessons
 ## add lesson to manifest
 set_lesson()
+## we only need to pack a course once a new lesson is written. 
+## We don't have to do it when we modify a lesson or fix it.
 pack_course()
 
 
@@ -33,5 +40,6 @@ install_course_github("ahdvnd", "cs112-swirl-courses")
 # if not working, restart your session
 # run the below command for starting swirl
 swirl()
-
+Aboozar
+1
 
