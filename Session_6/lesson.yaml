@@ -101,7 +101,7 @@
       at the end, you should determine the family of model you would like to use.
       We're going to use logistic regression, so we use family = binomial at the end.
       Note that we'll be using the ha_train data.
-      Let's regress target on age, sex, chest pain type (cp), esting blood pressure (trestbps),
+      Let's regress target on age, sex, chest pain type (cp), resting blood pressure (trestbps),
       cholestoral (chol), fasting blood sugar (fbs), resting electrocardiographic 
       results (restecg), and maximum heart rate achieved (thalach). Save the result
       to an object called logistic01.
@@ -146,8 +146,8 @@
 - Class: cmd_question
   Output: To convert the predicted values to only zeros and ones, we can set a rule.
       We can say that if the predicted outcomes are less than 0.5, change them to 0,
-      and if they are equal or greater than 0.5, change them to 1. This is arbitrary
-      rule but it'll help up compare the predicted and the observed outcomes. Run
+      and if they are equal or greater than 0.5, change them to 1. This is an arbitrary
+      rule but it'll help us compare the predicted and the observed outcomes. Run
       this code without modifying it predicted_vals_binary <- ifelse(predicted_vals < 0.5, 0, 1)
       which basically creates a new variable that is 0 for observations of predicted_Vals
       that are less than 0.5 and 1 otherwise.
