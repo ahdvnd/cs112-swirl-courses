@@ -1,0 +1,86 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 7 Presenting Regression Results
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 7, Presenting Regression Results. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+
+- Class: text
+  Output: In this lesson, you will practice two examples where a for loop iteratively calculates a value and saves the value to a storage vector. 
+      Use the documentation as needed, https://rpubs.com/brouwern/for_i_in_R. 
+
+- Class: cmd_question
+  Output: Let's start with a simple example. First, we create a storage vector. 
+      Use the rep() function and create 20 NA values, storing it to an object called store1. 
+  CorrectAnswer: store1 <- rep(NA, 20)
+  AnswerTests: any_of_exprs('store1 <- rep(NA, 20)')
+  Hint: Fill in the argument for rep().
+  
+- Class: cmd_question
+  Output: Let's take a look at our storage vector.
+  CorrectAnswer: store1
+  AnswerTests: any_of_exprs('store1')
+  Hint: Just type the name of the storage vector.
+
+- Class: cmd_question
+  Output: Next, we want to create a for loop, calculating the value i^2 + 2i + 4, where i is the index of the storage vector.
+      Make sure you save the result to the storage vector we just created.
+  CorrectAnswer: for (i in 1:length(store1)){store1[i] <- i^2 + 2*i + 4}
+  AnswerTests: any_of_exprs('for (i in 1:length(store1)){store1[i] <- i^2 + 2*i + 4}', 'for (i in 1:20){store1[i] <- i^2 + 2*i + 4}')
+  Hint: Modify this expression, for (i in 1:10){storage <- i^2}.
+
+- Class: text
+  Output: Good job! You know the basics of using a for loop to iteratively calculate and store values to a storage vector.
+      Now, we are advancing to a more complicated example. 
+
+- Class: cmd_question
+  Output: Let's also start by creating a storage variable.
+      The storage has 100 rows and 2 columns, so you'd be using the matrix() function.
+      This time, name it as store2. 
+  CorrectAnswer: store2 <- matrix(NA, nrow = 100, ncol = 2)
+  AnswerTests: any_of_exprs('store2 <- matrix(NA, nrow = 100, ncol = 2)')
+  Hint: Modify this expression, matrix(NA, nrow=, ncol=).
+
+- Class: cmd_question
+  Output: Recall the simulation we ran from a few sessions ago. A simulation is already ran, generating 100 simulated coefficients.
+      The linear model is re78 ~ age, based on the lalonde dataset. 
+      Let's first take a look at the simulated coefficients, using sim_results@coef
+  CorrectAnswer: sim_results@coef
+  AnswerTests: any_of_exprs('sim_results@coef')
+  Hint: 
+
+- Class: text
+  Output: Each row represents a simulation, with an intercept and coefficients for the variable age. 
+      To select specific values from the simulated, we can use the indexing, sim_results@coef[x, y], where x is the row and y is the column.
+      For example, if we want the age coefficient for the 5th simulation, we would type sim_results@coef[5, 2]. 
+
+- Class: cmd_question
+  Output: Now, to the task. 
+      Remember we have 100 rows and 2 columns? This is the exact dimension of the simulated results.
+      In the for loop, let's store the simulated values in the storage matrix we created.
+      The only difference is that we would like to round the numbers so that there are no decimals, use round(x, digits=0).
+  CorrectAnswer: for (i in 1:nrow(store2)){for (j in 1:ncol(store2)){store2[i, j] <- round(sim_results@coef[i, j], digits=0)}}
+  AnswerTests: any_of_exprs('for (i in 1:nrow(store2)){for (j in 1:ncol(store2)){store2[i, j] <- round(sim_results@coef[i, j], digits=0)}}')
+  Hint: We are using a nested for loop here (a for loop within a for loop). One for loop indicates the row and the other indicates the column.
+      If you are struggling, then modify the expression, for (i in 1:x){for (j in 1:y){store2[i, j] <- round(number, digits=0)}}
+
+- Class: cmd_question
+  Output: If you got this far, good job! Let's take a look at our storage matrix.
+  CorrectAnswer: store2
+  AnswerTests: any_of_exprs('store2')
+  Hint: Just type store2.
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s7")
+  Hint:

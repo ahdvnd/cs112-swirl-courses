@@ -37,7 +37,6 @@ library(swirl)
 # don’t need to do this step if doing this for the first time
 uninstall_all_courses()
 # this installs the lessons content
-1
 install_course_github("ahdvnd", "cs112-swirl-courses")
 # if not working, restart your session
 # run the below command for starting swirl
@@ -45,3 +44,4 @@ swirl()
 Aboozar
 
 
+=======
