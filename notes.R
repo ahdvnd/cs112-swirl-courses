@@ -43,5 +43,3 @@ install_course_github("ahdvnd", "cs112-swirl-courses")
 swirl()
 Aboozar
 
-
-=======
