@@ -17,6 +17,8 @@ pack_course()
 
 
 
+
+
 ## Instruction for students
 
 # If you don't have the devtools packages
@@ -41,5 +43,5 @@ install_course_github("ahdvnd", "cs112-swirl-courses")
 # run the below command for starting swirl
 swirl()
 Aboozar
-1
+
 
