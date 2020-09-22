@@ -15,7 +15,8 @@
       
 - Class: text
   Output: When you started this swirl lesson, the Matching and boot packages
-      were automatically installed and loaded in your environment. We also 
+      were automatically loaded in your environment. If you got an error
+      make sure you reinstall packages Matching and boot. We also 
       loaded the data lalonde in your environment. So you're good to go.
 
 - Class: cmd_question
@@ -77,6 +78,7 @@
   CorrectAnswer: cv.err <- cv.glm(lalonde, glm.lalonde)
   AnswerTests: any_of_exprs('cv.err <- cv.glm(lalonde, glm.lalonde)', 'cv.err <- cv.glm(data = lalonde, glmfit = glm.lalonde)')
   Hint: Make sure you specify the data. Did you save the results to an object?
+      Also make sure you specify the data first and then the glm model.
 
 - Class: cmd_question
   Output: Now let's do the same thing with the object related to our second
