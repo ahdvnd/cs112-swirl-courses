@@ -1,0 +1,124 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 8 Resampling Methods
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 8, Resampling Methods. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      
+- Class: text
+  Output: When you started this swirl lesson, the Matching and boot packages
+      were automatically installed and loaded in your environment. We also 
+      loaded the data lalonde in your environment. So you're good to go.
+
+- Class: cmd_question
+  Output: Remember, to make your code replicable especially when you use random
+      sampling functions, it's better to use the set.seed() function. Use the 
+      function and set the seed at 20181001.
+  CorrectAnswer: set.seed(20181001)
+  AnswerTests: any_of_exprs('set.seed(20181001)')
+  Hint: 
+  
+- Class: text
+  Output: Here's a little trick in R when you use lm() or glm() functions for
+      regression. Let's say you have a data frame with 5 variables in which 
+      the variable y is your outcome variable and x1, ..., x4 are your independent
+      variable. Instead of saying glm(y ~ x1 + x2 + x3 + x4, data = my_data) you
+      can say glm(y ~ ., data = my_data). This will basically regress your outcome
+      y on every other variable in your data frame. Press any key to continue!
+
+- Class: cmd_question
+  Output: Let's look at the lalonde data again. Use the head function to look
+      at the first few rows. 
+  CorrectAnswer: head(lalonde)
+  AnswerTests: any_of_exprs('head(lalonde)')
+  Hint: 
+
+- Class: cmd_question
+  Output: re78 is our outcome (dependent) variable. Let's regress it on every
+      other variable in the data without really using the name of the independent
+      variables in the regression and assign the result to an object called glm.lalonde.
+      Use the suggested approach above. Use the glm() function which is the 
+      general form of the lm() function.
+  CorrectAnswer: glm.lalonde <- glm(re78 ~ ., data = lalonde)
+  AnswerTests: any_of_exprs('glm.lalonde <- glm(re78 ~ ., data = lalonde)', 'glm.lalonde <- glm(re78 ~ ., lalonde)')
+  Hint: Make sure you specify the data. Did you save the results to an object?
+
+- Class: text
+  Output: Here's another trick in R when you use lm() or glm() functions for
+      regression. Again, let's say you have a data frame with 5 variables in which 
+      the variable y is your outcome variable and x1, ..., x4 are your independent
+      variable. If we want all predictors with all first-order interaction terms,
+      we can simply use glm(y ~ .*., data = muy_data) which is equivalent to
+      glm(y ~ x1 + x2 + x3 + x4 + I(x1*x2) + I(x1*x3) + I(x1*x4) + I(x2*x3) + I(x2*x4) + I(x3*x4), data = my_data)
+
+- Class: cmd_question
+  Output: Let's regress it on every single variable and their interaction by using 
+      the trick you just leaned. Assign the result to an object called glm2.lalonde.
+      Use the suggested approach above. Use the glm() function which is the 
+      general form of the lm() function.
+  CorrectAnswer: glm2.lalonde <- glm(re78 ~ .*., data = lalonde)
+  AnswerTests: any_of_exprs('glm2.lalonde <- glm(re78 ~ .*., data = lalonde)', 'glm2.lalonde <- glm(re78 ~ .*., lalonde)')
+  Hint: Make sure you specify the data. Did you save the results to an object?
+
+
+- Class: cmd_question
+  Output: Now that you have your models ready, use the cv.glm function that
+      performs LOOCV (You can use the K argument to perform K-fold CV). Let's first
+      use it on the object related to our first regression called glm.lalonde.
+      Assign the result to an object called cv.err
+  CorrectAnswer: cv.err <- cv.glm(lalonde, glm.lalonde)
+  AnswerTests: any_of_exprs('cv.err <- cv.glm(lalonde, glm.lalonde)', 'cv.err <- cv.glm(data = lalonde, glmfit = glm.lalonde)')
+  Hint: Make sure you specify the data. Did you save the results to an object?
+
+- Class: cmd_question
+  Output: Now let's do the same thing with the object related to our second
+      regression called glm2.lalonde. Assign the result to an object called cv.err2
+  CorrectAnswer: cv.err2 <- cv.glm(lalonde, glm2.lalonde)
+  AnswerTests: any_of_exprs('cv.err2 <- cv.glm(lalonde, glm2.lalonde)', 'cv.err2 <- cv.glm(data = lalonde, glmfit = glm2.lalonde)')
+  Hint: Make sure you specify the data. Did you save the results to an object?
+
+- Class: cmd_question
+  Output: We can look at the MSE of the errors by calling the delta element of
+      the objects we created and then look at their first columns. Here you can use
+      the command cv.err$delta[1] for the first error object cv.err.
+  CorrectAnswer: cv.err$delta[1]
+  AnswerTests: any_of_exprs('cv.err$delta[1]')
+  Hint: Just copy and paste the code
+
+- Class: cmd_question
+  Output: Let's do the same thing for the second error object that we created
+      and called cv.err2
+  CorrectAnswer: cv.err2$delta[1]
+  AnswerTests: any_of_exprs('cv.err2$delta[1]')
+  Hint:
+ 
+- Class: mult_question
+  Output: Based on your analysis above, which model would you choose?
+  AnswerChoices: First;Second
+  CorrectAnswer: First
+  AnswerTests: omnitest(correctVal='First')
+  Hint: You choose the model with lower MSE!
+  
+- Class: text
+  Output: This exercise only looked at two models. One with all variables and
+      one with all variables but also their interaction. You can see that we used
+      the lOOCV technique to choose between the models. We can continute trying
+      other models and see which ones give us a lower MSE and choose that one.
+      Again, remember the goal in prediction is to find the most precise prediction
+      of an outcome. So we'll choose the model that produces the lowest mean
+      standard error (MSE). 
+  
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s8")
+  Hint:
