@@ -35,22 +35,22 @@
 - Class: cmd_question
   Output: As data scientists, we should be comfortable with splitting data into training and test set.
       Use the sample() function to randomly select 100 indices as test set.
-      Save the indices to an object called test.idx.
-  CorrectAnswer: test.idx <- sample(1:nrow(lalonde), 100)
-  AnswerTests: any_of_exprs('test.idx <- sample(1:nrow(lalonde), 100)', 'test.idx = sample(1:445, 100)')
+      Save the indices to an object called test.
+  CorrectAnswer: test <- sample(1:nrow(lalonde), 100)
+  AnswerTests: any_of_exprs('test <- sample(1:nrow(lalonde), 100)', 'test = sample(1:445, 100)')
   Hint: To sample 5 numbers from 1-10, you would do sample(1:10, 5). See how you would modify this.
 
 - Class: cmd_question
   Output: With the indices generated above, let's extract the test set from the original lalonde dataset.
       Save the data frame to an object called lalonde.test.
-  CorrectAnswer: lalonde.test <- lalonde[test.idx,]
-  AnswerTests: any_of_exprs('lalonde.test <- lalonde[test.idx,]')
+  CorrectAnswer: lalonde.test <- lalonde[test,]
+  AnswerTests: any_of_exprs('lalonde.test <- lalonde[test,]')
   Hint: Make sure you include a comma in the [] to specify you want the rows.
 
 - Class: cmd_question
   Output: Now repeat this with the training set. A hint is to use the - operator.
-  CorrectAnswer: lalonde.train <- lalonde[-test.idx,]
-  AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test.idx,]')
+  CorrectAnswer: lalonde.train <- lalonde[-test,]
+  AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test,]')
   Hint: lalonde[-1,] means you want everything except the first row.
 
 - Class: cmd_question
