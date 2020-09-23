@@ -136,12 +136,9 @@
   AnswerTests: any_of_exprs('rmse.rf.test <- calc_rmse(lalonde.test$re75, rf.test.pred)')
   Hint: Change this, calc_rmse(ytrue, ypred)
 
-
 - Class: text
-  Output: Let's compare the test set error of our two models. 
-      Our random forest model has a smaller rmse () than the bagging model (). 
-      Though the difference might be small here, it demonstrates that usually the random forest model outperforms the decision tree and the bagging models in external test sets.
-      This means that there is a lower risk of overfitting in the model.
+  Output: Good job! You've learned the basics of bagging and random forest models. 
+      Now you can show this off to your friends.
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
