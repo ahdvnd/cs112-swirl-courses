@@ -89,14 +89,6 @@
   AnswerTests: omnitest(correctVal='age')
   Hint: The variable age is not used to classify in this decision tree.
 
-- Class: mult_question
-  Output: Say we have a data point that has re74 = 7000, u75 = 1, married = 1, and educ = 5,
-      what is the predicted value based on the decision tree?
-  AnswerChoices: 0;7168;15810;5233;4261
-  CorrectAnswer: 7168
-  AnswerTests: omnitest(correctVal=7168)
-  Hint: When an evaluation is true, we proceed to the left branch, vice versa.
-
 - Class: text
   Output: Remember the test set we made at the beginning? 
       Let's compare the root-mean-squared-error (rmse) for our training set and test set.
