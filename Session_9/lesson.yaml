@@ -27,6 +27,12 @@
   Output: Our trusty lalonde dataset is automatically loaded in the beginning of the session.
 
 - Class: cmd_question
+  Output: Let's set a seed to make sure our tree turns out the same. Set seed to 112.
+  CorrectAnswer: set.seed(112)
+  AnswerTests: any_of_exprs('set.seed(112)')
+  Hint: Copy and paste, set.seed(112)
+
+- Class: cmd_question
   Output: As data scientists, we should be comfortable with splitting data into training and test set.
       Use the sample() function to randomly select 100 indices as test set.
       Save the indices to an object called test.idx.
