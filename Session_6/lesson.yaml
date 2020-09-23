@@ -25,7 +25,7 @@
       https://bit.ly/heart_attack_data and is in .csv format. Use the appropriate
       function to load the dataset first and save it to an object called ha_data.
   CorrectAnswer: ha_data <- read.csv("https://bit.ly/heart_attack_data")
-  AnswerTests: any_of_exprs('ha_data <- read.csv("https://bit.ly/heart_attack_data")')
+  AnswerTests: expr_uses_func('read.csv')
   Hint: Which function do we usually use to import csv files? 
       You don't need to use any other argument. Make sure you use "<-"
       for assignment and not "=".
