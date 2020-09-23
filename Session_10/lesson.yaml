@@ -39,8 +39,8 @@
       If we use re75 as the dependent variable and the rest (except re78) as independent variables, 
       how many independent variables are there?
   AnswerChoices: 12;11;10;9
-  CorrectAnswer: "12"
-  AnswerTests: omnitest(correctVal='12')
+  CorrectAnswer: "10"
+  AnswerTests: omnitest(correctVal='10')
   Hint: We can't use re75 and re78.
 
 
