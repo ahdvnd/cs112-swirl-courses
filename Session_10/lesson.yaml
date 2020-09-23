@@ -28,12 +28,6 @@
   Output: Our trusty lalonde dataset is automatically loaded in the beginning of the session.
       It is also appropriately separated into training set (n=345) and test set (n=100). 
 
-- Class: cmd_question
-  Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
-  CorrectAnswer: set.seed(112)
-  AnswerTests: any_of_exprs('set.seed(112)')
-  Hint: set.seed(112)
-
 - Class: mult_question
   Output: First, we will apply bagging to the dataset. Note that in the lalonde dataset, there are 12 variables in total.
       If we use re75 as the dependent variable and the rest (except re78) as independent variables, 
@@ -43,6 +37,11 @@
   AnswerTests: omnitest(correctVal='10')
   Hint: We can't use re75 and re78.
 
+- Class: cmd_question
+  Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
+  CorrectAnswer: set.seed(112)
+  AnswerTests: any_of_exprs('set.seed(112)')
+  Hint: set.seed(112)
 
 - Class: cmd_question
   Output: Use the randomForest() function, which is similar in format as tree(), to apply bagging.
@@ -90,6 +89,12 @@
   Hint: Square root of 10 is ~3. 
 
 - Class: cmd_question
+  Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
+  CorrectAnswer: set.seed(112)
+  AnswerTests: any_of_exprs('set.seed(112)')
+  Hint: set.seed(112)
+
+- Class: cmd_question
   Output: Now, use the randomForest() function to make a random forest.
       Save the forest to an object called rf.lalonde.
       (Hint, you only need to change one parameter in from the bagging model.)
@@ -134,9 +139,8 @@
 
 - Class: text
   Output: Let's compare the test set error of our two models. 
-      For our bagging model, the rmse is approximately 1844.
-      For our random forest model, the rmse is approximately 1833. 
-      Though the difference is small here, it demonstrates that usually the random forest model outperforms the decision tree and the bagging models in external test sets.
+      Our random forest model has a smaller rmse () than the bagging model (). 
+      Though the difference might be small here, it demonstrates that usually the random forest model outperforms the decision tree and the bagging models in external test sets.
       This means that there is a lower risk of overfitting in the model.
 
 - Class: mult_question
