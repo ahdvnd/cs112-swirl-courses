@@ -37,14 +37,14 @@
 - Class: cmd_question
   Output: With the indices generated above, let's extract the test set from the original lalonde dataset.
       Save the data frame to an object called lalonde.test.
-  CorrectAnswer: lalonde.test <- lalonde[test,]
-  AnswerTests: any_of_exprs('lalonde.test <- lalonde[test,]')
+  CorrectAnswer: lalonde.test <- lalonde[test.idx,]
+  AnswerTests: any_of_exprs('lalonde.test <- lalonde[test.idx,]')
   Hint: Make sure you include a comma in the [] to specify you want the rows.
 
 - Class: cmd_question
   Output: Now repeat this with the training set. A hint is to use the - operator.
-  CorrectAnswer: lalonde.train <- lalonde[-test,]
-  AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test,]')
+  CorrectAnswer: lalonde.train <- lalonde[-test.idx,]
+  AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test.idx,]')
   Hint: lalonde[-1,] means you want everything except the first row.
 
 - Class: cmd_question
