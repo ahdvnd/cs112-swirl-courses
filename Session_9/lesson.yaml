@@ -1,0 +1,136 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 9 CART
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 9, CART. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      
+- Class: text
+  Output: In this lesson, we will build a simple decision tree together, and try to interpret it!
+
+- Class: cmd_question
+  Output: Let's start by loading the necessary library for making decision trees. 
+      Load the "tree" library. Install it if you haven't done so.
+  CorrectAnswer: library(tree)
+  AnswerTests: any_of_exprs('library(tree)')
+  Hint: To install, install.packages("tree"). To load, library(tree).
+
+- Class: text
+  Output: Our trusty lalonde dataset is automatically loaded in the beginning of the session.
+
+- Class: cmd_question
+  Output: As data scientists, we should be comfortable with splitting data into training and test set.
+      Use the sample() function to randomly select 100 indices as test set.
+      Save the indices to an object called test.idx.
+  CorrectAnswer: test.idx <- sample(1:nrow(lalonde), 100)
+  AnswerTests: any_of_exprs('test.idx <- sample(1:nrow(lalonde), 100)', 'test.idx = sample(1:445, 100)')
+  Hint: To sample 5 numbers from 1-10, you would do sample(1:10, 5). See how you would modify this.
+
+- Class: cmd_question
+  Output: With the indices generated above, let's extract the test set from the original lalonde dataset.
+      Save the data frame to an object called lalonde.test.
+  CorrectAnswer: lalonde.test <- lalonde[test,]
+  AnswerTests: any_of_exprs('lalonde.test <- lalonde[test,]')
+  Hint: Make sure you include a comma in the [] to specify you want the rows.
+
+- Class: cmd_question
+  Output: Now repeat this with the training set. A hint is to use the - operator.
+  CorrectAnswer: lalonde.train <- lalonde[-test,]
+  AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test,]')
+  Hint: lalonde[-1,] means you want everything except the first row.
+
+- Class: cmd_question
+  Output: Now we are done with processing, we can make our decision tree! 
+      Use the tree() function, which is similar in format as glm(), to make a decision tree.
+      Save the tree to an object called tree.re75.
+      The dependent variable is re75. Use everything except re75 and re78 as independent variables.
+  CorrectAnswer: tree.re75 <- tree(re75 ~ .-re78, data=lalonde.train)
+  AnswerTests: any_of_exprs('tree.re75 <- tree(re75 ~ .-re78, data=lalonde.train)', 'tree.re75 <- tree(re75 ~ age + educ + black + hisp + married + nodegr + re74 + u74 + u75 + treat, data=lalonde.train)')
+  Hint: Make sure you specify the data, we only want to use the training set here.
+
+- Class: cmd_question
+  Output: Let's take a look at the summary of our decision tree.
+  CorrectAnswer: summary(tree.re75)
+  AnswerTests: any_of_exprs('summary(tree.re75)')
+  Hint: Use summary(tree.re75)
+
+- Class: cmd_question
+  Output: We can also plot our decision tree easily with plot() and text().
+      Run plot(tree.re75)
+  CorrectAnswer: plot(tree.re75)
+  AnswerTests: any_of_exprs('plot(tree.re75)')
+  Hint: 
+
+- Class: cmd_question
+  Output: The plot is empty. We need to add text to the tree.
+      Run text(tree.re75, pretty=0)
+  CorrectAnswer: text(tree.re75, pretty=0)
+  AnswerTests: any_of_exprs('text(tree.re75, pretty=0)')
+  Hint: 
+
+- Class: mult_question
+  Output: Based on the plot we made, which variables below is NOT used to make a decision in the tree?
+  AnswerChoices: re74;u75;educ;married;age
+  CorrectAnswer: age
+  AnswerTests: omnitest(correctVal='age')
+  Hint: The variable age is not used to classify in this decision tree.
+
+- Class: mult_question
+  Output: Say we have a data point that has re74 = 7000, u75 = 1, married = 1, and educ = 5,
+      what is the predicted value based on the decision tree?
+  AnswerChoices: 0;7168;15810;5233;4261
+  CorrectAnswer: 7168
+  AnswerTests: omnitest(correctVal=7168)
+  Hint: When an evaluation is true, we proceed to the left branch, vice versa.
+
+- Class: text
+  Output: Remember the test set we made at the beginning? 
+      Let's compare the root-mean-squared-error (rmse) for our training set and test set.
+      The calc_rmse is already loaded. The first argument is ytrue and the second is ypred.
+
+- Class: cmd_question
+  Output: Let's generate predictions from our training set using the decision tree.
+      Save the predictions to an object called train.pred.
+      Make sure you specify the type argument as "vector".
+  CorrectAnswer: train.pred <- predict(tree.re75, lalonde.train, type="vector")
+  AnswerTests: any_of_exprs('train.pred <- predict(tree.re75, lalonde.train, type="vector")')
+  Hint: train.pred <- predict([insert tree], [insert data], type="vector")
+
+- Class: cmd_question
+  Output: Now we can use the calc_rmse function to calculate the training set error.
+  CorrectAnswer: calc_rmse(lalonde.train$re75, train.pred)
+  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, train.pred))
+  Hint: Change this, calc_rmse(ytrue, ypred)
+
+- Class: cmd_question
+  Output: Let's do the same thing, but for the test set
+      Save the predictions to an object called test.pred.
+      Make sure you specify the type argument as "vector".
+  CorrectAnswer: test.pred <- predict(tree.re75, lalonde.test, type="vector")
+  AnswerTests: any_of_exprs('test.pred <- predict(tree.re75, lalonde.test, type="vector")')
+  Hint: test.pred <- predict([insert tree], [insert data], type="vector")
+
+- Class: cmd_question
+  Output: Use the calc_rmse function to calculate the test set error.
+  CorrectAnswer: calc_rmse(lalonde.test$re75, test.pred)
+  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, test.pred))
+  Hint: Change this, calc_rmse(ytrue, ypred)
+
+- Class: text
+  Output: Awesome job! In this lesson, we built a decision tree together. 
+      We also analyzed its basic structure and evaluated the model with rmse.
+  
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s9")
+  Hint:
