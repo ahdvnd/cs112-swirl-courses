@@ -127,7 +127,7 @@
 - Class: cmd_question
   Output: Use the calc_rmse function to calculate the test set error.
   CorrectAnswer: calc_rmse(lalonde.test$re75, test.pred)
-  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, test.pred))
+  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.test$re75, test.pred))
   Hint: Change this, calc_rmse(ytrue, ypred)
   
 - Class: mult_question
