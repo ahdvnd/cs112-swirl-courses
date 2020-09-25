@@ -33,9 +33,10 @@
   Hint: Copy and paste, set.seed(112)
 
 - Class: cmd_question
-  Output: As data scientists, we should be comfortable with splitting data into training and test set.
-      Use the sample() function to randomly select 100 indices as test set.
-      Save the indices to an object called test.
+  Output: As data scientists, we should be comfortable with splitting data into 
+      training and test set. Use the sample() function to randomly select 100 
+      values from numbers betwee 1 and the number of rows of the dataset.
+      This will be the indices of your test set. Save the indices to an object called 'test'.
   CorrectAnswer: test <- sample(1:nrow(lalonde), 100)
   AnswerTests: any_of_exprs('test <- sample(1:nrow(lalonde), 100)', 'test = sample(1:445, 100)')
   Hint: To sample 5 numbers from 1-10, you would do sample(1:10, 5). See how you would modify this.
@@ -48,18 +49,21 @@
   Hint: Make sure you include a comma in the [] to specify you want the rows.
 
 - Class: cmd_question
-  Output: Now repeat this with the training set. A hint is to use the - operator.
+  Output: Now repeat this with the training set. Save the result to an object
+      called lalonde.train. A hint is to use the - operator.
   CorrectAnswer: lalonde.train <- lalonde[-test,]
   AnswerTests: any_of_exprs('lalonde.train <- lalonde[-test,]')
   Hint: lalonde[-1,] means you want everything except the first row.
 
 - Class: cmd_question
-  Output: Now we are done with processing, we can make our decision tree! 
+  Output: Now we are done with splitting the data, we can make our decision tree! 
       Use the tree() function, which is similar in format as glm(), to make a decision tree.
-      Save the tree to an object called tree.re75.
-      The dependent variable is re75. Use everything except re75 and re78 as independent variables.
+      Save the tree to an object called tree.re75. The dependent variable is re75.
+      Use everything except re75 and re78 as independent variables. You can use "."
+      for specifying all other variables and "-" for excluding some of them.
+      Specify that you're using the training data.
   CorrectAnswer: tree.re75 <- tree(re75 ~ .-re78, data=lalonde.train)
-  AnswerTests: any_of_exprs('tree.re75 <- tree(re75 ~ .-re78, data=lalonde.train)', 'tree.re75 <- tree(re75 ~ age + educ + black + hisp + married + nodegr + re74 + u74 + u75 + treat, data=lalonde.train)')
+  AnswerTests: any_of_exprs('tree.re75 <- tree(re75 ~ .-re78, data=lalonde.train)', 'tree.re75 <- tree(re75 ~ .-re78 -re75, data=lalonde.train)', 'tree.re75 <- tree(re75 ~ .-re78 -re75, lalonde.train)', 'tree.re75 <- tree(re75 ~ age + educ + black + hisp + married + nodegr + re74 + u74 + u75 + treat, data=lalonde.train)')
   Hint: Make sure you specify the data, we only want to use the training set here.
 
 - Class: cmd_question
@@ -89,21 +93,25 @@
   AnswerTests: omnitest(correctVal='age')
   Hint: The variable age is not used to classify in this decision tree.
 
-- Class: text
-  Output: Remember the test set we made at the beginning? 
-      Let's compare the root-mean-squared-error (rmse) for our training set and test set.
-      The calc_rmse is already loaded. The first argument is ytrue and the second is ypred.
-
 - Class: cmd_question
-  Output: Let's generate predictions from our training set using the decision tree.
+  Output: Let's generate predictions from our training set using the decision tree
+      and the predict() function.
       Save the predictions to an object called train.pred.
       Make sure you specify the type argument as "vector".
   CorrectAnswer: train.pred <- predict(tree.re75, lalonde.train, type="vector")
-  AnswerTests: any_of_exprs('train.pred <- predict(tree.re75, lalonde.train, type="vector")')
+  AnswerTests: any_of_exprs('train.pred <- predict(tree.re75, lalonde.train, type="vector")', 'train.pred <- predict(tree.re75, type="vector")')
   Hint: train.pred <- predict([insert tree], [insert data], type="vector")
+  
+- Class: text
+  Output: Remember the test set we made at the beginning? 
+      Let's compare the root-mean-squared-error (RMSE) for our training set and test set.
+      We have created a function called calc_rmse that is already loaded. 
 
 - Class: cmd_question
   Output: Now we can use the calc_rmse function to calculate the training set error.
+      Make sure to use the two arguments. The first argument of the function should
+      be the observed values from the training set and the second argument should be
+      the predicted values from the previous step.
   CorrectAnswer: calc_rmse(lalonde.train$re75, train.pred)
   AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, train.pred))
   Hint: Change this, calc_rmse(ytrue, ypred)
@@ -121,6 +129,18 @@
   CorrectAnswer: calc_rmse(lalonde.test$re75, test.pred)
   AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, test.pred))
   Hint: Change this, calc_rmse(ytrue, ypred)
+  
+- Class: mult_question
+  Output: Based on your results, which error is higher?
+  AnswerChoices: Test set error;Training set error
+  CorrectAnswer: Test set error
+  AnswerTests: omnitest(correctVal='Test set error')
+  Hint: Look at the numbers you got from the previous steps.
+
+- Class: text
+  Output: Well, it makes sense that the test set error is higher becuase we fit
+      the model using the training set and not the test set. Press any key to
+      continue!
 
 - Class: text
   Output: Awesome job! In this lesson, we built a decision tree together. 
