@@ -19,6 +19,20 @@
   VideoLink: https://rpubs.com/brouwern/for_i_in_R
 
 - Class: cmd_question
+  Output: First load the package Matching. If you haven't installed it yet, you
+      should install it first.
+  CorrectAnswer: library(Matching)
+  AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")')
+  Hint: After installation, use the library() function.
+  
+- Class: cmd_question
+  Output: First load the package arm. If you haven't installed it yet, you
+      should install it first.
+  CorrectAnswer: library(arm)
+  AnswerTests: any_of_exprs('library(arm)', 'library("arm")')
+  Hint: After installation, use the library() function.
+
+- Class: cmd_question
   Output: Let's start with a simple example. First, we create a storage vector. 
       Use the rep() function and create 20 NA values, storing it to an object called store1. 
   CorrectAnswer: store1 <- rep(NA, 20)
@@ -42,11 +56,31 @@
   Hint: Just copy and paste the suggested code!
 
 - Class: cmd_question
+  Output: Let's load the lalonde data from the packate Matching.
+  CorrectAnswer: data(lalonde)
+  AnswerTests: any_of_exprs('data(lalonde)')
+  Hint: Use the data() function.
+  
+- Class: cmd_question
   Output: Recall the simulation we ran from a few sessions ago. 
-      A simulation is already ran when you started this lesson, 
-      generating 100 simulated coefficients.
-      The linear model is re78 ~ age, based on the lalonde dataset. 
-      Let's first take a look at the simulated coefficients, using sim_results@coef
+      Let's first run a regression of the variable re78 on the variable age.
+      Assign the result to an object called lm1.
+  CorrectAnswer: lm1 = lm(re78 ~ age, data=lalonde)
+  AnswerTests: any_of_exprs('lm1 <- lm(re78 ~ age, data=lalonde)', 'lm1 <- lm(lalonde$re78 ~ lalonde$age)')
+  Hint: Make sure you use the lm function and use "<-" for assignment.
+      Also make sure you assigned the result to an object called lm1.
+
+- Class: cmd_question
+  Output: Now, let's use the sim function to generate 100 simulated coefficients
+      using the regression we just ran. Assign the result to an object called
+      sim_results.
+  CorrectAnswer: sim_results <- sim(lm1, n.sims = 100)
+  AnswerTests: any_of_exprs('sim_results <- sim(lm1, n.sims = 100)', 'sim_results <- sim(lm1, 100)')
+  Hint: Use the object lm1 from the previous step. Make sure you assign the results
+      to an object called sim_results.
+  
+- Class: cmd_question
+  Output: Let's take a look at the simulated coefficients, using sim_results@coef
   CorrectAnswer: sim_results@coef
   AnswerTests: any_of_exprs('sim_results@coef')
   Hint: 

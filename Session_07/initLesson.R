@@ -5,9 +5,9 @@
 
 # swirl_options(swirl_logging = TRUE)
 
-library(Matching)
-library(arm)
-data(lalonde)
+# library(Matching)
+# library(arm)
+# data(lalonde)
 
-lm1 = lm(re78 ~ age, data=lalonde)
-sim_results <- sim(lm1, n.sims = 100)
+# lm1 = lm(re78 ~ age, data=lalonde)
+# sim_results <- sim(lm1, n.sims = 100)
