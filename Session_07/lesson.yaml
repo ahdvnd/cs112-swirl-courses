@@ -65,7 +65,7 @@
   Output: Recall the simulation we ran from a few sessions ago. 
       Let's first run a regression of the variable re78 on the variable age.
       Assign the result to an object called lm1.
-  CorrectAnswer: lm1 = lm(re78 ~ age, data=lalonde)
+  CorrectAnswer: lm1 <- lm(re78 ~ age, data=lalonde)
   AnswerTests: any_of_exprs('lm1 <- lm(re78 ~ age, data=lalonde)', 'lm1 <- lm(lalonde$re78 ~ lalonde$age)')
   Hint: Make sure you use the lm function and use "<-" for assignment.
       Also make sure you assigned the result to an object called lm1.
