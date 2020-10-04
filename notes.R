@@ -17,8 +17,6 @@ pack_course()
 
 
 
-
-
 ## Instruction for students
 
 # If you don't have the devtools packages
@@ -30,7 +28,7 @@ library(devtools)
 # We are going to use a modified version of the package on my Github
 install_github("ahdvnd/swirlplus", force = TRUE)
 ## you only have to perform the steps above once!
-
+3
 
 ## This you have to do everytime you open your RStudio to use swirl
 library(swirl)
