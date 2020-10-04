@@ -52,10 +52,10 @@
   Output: Now, try running a linear regression model using the lm() function.
       In your model, the variable re78 is the outcome variable and the treatment
       variable is the "treat" variable. Don't use any other independent variable.
-      Assign your model to an object called lm_01
+      Assign your model to an object called lm01
   CorrectAnswer: lm01 <- lm(re78 ~ treat, data  = lalonde_obs)
   AnswerTests: any_of_exprs('lm01 <- lm(re78 ~ treat, data  = lalonde_obs)', 'lm01 <- lm(lalonde_obs$re78 ~ lalonde_obs$treat)')
-  Hint: Did you assign the output of your model to an object called lm_01?
+  Hint: Did you assign the output of your model to an object called lm01?
       
 - Class: mult_question
   Output: Should you interpret this coefficient as a causal effect?
@@ -69,37 +69,37 @@
 - Class: cmd_question
   Output: Now, try running a different linear regression model. In this model,
       regress re78 on treat and age and educ. Assign your model to an object 
-      called lm_02
+      called lm02
   CorrectAnswer: lm02 <- lm(re78 ~ treat + age + educ, data  = lalonde_obs)
   AnswerTests: any_of_exprs('lm02 <- lm(re78 ~ treat + age + educ, data  = lalonde_obs)', 'lm02 <- lm(lalonde_obs$re78 ~ lalonde_obs$treat + lalonde_obs$age + lalonde_obs$educ)')
-  Hint: Did you assign the output of your model to an object called lm_02?
+  Hint: Did you assign the output of your model to an object called lm02?
 
 - Class: cmd_question
   Output: Finally, try running a different linear regression model. In this model,
       regress re78 on every other variable (including treat) excluding the variable
       re75. Use the "~ ." notation and then exclude re75 by immediately typing
       "-re75" after ".". Therefore, you should type "re78 ~.-re75".
-      Assign your model to an object called lm_03
+      Assign your model to an object called lm03
   CorrectAnswer: lm03 <- lm(re78 ~.-re75, data  = lalonde_obs)
   AnswerTests: any_of_exprs('lm03 <- lm(re78 ~.-re75, data  = lalonde_obs)', 'lm03 <- lm(lalonde_obs$re78 ~.-lalonde_obs$re75)')
-  Hint: Did you assign the output of your model to an object called lm_03?
+  Hint: Did you assign the output of your model to an object called lm03?
 
 - Class: cmd_question
-  Output: Look at the summary of your first model lm_01.
-  CorrectAnswer: summary(lm_01)
-  AnswerTests: any_of_exprs('summary(lm_01)')
+  Output: Look at the summary of your first model lm01.
+  CorrectAnswer: summary(lm01)
+  AnswerTests: any_of_exprs('summary(lm01)')
   Hint: 
   
 - Class: cmd_question
-  Output: Then the summary of your second model lm_01.
-  CorrectAnswer: summary(lm_02)
-  AnswerTests: any_of_exprs('summary(lm_02)')
+  Output: Then the summary of your second model lm01.
+  CorrectAnswer: summary(lm02)
+  AnswerTests: any_of_exprs('summary(lm02)')
   Hint: 
 
 - Class: cmd_question
-  Output: Finally, look at the summary of your third model lm_03.
-  CorrectAnswer: summary(lm_03)
-  AnswerTests: any_of_exprs('summary(lm_03)')
+  Output: Finally, look at the summary of your third model lm03.
+  CorrectAnswer: summary(lm03)
+  AnswerTests: any_of_exprs('summary(lm03)')
   Hint: 
 
 - Class: mult_question

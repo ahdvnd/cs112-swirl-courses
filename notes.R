@@ -6,7 +6,7 @@
 install.packages("swirl")
 library(swirl)
 library(swirlify)
-demo_lesson()
+# demo_lesson()
 
 ## Things to do for adding lessons
 ## add lesson to manifest
