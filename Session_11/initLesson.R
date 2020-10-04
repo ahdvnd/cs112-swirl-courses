@@ -5,7 +5,4 @@
 
 # swirl_options(swirl_logging = TRUE)
 
-library(Matching)
-data(lalonde)
 
-set.seed(112)
