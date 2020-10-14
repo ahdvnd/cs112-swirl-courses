@@ -28,6 +28,15 @@
   Output: Our trusty lalonde dataset is automatically loaded in the beginning of the session.
       It is also appropriately separated into training set (n=345) and test set (n=100). 
 
+- Class: mult_question
+  Output: First, we will apply bagging to the dataset. Note that in the lalonde dataset, there are 12 variables in total.
+      If we use re75 as the dependent variable and the rest (except re78) as independent variables, 
+      how many independent variables are there?
+  AnswerChoices: 12;11;10;9
+  CorrectAnswer: "10"
+  AnswerTests: omnitest(correctVal='10')
+  Hint: We can't use re75 and re78.
+
 - Class: cmd_question
   Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
   CorrectAnswer: set.seed(112)
@@ -35,14 +44,11 @@
   Hint: set.seed(112)
 
 - Class: cmd_question
-  Output: Use the randomForest() function, which is similar in format as tree(), 
-      to apply bagging. Note that the function randomForest() can be used for bagging
-      as well. Save the forest to an object called bag.lalonde.
+  Output: Use the randomForest() function, which is similar in format as tree(), to apply bagging.
+      Save the forest to an object called bag.lalonde.
       Here's the expression we'll use, randomForest(re75~.-re78, data=lalonde.train, mtry=10, importance = TRUE).
-      The argument 'mtry' specifies the number of variables that can be used to classify at each node.
-      The argument 'importance' allows us to see the relative influence of each variable.
-      Note that we're using re75 as the dependent variable and everything else except
-      re78 as independent variables.
+      mtry specifies the number of variables that can be used to classify at each node.
+      importance allows us to see the relative influence of each variable.
   CorrectAnswer: bag.lalonde <- randomForest(re75~.-re78, data=lalonde.train, mtry=10, importance = TRUE)
   AnswerTests: any_of_exprs('bag.lalonde <- randomForest(re75~.-re78, data=lalonde.train, mtry=10, importance = TRUE)')
   Hint: Just copy and paste the expression and save it to an object called bag.lalonde.
@@ -59,20 +65,17 @@
 
 - Class: cmd_question
   Output: Let's calculate the rmse value of this model using the test set. First, let's generate the predictions.
-      Save the predictions to an object called bag.test.pred. The test data is called
-      'lalonde.test'. You don't need to specify any other argument.
+      Save the predictions to an object called bag.test.pred.
   CorrectAnswer: bag.test.pred <- predict(bag.lalonde, lalonde.test)
   AnswerTests: any_of_exprs('bag.test.pred <- predict(bag.lalonde, lalonde.test)')
   Hint: Remember we put the model and the test set as arguments in predict().
 
 - Class: cmd_question
   Output: Now we can use the calc_rmse function (already loaded) to calculate the training set error.
-      Save the result to an object called rmse.bag.test. You have to first enter
-      the observed values and then the predicted values.
+      Save the result to an object called rmse.bag.test.
   CorrectAnswer: rmse.bag.test <- calc_rmse(lalonde.test$re75, bag.test.pred)
   AnswerTests: any_of_exprs('rmse.bag.test <- calc_rmse(lalonde.test$re75, bag.test.pred)')
-  Hint: Change this, calc_rmse(ytrue, ypred). Also did you save the results to 
-      an object called rmse.bag.test?
+  Hint: Change this, calc_rmse(ytrue, ypred)
 
 
 - Class: mult_question
@@ -84,6 +87,12 @@
   CorrectAnswer: "3"
   AnswerTests: omnitest(correctVal='3')
   Hint: Square root of 10 is ~3. 
+
+- Class: cmd_question
+  Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
+  CorrectAnswer: set.seed(112)
+  AnswerTests: any_of_exprs('set.seed(112)')
+  Hint: set.seed(112)
 
 - Class: cmd_question
   Output: Now, use the randomForest() function to make a random forest.
@@ -100,10 +109,9 @@
   Hint: Just type rf.lalonde.
 
 - Class: cmd_question
-  Output: We can also look at the respective importance of each variable. 
-      Enter importance(rf.lalonde). The %IncMSE value indicates the change 
-      in MSE when the variable is removed. Thus, the larger the %IncMSE, 
-      the more important the variable.
+  Output: We can also look at the respective importance of each variable. Input importance(rf.lalonde).
+      The %IncMSE value indicates the change in MSE when the variable is removed.
+      Thus, the larger the %IncMSE, the more important the variable.
   CorrectAnswer: importance(rf.lalonde)
   AnswerTests: any_of_exprs('importance(rf.lalonde)')
   Hint:
