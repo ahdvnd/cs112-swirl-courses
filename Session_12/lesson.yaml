@@ -25,26 +25,26 @@
 
 - Class: mult_question
   Output: We have a hypothetical person, Mini, who is female and college-educated (16 years of education).
-      What is the potential outcome (salary), given the equation above is correct. 
+      What is the potential outcome (salary), given the equation above. 
   AnswerChoices: 82;78;80;3
   CorrectAnswer: 78
-  AnswerTests: mnitest(correctVal=78)
+  AnswerTests: omnitest(correctVal=78)
   Hint: Plug the values into the equation.
 
 - Class: mult_question
   Output: Let's assume in an alternate universe, Mini is identical except that the gender is male.
-      What is the potential outcome (salary) now, given the equation above is correct and female=0. 
+      What is the potential outcome (salary) now, given the equation above. 
       (This is the counterfactual.)
   AnswerChoices: 82;78;80;3
   CorrectAnswer: 80
-  AnswerTests: mnitest(correctVal=80)
+  AnswerTests: omnitest(correctVal=80)
   Hint: Plug the values into the equation.
 
 - Class: mult_question
   Output: What is the treatment effect of 'being female' for Mini? 
   AnswerChoices: 1;-1;2;-2;5;-5
   CorrectAnswer: -2
-  AnswerTests: mnitest(correctVal=-5)
+  AnswerTests: omnitest(correctVal=-5)
   Hint: Calculate the difference between the potential outcomes. 
 
 - Class: text
@@ -56,7 +56,7 @@
   Output: Also, do we get to observe both potential outcomes?
   AnswerChoices: Yes;No
   CorrectAnswer: No
-  AnswerTests: mnitest(correctVal='No')
+  AnswerTests: omnitest(correctVal='No')
   Hint: We either get to observe the scenario where Mini is a female OR the scenario where Mini is male. 
       Therefore, we don't get to calculate the treatment effect for Mini in this case. 
       This is called "the fundamental problem of causal inference". 
@@ -71,7 +71,7 @@
       who would you choose?
   AnswerChoices: Mike;Mark
   CorrectAnswer: Mark
-  AnswerTests: mnitest(correctVal='Mark')
+  AnswerTests: omnitest(correctVal='Mark')
   Hint: Who is more "similar" to Mini?
 
 - Class: text
