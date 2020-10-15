@@ -53,7 +53,7 @@
       relationship between variables. 
 
 - Class: mult_question
-  Output: Also, do we get to observe both potential outcomes?
+  Output: Also, do we get to observe both potential outcomes in reality?
   AnswerChoices: Yes;No
   CorrectAnswer: No
   AnswerTests: omnitest(correctVal='No')
@@ -80,6 +80,7 @@
       estimate of the treatment effect. 
       If we use Mike, then the estimated treatment effect is 78-50 = 28.
       If we use Mark, then the estimated treatment effect is 78-85 = -7. 
+      It is thus clear that using Mark gives us a closer estimate.
     
 - Class: text
   Output: Good job on this lesson. Try to wrap your head around the concepts of counterfactuals and potential outcomes. 
