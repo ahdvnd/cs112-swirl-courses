@@ -28,7 +28,7 @@
       What is the potential outcome (salary), given the equation above. 
   AnswerChoices: 82;78;80;3
   CorrectAnswer: 78
-  AnswerTests: omnitest(correctVal=78)
+  AnswerTests: omnitest(correctVal='78')
   Hint: Plug the values into the equation.
 
 - Class: mult_question
@@ -37,14 +37,14 @@
       (This is the counterfactual.)
   AnswerChoices: 82;78;80;3
   CorrectAnswer: 80
-  AnswerTests: omnitest(correctVal=80)
+  AnswerTests: omnitest(correctVal='80')
   Hint: Plug the values into the equation.
 
 - Class: mult_question
   Output: What is the treatment effect of 'being female' for Mini? 
   AnswerChoices: 1;-1;2;-2;5;-5
   CorrectAnswer: -2
-  AnswerTests: omnitest(correctVal=-5)
+  AnswerTests: omnitest(correctVal='-2')
   Hint: Calculate the difference between the potential outcomes. 
 
 - Class: text
