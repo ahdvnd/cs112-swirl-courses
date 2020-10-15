@@ -1,0 +1,93 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 12 Counterfactuals, The Rubin Causal Model
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 12, Counterfactuals, The Rubin Causal Model. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: Please do this session after you completed the readings (at least the Wikipedia page), 
+      as this will be a light practice on the concepts.
+
+- Class: text
+  Output: Let's say we want to investigate the effect of gender on salary. 
+      The variables we have handy are salary (outcome), female (treatment; 1 for female, 0 for male), and education (covariate).
+      Assume that we know that the variables are related by the equation, salary = -2*female + 5*education. 
+
+- Class: mult_question
+  Output: We have a hypothetical person, Mini, who is female and college-educated (16 years of education).
+      What is the potential outcome (salary), given the equation above is correct. 
+  AnswerChoices: 82;78;80;3
+  CorrectAnswer: 78
+  AnswerTests: mnitest(correctVal=78)
+  Hint: Plug the values into the equation.
+
+- Class: mult_question
+  Output: Let's assume in an alternate universe, Mini is identical except that the gender is male.
+      What is the potential outcome (salary) now, given the equation above is correct and female=0. 
+      (This is the counterfactual.)
+  AnswerChoices: 82;78;80;3
+  CorrectAnswer: 80
+  AnswerTests: mnitest(correctVal=80)
+  Hint: Plug the values into the equation.
+
+- Class: mult_question
+  Output: What is the treatment effect of 'being female' for Mini? 
+  AnswerChoices: 1;-1;2;-2;5;-5
+  CorrectAnswer: -2
+  AnswerTests: mnitest(correctVal=-5)
+  Hint: Calculate the difference between the potential outcomes. 
+
+- Class: text
+  Output: Note that the treatment effect we calculated from taking the difference between the potential outcome is 
+      identical to that of the equation. In reality, however, we don't have access to a formula that tells us the 
+      relationship between variables. 
+
+- Class: mult_question
+  Output: Also, do we get to observe both potential outcomes?
+  AnswerChoices: Yes;No
+  CorrectAnswer: No
+  AnswerTests: mnitest(correctVal='No')
+  Hint: We either get to observe the scenario where Mini is a female OR the scenario where Mini is male. 
+      Therefore, we don't get to calculate the treatment effect for Mini in this case. 
+      This is called "the fundamental problem of causal inference". 
+
+- Class: text
+  Output: Now we have data on two other people, Mike and Mark. 
+      Mike is male and has been educated for 10 years.
+      Mark is male and has been educated for 17 years. 
+
+- Class: mult_question
+  Output: If you had to choose either Mike or Mark to compare to Mini in order to estimate the treatment effect,
+      who would you choose?
+  AnswerChoices: Mike;Mark
+  CorrectAnswer: Mark
+  AnswerTests: mnitest(correctVal='Mark')
+  Hint: Who is more "similar" to Mini?
+
+- Class: text
+  Output: Given the limited information we have, Mark is the better choice because he is "more similar" to Mini on the 
+      covariates (independent variables that aren't the treatment variable). Therefore, it would provide a better 
+      estimate of the treatment effect. 
+      If we use Mike, then the estimated treatment effect is 78-50 = 28.
+      If we use Mark, then the estimated treatment effect is 78-85 = -7. 
+    
+- Class: text
+  Output: Good job on this lesson. Try to wrap your head around the concepts of counterfactuals and potential outcomes. 
+      The last part alludes to a method that will be used to circumvent the fundamental problem of causal inference, matching.
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s12")
+  Hint:
