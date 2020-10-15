@@ -71,6 +71,14 @@
 
 
 - Class: cmd_question
+  Output: Now, let's load the package boot. If you haven't installed the package
+      already, first install it and then load it.
+  CorrectAnswer: library(boot)
+  AnswerTests: any_of_exprs('library(boot)', 'library("boot")')
+  Hint: Make sure you installed the package first.
+
+
+- Class: cmd_question
   Output: Now that you have your models ready, use the cv.glm function that
       performs LOOCV (You can use the K argument to perform K-fold CV). Let's first
       use it on the object related to our first regression called glm.lalonde.

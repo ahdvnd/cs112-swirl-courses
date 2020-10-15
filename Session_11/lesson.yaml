@@ -1,0 +1,131 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 11 The bridge to causal inference
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 11, The bride to causal inferece. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: Remember the Lalonde experiment and the lalonde data which we have used
+      before. The original paper is about a randomized experiment. But in this
+      exercise, we are going to work with the observational version of the of the 
+      lalonde data set. Hit any key to continue!
+
+- Class: text
+  Output: Let's download the data from the following link 
+      "http://bit.ly/lalonde_observational" This is a direct link and the data 
+      is in csv format. Use the approapriate function in R to load the csv file
+      into your environment. Assign the data to an object call lalonde_obs.
+      If you are having difficulties with firewalls in your country, make sure
+      you download the file first and locally load it into your environment.
+      Hit any key to continue!
+
+- Class: cmd_question
+  Output: Let's look at the head of the data. Again, make sure you have loaded
+      the dataset into your environment first.
+  CorrectAnswer: head(lalonde_obs)
+  AnswerTests: any_of_exprs('head(lalonde_obs)')
+  Hint: Did you load the data first and did you assign it to an object calle lalonde_obs?
+
+- Class: text
+  Output: Unlike the STANDARD version of "lalonde", which we've been using until
+      now, which was derived from a randomized experiment, this dataset is 
+      special. Let's see how!
+
+- Class: text
+  Output: this version takes the TREATMENT group from the randomized experiment 
+      data, and merges this treatment group with a control group of US census data.
+      In other words, all the treat == 1 observations in this dataset come from 
+      data(lalonde) that we have seen before, and the treat == 0 observations 
+      come from survey data.
+    
+- Class: cmd_question
+  Output: Now, try running a linear regression model using the lm() function.
+      In your model, the variable re78 is the outcome variable and the treatment
+      variable is the "treat" variable. Don't use any other independent variable.
+      Assign your model to an object called lm01
+  CorrectAnswer: lm01 <- lm(re78 ~ treat, data  = lalonde_obs)
+  AnswerTests: any_of_exprs('lm01 <- lm(re78 ~ treat, data  = lalonde_obs)', 'lm01 <- lm(lalonde_obs$re78 ~ lalonde_obs$treat)')
+  Hint: Did you assign the output of your model to an object called lm01?
+      
+- Class: mult_question
+  Output: Should you interpret this coefficient as a causal effect?
+  AnswerChoices: Yes;No
+  CorrectAnswer: No
+  AnswerTests: omnitest(correctVal='No')
+  Hint: Note that because the control group is no longer experimental and it 
+      comes from the US census data, hence it is observational, we can't directly
+      draw causal conclusions.
+
+- Class: cmd_question
+  Output: Now, try running a different linear regression model. In this model,
+      regress re78 on treat and age and educ. Assign your model to an object 
+      called lm02
+  CorrectAnswer: lm02 <- lm(re78 ~ treat + age + educ, data  = lalonde_obs)
+  AnswerTests: any_of_exprs('lm02 <- lm(re78 ~ treat + age + educ, data  = lalonde_obs)', 'lm02 <- lm(lalonde_obs$re78 ~ lalonde_obs$treat + lalonde_obs$age + lalonde_obs$educ)')
+  Hint: Did you assign the output of your model to an object called lm02?
+
+- Class: cmd_question
+  Output: Finally, try running a different linear regression model. In this model,
+      regress re78 on every other variable (including treat) excluding the variable
+      re75. Use the "~ ." notation and then exclude re75 by immediately typing
+      "-re75" after ".". Therefore, you should type "re78 ~.-re75".
+      Assign your model to an object called lm03
+  CorrectAnswer: lm03 <- lm(re78 ~.-re75, data  = lalonde_obs)
+  AnswerTests: any_of_exprs('lm03 <- lm(re78 ~.-re75, data  = lalonde_obs)', 'lm03 <- lm(lalonde_obs$re78 ~.-lalonde_obs$re75)')
+  Hint: Did you assign the output of your model to an object called lm03?
+
+- Class: cmd_question
+  Output: Look at the summary of your first model lm01.
+  CorrectAnswer: summary(lm01)
+  AnswerTests: any_of_exprs('summary(lm01)')
+  Hint: 
+  
+- Class: cmd_question
+  Output: Then the summary of your second model lm01.
+  CorrectAnswer: summary(lm02)
+  AnswerTests: any_of_exprs('summary(lm02)')
+  Hint: 
+
+- Class: cmd_question
+  Output: Finally, look at the summary of your third model lm03.
+  CorrectAnswer: summary(lm03)
+  AnswerTests: any_of_exprs('summary(lm03)')
+  Hint: 
+
+- Class: mult_question
+  Output:  Do different linear regression models deliver stable results for 
+      the treat coefficient?
+  AnswerChoices: Yes;No
+  CorrectAnswer: No
+  AnswerTests: omnitest(correctVal='No')
+  Hint: 
+      
+      
+- Class: text
+  Output: If you answered No to the previous question, you are right. When we change
+      the set of variables to include in our regression, the treatment effect
+      changes significantly. This is mainly because we are working with observational
+      data. Hit any key to continue!
+
+- Class: text
+  Output: Good job! Even though the coding for this exercise was very similar to
+      what we've done in the past, this swirl exercise is our first introduction
+      to observational data. We will soon learn methods in causal inference that
+      help us understand causal questions even in non-experimental settings.
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s11")
+  Hint:

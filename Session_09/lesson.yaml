@@ -113,7 +113,7 @@
       be the observed values from the training set and the second argument should be
       the predicted values from the previous step.
   CorrectAnswer: calc_rmse(lalonde.train$re75, train.pred)
-  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.train$re75, train.pred))
+  AnswerTests: any_of_exprs('calc_rmse(lalonde.train$re75, train.pred)')
   Hint: Change this, calc_rmse(ytrue, ypred)
 
 - Class: cmd_question

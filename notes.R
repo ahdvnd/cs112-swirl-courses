@@ -6,7 +6,7 @@
 install.packages("swirl")
 library(swirl)
 library(swirlify)
-demo_lesson()
+# demo_lesson()
 
 ## Things to do for adding lessons
 ## add lesson to manifest
@@ -14,8 +14,6 @@ set_lesson()
 ## we only need to pack a course once a new lesson is written. 
 ## We don't have to do it when we modify a lesson or fix it.
 pack_course()
-
-
 
 
 
@@ -30,7 +28,7 @@ library(devtools)
 # We are going to use a modified version of the package on my Github
 install_github("ahdvnd/swirlplus", force = TRUE)
 ## you only have to perform the steps above once!
-
+3
 
 ## This you have to do everytime you open your RStudio to use swirl
 library(swirl)

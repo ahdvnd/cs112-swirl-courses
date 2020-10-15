@@ -5,7 +5,4 @@
 
 # swirl_options(swirl_logging = TRUE)
 
-#install.packages("boot")
-library(Matching)
-#library(boot)
-data(lalonde)
+
