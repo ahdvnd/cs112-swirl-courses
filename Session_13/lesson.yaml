@@ -1,0 +1,147 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 13 Randomized Experiments
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 13, Randomized Experiments. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: In this lesson, we'll do a quick A/B testing exercise in R. Go through
+      the readings to understand what A/B testing is. A/B testing is comparing 
+      two or more arms of an experiment to see which one performs better. For
+      instance, you can compare two website desings by showing users two versions
+      of a buttion on your website (let’s call them A and B) to your visitors.
+      The one that gives a better conversion (more click or more purchase) rate 
+      is a better version. Hit any key to continue!
+
+- Class: mult_question
+  Output: For example, let's assume version A has 600 clicks with 30 conversions
+      and version B has 400 clicks with 40 conversions. We can easily calculate
+      the conversion rates in our head. What are the conversion rates for A and B?
+  AnswerChoices: 0.05 and 0.1; 0.5 and 0.1; 0.5 and 0.01; 0.05 and 0.01
+  CorrectAnswer: 0.05 and 0.1
+  AnswerTests: omnitest(correctVal='0.05 and 0.1')
+  Hint: Conversion rate is the ratio of conversions over the number of clicks 
+      for each version.
+      
+- Class: mult_question
+  Output: Which version does better in terms of conversion?
+  AnswerChoices: A;B
+  CorrectAnswer: B
+  AnswerTests: omnitest(correctVal='B')
+  Hint:
+
+- Class: text
+  Output: Ok! The version B of our website is obviously better. But is the difference
+      statistically significant? Press any key to continue!
+      
+- Class: text
+  Output: Let's define our null and alternative Hypotheses. The null hypothesis 
+      is the assumption that there is no difference between the two versions of
+      our site, i.e., the conversion rates are similar. We then define the
+      alternative hypothesis as the assumption that there is actually a 
+      difference between the two versions. To test our hypothesis in A/B testing
+      we usually use a two-tailed alternative hypothesis. Press any key to continue!
+
+- Class: cmd_question
+  Output: We are going to use the package 'pwr'. This package contains functions
+      for basic power calculations using effect sizes. First, install the package
+      then load the package. Load the package to pass this step.
+  CorrectAnswer: library(pwr)
+  AnswerTests: any_of_exprs('library(pwr)', 'library("pwr")')
+  Hint: Load the package using the library() function. 
+
+- Class: cmd_question
+  Output: To perform the two-tailed test in R, we use the prop.test() function
+      in pwr by saying prop.test(c(conv_A, conv_B), c(clicks_A, clicks_B)). 
+      The first vector contains the number of conversions for each arm and 
+      the second vector contains the number of clicks. Replace the values in the
+      function above with appropriate numbers to continue.
+  CorrectAnswer: prop.test(c(30, 40), c(600, 400))
+  AnswerTests: any_of_exprs('prop.test(c(30, 40), c(600, 400))')
+  Hint: Plug in numbers instead of conv_A, conv_B, click_A, etc.
+
+- Class: mult_question
+  Output: To reject the Null Hypothesis we need a p-value that is lower 
+      than the selected Significance Level(5%). i.e. if p < 0.05.
+      If p < 0.05, then we reject the null hypothesis that the two conversion
+      rates are similar. Based on your results, do you reject the null?
+  AnswerChoices: Yes;No
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+  Hint: make a decision based on your p-value!
+
+- Class: text
+  Output: Now, let's answer a different question. Did we collect enough clicks
+      to have a valid statistical study? In other words, is my sample size 
+      in our study big enough? Press any key to continue!
+      
+- Class: text
+  Output: To answer this question, we need a few more pieces of information. 
+      First, we need to know the ideal effect size we expect. For instance, how
+      large do we want the difference in conversion rates to be. Let's say we
+      want the effect size to be 0.2. Hit any key to continue!
+
+- Class: text
+  Output: Second, we need to specify the significance level. Let's assume the 
+      5% significance level. Hit any key to continue!
+  
+- Class: text
+  Output: Then we need to specify the power of test which is 1 minus Type II 
+      error probability. Let's set power at 0.8. Hit any key to continue!
+
+- Class: cmd_question
+  Output: Now that we have all the information, let's put things together. We
+      can use the function pwr.2p2n.test() in the pwr package. This function will
+      tell us how many observations we need in the second version in order to 
+      get the desired effect size at the specified significance level and power.
+      In this function, you need to specify 'h' (effect size), 'n1' 
+      (number of observations in the first sample), 'sig.level' (significance 
+      level), and 'power' (power of the test). 
+  CorrectAnswer: pwr.2p2n.test(h=0.2, n1=600, sig.level=0.05, power=0.8)
+  AnswerTests: any_of_exprs('pwr.2p2n.test(h=0.2, n1=600, sig.level=0.05, power=0.8)')
+  Hint: Specify the arguments in the order mentioned above! 
+
+- Class: mult_question
+  Output: What should be the number of clicks in the second arm?
+  AnswerChoices: 652;423;291;323
+  CorrectAnswer: 291
+  AnswerTests: omnitest(correctVal='291')
+  Hint: Look at the number in front of n2!
+
+- Class: cmd_question
+  Output: Note that this is the minimum sample size in the second arm that 
+      is needed. Let's change the effect size to 0.3 and see what happens
+      to the sample size in the second group.
+  CorrectAnswer: pwr.2p2n.test(h=0.3, n1=600, sig.level=0.05, power=0.8)
+  AnswerTests: any_of_exprs('pwr.2p2n.test(h=0.3, n1=600, sig.level=0.05, power=0.8)')
+  Hint: 
+
+- Class: mult_question
+  Output: Do you need a smaller or bigger sample size compared to the previous
+      scenario?
+  AnswerChoices: Smaller;Bigger
+  CorrectAnswer: Smaller
+  AnswerTests: omnitest(correctVal='Smaller')
+  Hint: 
+
+- Class: text
+  Output: Good job on this lesson. Change the significance level and power and see
+      what happens. Check the manual of the package and see what other functions
+      exist in the package. Hit any key to continue!
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s13")
+  Hint:
