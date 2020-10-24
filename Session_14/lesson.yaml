@@ -1,0 +1,119 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 14 Randomization Inferenve
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 14, Randomization Inference. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: In this exercise, we'll be going over a simple exercise in randomization
+      inference. The data for the example is already loaded in your environment.
+      The data is called ri_data and has three columns. 
+      
+- Class: cmd_question
+  Output: Load the dplyr package. If you haven't installed it in your system,
+      you should install it first. 
+  CorrectAnswer: library(dplyr)
+  AnswerTests: any_of_exprs('library(dplyr)', 'library("dplyr")')
+  Hint: Load the package using the library() function. 
+
+
+- Class: cmd_question
+  Output: Using the function glimpse() in the dplyr package, let's take a look
+      at the data. Again, the dataset that's already imported in your environment
+      is called ri_data
+  CorrectAnswer: glimpse(ri_data)
+  AnswerTests: any_of_exprs('glimpse(ri_data)')
+  Hint: 
+
+- Class: cmd_question
+  Output: Write code that calcualte the prima facie (naive) treatment effect, i.e.,
+      the average difference between the observed outcomes of treatment group versus
+      the control group. 
+  CorrectAnswer: 14
+  AnswerTests: omnitest(correctVal = 14)
+  Hint: Remember to calculate means at the end. 
+
+- Class: cmd_question
+  Output: We've also loaded a function that we wrote in your environment. The
+      function is called general.Fisher. Just type the name of the function to
+      take a look at it. Type general.Fisher.
+  CorrectAnswer: general.Fisher
+  AnswerTests: any_of_exprs('general.Fisher')
+  Hint: Type general.Fisher.
+
+- Class: mult_question
+  Output: Based on what you see from the function, what do you think the function
+      does?
+  AnswerChoices: Bootstraps confidence intervals; Estimate the Fisther's interval; Randomization inference under a specific sharp null hypothesis
+  CorrectAnswer: Randomization inference under a specific sharp null hypothesis
+  AnswerTests: omnitest(correctVal='Randomization inference under a specific sharp null hypothesis')
+  Hint: 
+
+- Class: mult_question
+  Output: Which input argument specifies the value of the sharp null?
+  AnswerChoices: iter; counterfactuals; null; foo; assignment
+  CorrectAnswer: null
+  AnswerTests: omnitest(correctVal='null')
+  Hint: Take a look at the function again.
+
+- Class: cmd_question
+  Output: Now, let's use the function. The function takes three arguments. 
+      The first argument is the data (it's called data), the second specifies the number of iterations,
+      and the third argument specifies the sharp null hypothesis. Use the function 
+      to estimate the values of the tratment effect with 1000 iterations and the sharp
+      null value of 0. Save the result to an object called "ouput".
+      Then take a look at your object output. 
+  CorrectAnswer: output <- general.Fisher(data = ri_data, iter = 1000, null = 0)
+  AnswerTests: any_of_exprs('output <- general.Fisher(data = ri_data, iter = 1000, null = 0)', 'output <- general.Fisher(ri_data, 1000, 0)')
+  Hint: Make sure you use <- instead of = for assignment. 
+
+- Class: mult_question
+  Output: What are these different values?
+  AnswerChoices: Different treatment effect assuming different treatment assignments; Different null hypotheses; Different confidence intervals; Different observations bootstrapped from the sample
+  CorrectAnswer: Different treatment effect assuming different treatment assignments
+  AnswerTests: omnitest(correctVal='Different treatment effect assuming different treatment assignments')
+  Hint: 
+
+- Class: mult_question
+  Output: Why are there so many repeated values?
+  AnswerChoices: It happens; I don't see that many repeated values; There are only 8 observations in the data but we repeat the process 1000 times
+  CorrectAnswer: There are only 8 observations in the data but we repeat the process 1000 times
+  AnswerTests: omnitest(correctVal='There are only 8 observations in the data but we repeat the process 1000 times')
+  Hint: 
+
+- Class: cmd_question
+  Output: Let's take a look at the treatmtne effects based on our randomziation 
+      inference. Use the hist() function to take a look at the values. 
+  CorrectAnswer: hist(output)
+  AnswerTests: any_of_exprs('hist(output)')
+  Hint: 
+  
+- Class: cmd_question
+  Output: Finally, write code that shows the 95% confidence intervals of your
+      treatment effect. 
+  CorrectAnswer: quantile(output, probs = c(0.025, 0.975))
+  AnswerTests: any_of_exprs('quantile(output, probs = c(0.025, 0.975))')
+  Hint: 
+
+- Class: text
+  Output: Good job on this lesson. You can change the null hypothesis to different
+      values and run the function again to see how it impacts the confidence interval
+      or the histogram. You can also write a for-loop to find the Fisher's interval.
+      Press any key to continue to generated code for you.
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s14")
+  Hint:
