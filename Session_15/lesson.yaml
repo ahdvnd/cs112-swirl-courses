@@ -47,11 +47,11 @@
       and intimidate opposition parties and supress votes. Press any key to continue!
 
 - Class: cmd_question
-  Output: Let's take a look at the data. Use the dplyr fuction glimpse to take a
-      look at the data.
+  Output: Let's take a look at the data. Use the fuction glimpse() from the dplyr
+  package to take a look at the data.
   CorrectAnswer: glimpse(glynn_ichino)
   AnswerTests: any_of_exprs('glimpse(glynn_ichino)')
-  Hint: Did you load the dplyr library?
+  Hint: Did you load the dplyr library? Also the data is called glynn_ichino!
 
 - Class: cmd_question
   Output: Write code that calcualtes the difference between the average outcomes
@@ -71,8 +71,8 @@
 - Class: text
   Output: We use the conduct_ri() function from the ri2 package for randomization
       inference. In order to conduct randomization inference, we need to supply three
-      pieces of information 1) a test statistic, 2) a null hypothesis, 
-      and 3) a randomization procedure. Press any key to continue!
+      pieces of information (1) a test statistic, (2) a null hypothesis, 
+      and (3) a randomization procedure. Press any key to continue!
       
 - Class: text
   Output: The formula argument of the conduct_ri() function is similar to the 
@@ -108,28 +108,28 @@
   Output: Now, let's look at the summary of the results. Use the summary function
       to results of the conduct_ri() function. More specifically, you can look at
       the two-tailed p-value of your test.
-  orrectAnswer: summary(ri2_out)
+  CorrectAnswer: summary(ri2_out)
   AnswerTests: any_of_exprs('summary(ri2_out)')
   Hint: 
 
 - Class: mult_question
   Output: Based on the p-value which statement is true about the sharp null
       hypothesis?
-  AnswerChoices: We reject the sharp null hypothesis; We fail to reject the sharp null hypothesis
+  AnswerChoices: We reject the sharp null hypothesis;We fail to reject the sharp null hypothesis
   CorrectAnswer: We reject the sharp null hypothesis
   AnswerTests: omnitest(correctVal='We reject the sharp null hypothesis')
-  Hint: 
+  Hint:
 
 - Class: cmd_question
   Output: We can also look at the distribution of the test-statistic. For that
       we can use the plot function on the output object. What does the plot suggest?
-  orrectAnswer: plot(ri2_out)
+  CorrectAnswer: plot(ri2_out)
   AnswerTests: any_of_exprs('plot(ri2_out)')
-  Hint: 
+  Hint: Use the plot function.
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
   AnswerTests: cs112_credit(941, "s15")
-  Hint:
+  Hint: 
