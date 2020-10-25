@@ -71,7 +71,7 @@
 - Class: text
   Output: We use the conduct_ri() function from the ri2 package for randomization
       inference. In order to conduct randomization inference, we need to supply three
-      pieces of information: 1) a test statistic, 2) a null hypothesis, 
+      pieces of information 1) a test statistic, 2) a null hypothesis, 
       and 3) a randomization procedure. Press any key to continue!
       
 - Class: text
