@@ -1,0 +1,135 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 15 Randomization Inferenve I
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 15, the second
+      lesson on Randomization Inference. 
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: In this exercise, we'll work with the package ri2 that is used for
+      conducting randomization inference in R. 
+      
+- Class: cmd_question
+  Output: Please first install the package ri2 and then load it. You won't be able
+      to pass this step unless you load the package.
+  CorrectAnswer: library(ri2)
+  AnswerTests: any_of_exprs('library(ri2)', 'library("ri2")')
+  Hint: Load the package using the library() function. 
+
+- Class: text
+  Output: The data comes from Glynn and Ichino (2012) political science paper.
+      The paper shows how not having a runoff candidate in an election is related
+      to harasment of the opposition parties. Therefore, the treatment variable (Z) 
+      is 1 if there voting system is one-round and there's no runoff and 0 if
+      the system allows for multiple rounds (there is a runoff). The outcome variable (Y)
+      is also binary and is 1 if there is political harassment and 0 if there
+      isn't. The data is collected from the sub-Saharan African countries. The data 
+      is automatically imported in your environment in an object called glynn_ichino.
+      Press any key to continue!
+      
+- Class: text
+  Output: This exercise is borrowed from Prof. Matt Blackweel. The idea behind 
+      this study is that when there are no runoff elections (Z = 1), 
+      incumbents are able to win elections with only a plurality of votes. 
+      Without a runoff, there are usually incentices to supress voter turnout 
+      by intimidating voters. However, when there's a runoff (Z =0),
+      the incumbent party need to gain wider support and is less likely to harass
+      and intimidate opposition parties and supress votes. Press any key to continue!
+
+- Class: cmd_question
+  Output: Let's take a look at the data. Use the dplyr fuction glimpse to take a
+      look at the data.
+  CorrectAnswer: glimpse(glynn_ichino)
+  AnswerTests: any_of_exprs('glimpse(glynn_ichino)')
+  Hint: Did you load the dplyr library?
+
+- Class: cmd_question
+  Output: Write code that calcualtes the difference between the average outcomes
+      of the treated group vs. the control group. 
+  CorrectAnswer: 0.8
+  AnswerTests: omnitest(correctVal = 0.8)
+  Hint: Remember to calculate the average treatment effect.
+
+- Class: text
+  Output: This is not the causal effect. There are potentially other factors that
+      can influence the outocme. Even if the number you obtained in the previous
+      step was the causal effect, due to the small sample size, we can't really 
+      be sure the effect means anything. But let's for now, assume we randomized
+      elections. In the following steps, we will try to use randomization inference
+      in order to find uncertainty due to randomization. Press any key to continue!
+
+- Class: text
+  Output: We use the conduct_ri() function from the ri2 package for randomization
+      inference. In order to conduct randomization inference, we need to supply three
+      pieces of information: 1) a test statistic, 2) a null hypothesis, 
+      and 3) a randomization procedure. Press any key to continue!
+      
+- Class: text
+  Output: The formula argument of the conduct_ri() function is similar to the 
+      regression syntax of r’s built-in lm function and it determines the test
+      statistic. Our test statistic is the coefficient on Z from a regression 
+      of Y on Z, or more simply, the difference-in-means. The sharp_hypothesis 
+      argument of the conduct_ri() function indicates that we are imagining 
+      a (hypothetical!) world in which the true difference in potential outcomes
+      is exactly 0 for all units. Finally, the declare_ra() function from the 
+      randomizr package allows us to declare a randomization procedure. Press 
+      any key to continue!
+
+- Class: cmd_question
+  Output: Let's first define the randomization procedure. The declare_ra() 
+      function from the randomizr package that is automatically
+      loaded when you loaded the ri2 package, allows us to declare a randomization 
+      procedure. In this case, let's assign 5 countries to treatment out of 10 total
+      countries. The function has two argument. N is the total number of units and
+      m is the number of units that are assigned to treatment. Let's save the result
+      to an object called declaration.
+  CorrectAnswer: declaration <- declare_ra(N = 10, m = 5)
+  AnswerTests: any_of_exprs('declaration <- declare_ra(N = 10, m = 5)', 'declaration <- declare_ra(m = 5, N = 10)')
+  Hint: Did you use numbers 10 and 5?
+
+- Class: cmd_question
+  Output: Now, as we discussed, let's use the conduct_ri() function. The function
+      takes four arguments, "formula", "declaration", "sharp_hypothesis", and "data".
+  CorrectAnswer: ri2_out <- conduct_ri(formula = Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)
+  AnswerTests: any_of_exprs('ri2_out <- conduct_ri(formula = Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)')
+  Hint: 
+
+- Class: cmd_question
+  Output: Now, let's look at the summary of the results. Use the summary function
+      to results of the conduct_ri() function. More specifically, you can look at
+      the two-tailed p-value of your test.
+  orrectAnswer: summary(ri2_out)
+  AnswerTests: any_of_exprs('summary(ri2_out)')
+  Hint: 
+
+- Class: mult_question
+  Output: Based on the p-value which statement is true about the sharp null
+      hypothesis?
+  AnswerChoices: We reject the sharp null hypothesis; We fail to reject the sharp null hypothesis
+  CorrectAnswer: We reject the sharp null hypothesis
+  AnswerTests: omnitest(correctVal='We reject the sharp null hypothesis')
+  Hint: 
+
+- Class: cmd_question
+  Output: We can also look at the distribution of the test-statistic. For that
+      we can use the plot function on the output object. What does the plot suggest?
+  orrectAnswer: plot(ri2_out)
+  AnswerTests: any_of_exprs('plot(ri2_out)')
+  Hint: 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s15")
+  Hint:
