@@ -1,7 +1,7 @@
 # install.packages("googlesheets4")
 library(googlesheets4)
 library(stringr)
-library(dplyr)
+library(tidyverse)
 
 
 subs = read_sheet("1aUSIgj3KmHyiiz7H2CwOS4zp-NtDoaB4hihV0dbd05A") %>% 
@@ -38,6 +38,8 @@ subs_clean_email = subs_clean %>%
   right_join(emails, by = "name") %>% 
   select(name, total_subs, email)
 
+
+write_csv(subs_clean_email, "submission_report.csv")
 
 # The code below checks whether the person had entered the same
 # secret twice. Secrets aer unique

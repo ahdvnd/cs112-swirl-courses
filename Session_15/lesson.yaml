@@ -100,8 +100,9 @@
 - Class: cmd_question
   Output: Now, as we discussed, let's use the conduct_ri() function. The function
       takes four arguments, "formula", "declaration", "sharp_hypothesis", and "data".
+      Save the result to an object called ri2_out.
   CorrectAnswer: ri2_out <- conduct_ri(formula = Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)
-  AnswerTests: any_of_exprs('ri2_out <- conduct_ri(formula = Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)')
+  AnswerTests: any_of_exprs('ri2_out <- conduct_ri(formula = Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)', 'ri2_out <- conduct_ri(Y ~ Z, declaration = declaration, sharp_hypothesis = 0, data = glynn_ichino)')
   Hint: 
 
 - Class: cmd_question
