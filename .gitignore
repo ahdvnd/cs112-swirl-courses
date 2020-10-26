@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 .httr-oauth
-**/submission_report.csv
-**/submission_analysis.R
+.submission_report
+.submission_analysis
