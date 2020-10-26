@@ -48,7 +48,7 @@
 
 - Class: cmd_question
   Output: Let's take a look at the data. Use the fuction glimpse() from the dplyr
-  package to take a look at the data.
+      package to take a look at the data.
   CorrectAnswer: glimpse(glynn_ichino)
   AnswerTests: any_of_exprs('glimpse(glynn_ichino)')
   Hint: Did you load the dplyr library? Also the data is called glynn_ichino!
