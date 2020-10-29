@@ -126,8 +126,9 @@
   Hint:
 
 - Class: text
-  Output: From the p-value, we see that the minimum p-value is 0.024 instead of 2.22e-16 (remember that larger p-values are better in the matching context).
-      From the number of variables we small p-values, we also see that it decreased from 7 variables to 1 variable. 
+  Output: From the p-value, we see that the minimum p-value bigger for genetic matching compared to simple matching.
+      (Remember that larger p-values are better in the matching context).
+      Also look at the number of variables with the minimum p-values — that's another indicator of good matching.
 
 - Class: text
   Output: Good job! This was a long lesson, but you made it this far!
