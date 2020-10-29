@@ -59,6 +59,7 @@
   Output: Did the balance improve after matching? (Hint, look at the variables that have small p-values before/after matching.)
   AnswerChoices: Yes;No
   CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
   Hint:
 
 - Class: text
@@ -121,6 +122,7 @@
       how does the balance compare to our previous attempts? 
   AnswerChoices: It's better!;It's worse!
   CorrectAnswer: It's better!
+  AnswerTests: omnitest(correctVal='It's better!')
   Hint:
 
 - Class: text
