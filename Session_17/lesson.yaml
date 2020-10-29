@@ -58,7 +58,7 @@
 - Class: mult_question
   Output: Did the balance improve after matching? (Hint, look at the variables that have small p-values before/after matching.)
   AnswerChoices: Yes;No
-  CorrectAnswer: "Yes"
+  CorrectAnswer: Yes
   Hint:
 
 - Class: text
@@ -120,7 +120,7 @@
   Output: Looking at the match balance result (mainly the min. p-values and the number of variables with the p-values), 
       how does the balance compare to our previous attempts? 
   AnswerChoices: It's better!;It's worse!
-  CorrectAnswer: "It's better!"
+  CorrectAnswer: It's better!
   Hint:
 
 - Class: text

@@ -5,4 +5,3 @@
 
 # swirl_options(swirl_logging = TRUE)
 
-df = read.csv("https://drive.google.com/file/d/1l8k_2L4oPpf5Z_dFNCCjkYRBJmkQxMde/view")
