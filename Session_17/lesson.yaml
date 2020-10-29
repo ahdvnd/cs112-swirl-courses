@@ -122,7 +122,7 @@
       how does the balance compare to our previous attempts? 
   AnswerChoices: It's better!;It's worse!
   CorrectAnswer: It's better!
-  AnswerTests: omnitest(correctVal='It's better!')
+  AnswerTests: omnitest(correctVal="It's better!")
   Hint:
 
 - Class: text
