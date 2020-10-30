@@ -19,63 +19,82 @@
       You can access this code by typing "?Match" in your console. 
       
 - Class: cmd_question
-  Output: Let's get the lalonde dataset. Make sure you have the Matching library loaded. 
+  Output: First, load the Matching library.
+  CorrectAnswer: library(Matching)
+  AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")')
+  Hint: 
+      
+- Class: cmd_question
+  Output: Then, let's get the lalonde dataset. Make sure you have the Matching library loaded. 
   CorrectAnswer: data(lalonde)
   AnswerTests: any_of_exprs('data(lalonde)')
   Hint: Load the dataset using the data() function. 
 
+- Class: text
+  Output: Let's make a propensity score model. A propensity score model uses the
+      treatment variable as the dependent variabel. We are trying to predict
+      the probability of receiving the treatment for each subject. So everything
+      is different. Our left-hand side variable is the treatment now but we can
+      use the same set of covariates. Because the left-hand side variable 
+      (treatment) is binary, we would use a logit model.
+
 - Class: cmd_question
-  Output: Let's make a propensity score model. 
+  Output: 
       Note that we are only using the variables to their first power (no squares).
-      Make sure the variables are in this order, age, educ, black, hisp, married, nodegr, re74, re75, u74, u75.
-      Save your model to an object called glm_prop.
-  CorrectAnswer: glm_prop  <- glm(treat~age + educ + black + hisp + married + nodegr + re74  + re75 + u74 + u75, family=binomial, data=lalonde)
-  AnswerTests: any_of_exprs('glm_prop  <- glm(treat~age + educ + black + hisp + married + nodegr + re74  + re75 + u74 + u75, family=binomial, data=lalonde)','glm_prop  <- glm(treat~lalonde$age + lalonde$educ + lalonde$black + lalonde$hisp + lalonde$married + lalonde$nodegr + lalonde$re74  + lalonde$re75 + lalonde$u74 + lalonde$u75, family=binomial)')
-  Hint: Make sure you set family to binomial. Make sure you "predict" the treatment variable in your model.
+      Make sure the variables are in this order, age, educ, black, hisp, married, 
+      nodegr, re74, re75, u74, u75. Save your model to an object called glm_prop.
+  CorrectAnswer: glm_prop  <- glm(treat ~ age + educ + black + hisp + married + nodegr + re74  + re75 + u74 + u75, family=binomial, data=lalonde)
+  AnswerTests: any_of_exprs('glm_prop  <- glm(treat ~ age + educ + black + hisp + married + nodegr + re74  + re75 + u74 + u75, family=binomial, data=lalonde)','glm_prop  <- glm(treat~lalonde$age + lalonde$educ + lalonde$black + lalonde$hisp + lalonde$married + lalonde$nodegr + lalonde$re74  + lalonde$re75 + lalonde$u74 + lalonde$u75, family=binomial)', 'glm_prop  <- glm(treat ~ age + educ + black + hisp + married + nodegr + re74  + re75 + u74 + u75, data=lalonde, family=binomial)')
+  Hint: Make sure you set family to binomial. Make sure the treatment variable is your dependent variable.
 
 - Class: cmd_question
-  Output: Next, we will generate propensity scores for each observation in our dataset. 
-      Essentially, the propensity score "summarizes" the covariates (age, educ, etc.) with a single number. 
-      Save this to an object called X.
-  CorrectAnswer: X <- glm_prop$fitted
-  AnswerTests: any_of_exprs('X <- glm_prop$fitted')
-  Hint: Use the $fitted for the model to extract the propensity for each observation.
+  Output: Next, we will generate propensity scores for each observation in our 
+      dataset. The propensity scores will be the predicted values from our previous
+      regression. So let's add a new column to our data frame called 'ps' which 
+      contains the predicted probabilities. Make sure you use the predict() function
+      and use "respose" for the type argument. 
+  CorrectAnswer: lalonde$ps <- predict(glm_prop, type = "response")
+  AnswerTests: any_of_exprs('lalonde$ps <- predict(glm_prop, type = "response")', 'lalonde$ps <- glm_prop$fitted')
+  Hint: Make sure you add a column to your data frame called ps. 
 
 - Class: cmd_question
-  Output: For the sake of simplicity, let's save the outcome variable (re78) to an object called Y. 
-  CorrectAnswer: Y  <- lalonde$re78
-  AnswerTests: any_of_exprs('Y  <- lalonde$re78')
-  Hint: Call the lalonde$re78 and assign it to Y.
-
-- Class: cmd_question
-  Output: For the sake of simplicity, let's also save the treatment variable (treat) to an object called Tr. 
-  CorrectAnswer: Tr  <- lalonde$treat
-  AnswerTests: any_of_exprs('Tr  <- lalonde$treat')
-  Hint: Call the lalonde$treat and assign it to Tr.
-
-- Class: cmd_question
-  Output: Now we're ready to run the matching procedure. 
-      Simply paste in this, rr  <- Match(Y=Y, Tr=Tr, X=X, M=1).
-      The Y argument specifies the outcome; the Tr argument specifies the treatment; the X argument specifies the propensity score (or the covariates to be matched on); the M argument specifies the number of matches for each control/treated units. 
-  CorrectAnswer: rr  <- Match(Y=Y, Tr=Tr, X=X, M=1)
-  AnswerTests: any_of_exprs('rr  <- Match(Y=Y, Tr=Tr, X=X, M=1)')
-  Hint: 
+  Output: Now we're ready to run the matching algorithm. We have to specify at least
+      4 arguments. The first argument is Y and should be equal to the outcome variable.
+      The second argument is Tr and should be equal to the treatment variable. The third
+      argument is X and should be equal to the propensity score variable. Finally the last
+      argument is M and specifies the number of matches for each control/treated units.
+      Save the results to an object called rr.
+  CorrectAnswer: rr  <- Match(Y=lalonde$re78, Tr=lalonde$treat, X=lalonde$ps, M=1)
+  AnswerTests: any_of_exprs('rr  <- Match(Y=lalonde$re78, Tr=lalonde$treat, X=lalonde$ps, M=1)')
+  Hint: Make sure you follow this 'rr  <- Match(Y= ..., Tr= ..., X= ..., M= ...)'
 
 - Class: text
-  Output: To see the index of the matched units. We can use either "rr$index.treated" or "rr$index.control". 
-      To see the X or Y values of the matched units, we can use "rr$mdata$X" and "rr$mdata$Y" respectively.
+  Output: To see the index of the matched units. We can use either type
+      "rr$index.treated" or "rr$index.control". To see the X or Y values 
+      of the matched units, we can use "rr$mdata$X" and "rr$mdata$Y" respectively.
 
 - Class: cmd_question
-  Output: After we run the Match() function, we would want to check whether the matched units are similar. 
-      We could quantify this by running the MatchBalance() function.
-      In the function, 1) specify the model, treat ~ age..., 2) specify the dataset, 3) set the match.out to the match object rr, and 4) set nboots to 500. 
+  Output: Let's look at the index of the matched control units.
+  CorrectAnswer: rr$index.control
+  AnswerTests: any_of_exprs('rr$index.control')
+  Hint: Hint is provided above!
+
+- Class: cmd_question
+  Output: After we run the Match() function, we would want to check whether the 
+      matched units in the control and treatment groups are balanced. We could
+      check this by running the MatchBalance() function. In the function, 
+      1) specify the propensity score model, treat ~ age..., 2) specify the dataset, 
+      3) set the argument match.out to the match object rr, and 4) set nboots to 500. 
+      Save the final results to an object called mb.
   CorrectAnswer: mb  <- MatchBalance(treat~age + educ + black + hisp + married + nodegr + re74 + re75 + u74 + u75, data=lalonde, match.out=rr, nboots=500)
   AnswerTests: any_of_exprs('mb  <- MatchBalance(treat~age + educ + black + hisp + married + nodegr + re74 + re75 + u74 + u75, data=lalonde, match.out=rr, nboots=500)')
-  Hint: Use this, mb  <- MatchBalance(treat~age + educ + black + hisp + married + nodegr + re74 + re75 + u74 + u75, data=lalonde, match.out=rr, nboots=500)
+  Hint: You should type something like this mb  <- MatchBalance(treat ~ ... , data = ..., match.out = ..., nboots = ...)
 
 - Class: text
-  Output: We will be spending several sessions on the interpretation of the output of MatchBalance. But let's start thinking about the meaning of p-values here. 
-      When we want to matched units to be similar, is it better that the corresponding p-value is large or small? 
+  Output: We will be spending several sessions on the interpretation of the output
+      of MatchBalance. But let's start thinking about the meaning of p-values here. 
+      When we want to matched units to be similar, is it better that the 
+      corresponding p-value is large or small? 
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
