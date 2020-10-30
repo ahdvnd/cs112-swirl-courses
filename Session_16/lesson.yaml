@@ -91,6 +91,13 @@
   Hint: You should type something like this mb  <- MatchBalance(treat ~ ... , data = ..., match.out = ..., nboots = ...)
 
 - Class: text
+  Output: Take a look at the output of the MatchBalance() function. Specifically,
+      look at the variable age. Copy and paste your results for mean of the variable
+      in the treatment and control groups before and after matching. What do you
+      observe? Bring your copied results and an explanation of your findings about
+      the variable age to the class.
+
+- Class: text
   Output: We will be spending several sessions on the interpretation of the output
       of MatchBalance. But let's start thinking about the meaning of p-values here. 
       When we want to matched units to be similar, is it better that the 
