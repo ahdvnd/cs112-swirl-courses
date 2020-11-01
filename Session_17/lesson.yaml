@@ -95,8 +95,8 @@
 - Class: cmd_question
   Output: Run the same MatchBalance() function, but change the match.out parameter to reflect this new matching procedure.
       Save it to an object called mb3. 
-  CorrectAnswer: mb3 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=rr3, nboots=500)
-  AnswerTests: any_of_exprs('mb3 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=rr3, nboots=500)')
+  CorrectAnswer: mb3 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr3, nboots=500)
+  AnswerTests: any_of_exprs('mb3 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr3, nboots=500)')
   Hint: Same as before, but change the match.out parameter to rr3.
 
 - Class: text
@@ -135,8 +135,8 @@
   Output: Finally, we can check the balance of the genetic matching procedure. 
       The things you put into the MatchBalance function is the same as before, 
       except you specify match.out as mout. Save this to an object called mbgen. 
-  CorrectAnswer: mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=mout, nboots=500)
-  AnswerTests: any_of_exprs('mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=mout, nboots=500)')
+  CorrectAnswer: mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=mout, nboots=500)
+  AnswerTests: any_of_exprs('mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=mout, nboots=500)')
   Hint: 
 
 - Class: mult_question
