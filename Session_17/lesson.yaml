@@ -40,7 +40,7 @@
   Output: The data contains 445 treated units and 15992 control units. 
       We are not doing propensity score matching, so no need for that model this time.
       Let's define X, the covariates we want to match on. Use the cbind() 
-      function to combine age, age, education, black, hispanic, married, nodegree, 
+      function to combine age, education, black, hispanic, married, nodegree, 
       re74, and re75. Save the object into X. X will be the set of variables
       we are trying to match on.
   CorrectAnswer: X <- cbind(lalonde_obs$age, lalonde_obs$education, lalonde_obs$black, lalonde_obs$hispanic, lalonde_obs$married, lalonde_obs$nodegree, lalonde_obs$re74, lalonde_obs$re75)
@@ -57,15 +57,16 @@
   Output: Now we're ready to run the matching procedure. 
       You should have some practice on how to match, so I will leave it to you to do so.
       Specify the treatment, the covariates, and the number of matches to look 
-      for (M), in that order. Save this to an object called rr1. 
+      for (M), in that order. Save this to an object called rr1. Set M = 1.
   CorrectAnswer: rr1 <- Match(Tr = Tr, X = X, M = 1)
-  AnswerTests: any_of_exprs('rr1 <- Match(Tr = Tr, X = X, M = 1)')
-  Hint: 
+  AnswerTests: any_of_exprs('rr1 <- Match(Tr = Tr, X = X, M = 1)', 'rr1 <- Match(X = X, Tr = Tr, M = 1)')
+  Hint: Make sure the Matching library is loaded.
 
 - Class: cmd_question
   Output: After we run the Match() function, let's check whether the matched
       units are similar with the MatchBalance() function. In the function, 
-      1) specify the model, treat ~ age..., 2) specify the dataset, 3) set 
+      1) specify the model, treat ~ age + education + black + hispanic + 
+      married + nodegree + re74 + re75, 2) specify the dataset, 3) set 
       the match.out to the match object rr, and 4) set nboots to 500. 
       Save it to an object called mb1.
   CorrectAnswer: mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr1, nboots=500)
@@ -104,7 +105,7 @@
       better balance compared to M=1. 
 
 - Class: text
-  Output: Now the interesting method, genetic matching.
+  Output: Now let's do genetic matching.
       This procedure has one additional step. Simple matching has the Match() 
       and the MatchBalance step.
       Genetic matching has a GenMatch() step before these steps.
