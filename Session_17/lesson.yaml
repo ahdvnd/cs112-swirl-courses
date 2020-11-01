@@ -1,13 +1,13 @@
 - Class: meta
   Course: CS112
-  Lesson: Session 17 Statistical Matching II
+  Lesson: Session 17 Statistical Matching I
   Author: Michael Chen
   Type: Standard
   Organization: Minerva University
   Version: 2.4.5
   
 - Class: text
-  Output: Welcome to the Swirl lesson for CS112 Session 17, Statistical Matching II.
+  Output: Welcome to the Swirl lesson for CS112 Session 17, Statistical Matching I.
       Please note that you can use the function rpt() to go back to the
       previous question. To end your Swirl session, you can type bye().
       After you exit a lesson, you can always resume a lesson by typing 
@@ -16,44 +16,61 @@
       
 - Class: text
   Output: In this exercise, we will continue on the topic of Matching. 
-      First, we will review simple matching with different M values. Then, we will move on to genetic matching. 
-      We will try to interpret the match balance result to see how well we have matched our units.
-    
-- Class: text
-  Output: Before you start this lesson, please download and load the dataset dw_data.dta from the Forum.
-      This dataset contains 445 treated units and 15992 control units. 
-      Make sure you name the dataset "df". 
+      First, we will review simple matching with different M values. 
+      Then, we will move on to genetic matching. We will try to interpret 
+      the match balance result to see how well we have matched our units.
 
 - Class: cmd_question
-  Output: We are not doing propensity score matching, so no need for that model this time.
-      Let's define X, the covariates we want to match on.
-      Use the cbind() function to combine age, age, education, black, hispanic, married, nodegree, re74, and re75.
-  CorrectAnswer: X <- cbind(df$age, df$education, df$black, df$hispanic, df$married, df$nodegree, df$re74, df$re75)
-  AnswerTests: any_of_exprs('X <- cbind(df$age, df$education, df$black, df$hispanic, df$married, df$nodegree, df$re74, df$re75)') 
-  Hint: Make sure you use df$age to specify the age var. Make sure the var order is as stated above.
+  Output: This original data file is in a .dta format which means it a Stata native file.
+      Stata is another statistical software that is a lot more limited than R but is
+      still used in for statistical analysis. For your convenience, the data is tranformed 
+      into a csv link. Let's load the data from the following 
+      link http://bit.ly/lalonde_obs. Save the data into an object called lalonde_obs
+  CorrectAnswer: lalonde_obs <- read.csv("http://bit.ly/lalonde_obs")
+  AnswerTests: any_of_exprs('lalonde_obs <- read.csv("http://bit.ly/lalonde_obs")') 
+  Hint: Use the read.csv() function.
+
+- Class: cmd_question
+  Output: Let's look at the head of the data.
+  CorrectAnswer: head(lalonde_obs)
+  AnswerTests: any_of_exprs('head(lalonde_obs)') 
+  Hint: 
+
+- Class: cmd_question
+  Output: The data contains 445 treated units and 15992 control units. 
+      We are not doing propensity score matching, so no need for that model this time.
+      Let's define X, the covariates we want to match on. Use the cbind() 
+      function to combine age, age, education, black, hispanic, married, nodegree, 
+      re74, and re75. Save the object into X. X will be the set of variables
+      we are trying to match on.
+  CorrectAnswer: X <- cbind(lalonde_obs$age, lalonde_obs$education, lalonde_obs$black, lalonde_obs$hispanic, lalonde_obs$married, lalonde_obs$nodegree, lalonde_obs$re74, lalonde_obs$re75)
+  AnswerTests: any_of_exprs('X <- cbind(lalonde_obs$age, lalonde_obs$education, lalonde_obs$black, lalonde_obs$hispanic, lalonde_obs$married, lalonde_obs$nodegree, lalonde_obs$re74, lalonde_obs$re75)') 
+  Hint: Make sure you use lalonde_obs$age to specify the age var. Make sure the var order is as stated above.
 
 - Class: cmd_question
   Output: Let's define Tr, the treatment variable.
-  CorrectAnswer: Tr <- df$treat
-  AnswerTests: any_of_exprs('Tr <- df$treat') 
+  CorrectAnswer: Tr <- lalonde_obs$treat
+  AnswerTests: any_of_exprs('Tr <- lalonde_obs$treat') 
   Hint: Treatment variable is called "treat" in this dataset.
 
 - Class: cmd_question
   Output: Now we're ready to run the matching procedure. 
       You should have some practice on how to match, so I will leave it to you to do so.
-      Specify the treatment, the covariates, and the number of matches to look for (M), in that order.
-      Save this to an object called rr1. 
+      Specify the treatment, the covariates, and the number of matches to look 
+      for (M), in that order. Save this to an object called rr1. 
   CorrectAnswer: rr1 <- Match(Tr = Tr, X = X, M = 1)
   AnswerTests: any_of_exprs('rr1 <- Match(Tr = Tr, X = X, M = 1)')
   Hint: 
 
 - Class: cmd_question
-  Output: After we run the Match() function, let's check whether the matched units are similar with the MatchBalance() function.
-      In the function, 1) specify the model, treat ~ age..., 2) specify the dataset, 3) set the match.out to the match object rr, and 4) set nboots to 500. 
+  Output: After we run the Match() function, let's check whether the matched
+      units are similar with the MatchBalance() function. In the function, 
+      1) specify the model, treat ~ age..., 2) specify the dataset, 3) set 
+      the match.out to the match object rr, and 4) set nboots to 500. 
       Save it to an object called mb1.
-  CorrectAnswer: mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=rr1, nboots=500)
-  AnswerTests: any_of_exprs('mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=rr1, nboots=500)')
-  Hint: Use this, mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=rr1, nboots=500)
+  CorrectAnswer: mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr1, nboots=500)
+  AnswerTests: any_of_exprs('mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr1, nboots=500)')
+  Hint: Use this, mb1 <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = lalonde_obs, match.out=rr1, nboots=500)
 
 - Class: mult_question
   Output: Did the balance improve after matching? (Hint, look at the variables that have small p-values before/after matching.)
@@ -63,7 +80,8 @@
   Hint:
 
 - Class: text
-  Output: Before matching, 7 variables have poor balance (small p-values). After matching, only 1 variable has that small p-value. 
+  Output: Before matching, 7 variables have poor balance (small p-values). 
+      After matching, only 1 variable has that small p-value. 
       Hence, we have an improvement in balance between our treatment and control group. 
 
 - Class: cmd_question
@@ -82,43 +100,48 @@
   Hint: Same as before, but change the match.out parameter to rr3.
 
 - Class: text
-  Output: Look at the MatchBalance result and consider whether this has a better balance compared to M=1. 
+  Output: Look at the MatchBalance result and consider whether this has a 
+      better balance compared to M=1. 
 
 - Class: text
   Output: Now the interesting method, genetic matching.
-      This procedure has one additional step. Simple matching has the Match() and the MatchBalance step.
+      This procedure has one additional step. Simple matching has the Match() 
+      and the MatchBalance step.
       Genetic matching has a GenMatch() step before these steps.
       (You can run ?GenMatch for the documentation.)
 
 - Class: cmd_question
   Output: Let's run the Genmatch step. 
-      In the arguments, specify the treatment, the covariates, the estimand ("ATT"), M (1), pop.size (16), max.generations (10), wait.generations (5).
+      In the arguments, specify the treatment, the covariates, 
+      the estimand ("ATT"), M (1), pop.size (16), max.generations (10), wait.generations (5).
       Save the object to genout.
   CorrectAnswer: genout <- GenMatch(Tr=Tr, X=X, estimand="ATT", M=1, pop.size=16, max.generations=10, wait.generations=5)
   AnswerTests: any_of_exprs('genout <- GenMatch(Tr=Tr, X=X, estimand="ATT", M=1, pop.size=16, max.generations=10, wait.generations=5)')
   Hint: If you can't figure it out, just paste this, genout <- GenMatch(Tr=Tr, X=X, estimand="ATT", M=1, pop.size=16, max.generations=10, wait.generations=5)
 
 - Class: text
-  Output: If there are any confusion on the things you put in the GenMatch function, bring the question to class.
+  Output: If there are any confusion on the things you put in the 
+      GenMatch function, bring the question to class.
 
 - Class: cmd_question
   Output: We will then input the GenMatch output (which we named genout) to the Match function. 
-      Be sure to specify Tr, X, M, estimand, and set Weight.matrix as genout.
-      Save this to an object called mout.
+      Be sure to specify Tr, X, M, estimand (set at "ATT"), and set Weight.matrix as genout.
+      Save this to an object called mout. Choose M = 1.
   CorrectAnswer: mout <- Match(Tr=Tr, X=X, M=1, estimand="ATT", Weight.matrix=genout)
   AnswerTests: any_of_exprs('mout <- Match(Tr=Tr, X=X, M=1, estimand="ATT", Weight.matrix=genout)')
   Hint: 
 
 - Class: cmd_question
   Output: Finally, we can check the balance of the genetic matching procedure. 
-      The things you put into the MatchBalance function is the same as before, except you specify match.out as mout. 
-      Save this to an object called mbgen. 
+      The things you put into the MatchBalance function is the same as before, 
+      except you specify match.out as mout. Save this to an object called mbgen. 
   CorrectAnswer: mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=mout, nboots=500)
   AnswerTests: any_of_exprs('mbgen <- MatchBalance(treat~ age + education + black + hispanic + married + nodegree + re74 + re75, data = df, match.out=mout, nboots=500)')
   Hint: 
 
 - Class: mult_question
-  Output: Looking at the match balance result (mainly the min. p-values and the number of variables with the p-values), 
+  Output: Looking at the match balance result (mainly the min. p-values and 
+      the number of variables with the p-values), 
       how does the balance compare to our previous attempts? 
   AnswerChoices: It's better!;It's worse!
   CorrectAnswer: It's better!
