@@ -1,0 +1,138 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 18 More Matching
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 18, More Matching.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: In this exercise, we will be exploring several parameters and learn how they affect the matching procedure. 
+      Genetic matching consists of 2 main steps, 1) run GenMatch, 2) use the GenMatch output in Match. 
+      Then one can check for the balance and the estimated treatment effect after a satisfactory match is achieved. 
+      For today, we will run the entire matching procedure for questions 5-6 in the pre-class work doc, 
+      but it's easily replicatable for the other questions once you get the hang of it.
+
+- Class: video
+  Output: Do you want to access the doc link to the Genetic Matching Exercises?
+  VideoLink: https://docs.google.com/document/d/1b4yIh2oOOR-Nd5zgARheMBE19zqmPcq72YcRnw5MITY/edit
+
+- Class: cmd_question
+  Output: Let's first load the lalonde dataset WITH non-experiment observations. 
+      We are trying to match the treated units from the RCT with the units from the observational study to estimate the treatment effect. 
+      Load the data from https://tinyurl.com/yxzo52ez and save it as lalonde_obs. 
+  CorrectAnswer: lalonde_obs <- read.csv("https://tinyurl.com/yxzo52ez")
+  AnswerTests: any_of_exprs('lalonde_obs <- read.csv("https://tinyurl.com/yxzo52ez")') 
+  Hint: Use the read.csv() function.
+
+- Class: cmd_question
+  Output: Let's look at the head of the data.
+  CorrectAnswer: head(lalonde_obs)
+  AnswerTests: any_of_exprs('head(lalonde_obs)') 
+  Hint: 
+
+- Class: text
+  Output: Now let's tackle Q5 and Q6 together. Thus, we will be making two changes.
+      First, we will normalize education (not age) to have the mean of 0 and sd of 1. 
+      Second, we will enforce caliper to age (not education). 
+
+- Class: cmd_question
+  Output: Let's first transform education with the scale() function. 
+      If you want to normalize a variable, this generate code does the job, scale(X)[, 1].
+      Use the code and add it to the lalonde_obs dataframe as a new variable called educ_scaled. 
+  CorrectAnswer: lalonde_obs$educ_scaled <- scale(lalonde_obs$educ)[, 1]
+  AnswerTests: any_of_exprs('lalonde_obs$educ_scaled <- scale(lalonde_obs$educ)[, 1]')
+  Hint: Replace the input in the scale(X)[, 1] to get the transformed education. 
+
+
+- Class: cmd_question
+  Output: You are asked to match on only age and scaled educ. 
+      Combine the two variables and save it to an object called X. 
+  CorrectAnswer: X <- cbind(lalonde_obs$age, lalonde_obs$educ_scaled)
+  AnswerTests: any_of_exprs('X <- cbind(lalonde_obs$age, lalonde_obs$educ_scaled)') 
+  Hint: Make sure you use age and scaled education.
+
+- Class: cmd_question
+  Output: Let's define Tr, the treatment variable.
+  CorrectAnswer: Tr <- lalonde_obs$treat
+  AnswerTests: any_of_exprs('Tr <- lalonde_obs$treat') 
+  Hint: Treatment variable is called "treat" in this dataset.
+
+- Class: text
+  Output: Now let's do genetic matching. Let's start with the Genmatch step. 
+      Here goes the second modification, caliper.
+      The caliper value indicates the distance which is acceptable for any match. 
+
+- Class: cmd_question
+  Output: In the arguments, specify the treatment, the covariates, set replacement to true, and set the caliper of age to 0.01 
+      (and 1000 for the scaled education). 
+      Save the object to genout1.
+  CorrectAnswer: genout1 <- GenMatch(Tr=Tr, X=X, replace=TRUE, caliper=c(0.01, 1000))
+  AnswerTests: any_of_exprs('genout1 <- GenMatch(Tr=Tr, X=X, replace=TRUE)')
+  Hint: If you want to only set different caliper values for each variable, you need to pass a vector c() to indicate the caliper 
+      of each variable. Setting caliper=1000 for education means that there's practically no restriction on the variable. 
+
+
+- Class: cmd_question
+  Output: We will then input the GenMatch output (genout1) to the Match function. 
+      Be sure to define Tr, X, replace, Weight.matrix, and caliper.
+      Save this to an object called mout1. 
+  CorrectAnswer: mout1 <- Match(Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1, caliper=c(0.01, 1000))
+  AnswerTests: any_of_exprs('mout1 <- Match(Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1, caliper=c(0.01, 1000))')
+  Hint: 
+
+- Class: cmd_question
+  Output: We can now check the balance of the genetic matching procedure. 
+      In the MatchBalance function, specify the model (treat ~ x + x), data, match.out, and nboots (as 500). 
+      Save it to an object called mb1. 
+  CorrectAnswer: mb1 <- MatchBalance(treat~ age + educ_scaled, data = lalonde_obs, match.out=mout1, nboots=500)
+  AnswerTests: any_of_exprs('mb1 <- MatchBalance(treat~ age + educ_scaled, data = lalonde_obs, match.out=mout1, nboots=500)')
+  Hint: 
+
+- Class: mult_question
+  Output: Looking at the match balance result, what is the min. p-value after matching? 
+  AnswerChoices: 1;2.22e-16
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal="1")
+  Hint: What is the "After Matching Minimum p.value"?
+
+- Class: cmd_question
+  Output: After having a satisfactory balance after matching, we can estimate our treatment effect with the Match() function.
+      The only thing we have to change is specifying the outcome variable Y in the Match function.
+      Specify the outcome, re78, as the first parameter in Match(Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1).
+      Save it to mout1. 
+  CorrectAnswer: mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1)
+  AnswerTests: any_of_exprs('mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1)')
+  Hint: 
+
+- Class: cmd_question
+  Output: We can now look at the estimate and standard error of the treatment effect. Use $est to look at the estimate.
+  CorrectAnswer: mout1$est
+  AnswerTests: any_of_exprs('mout1$est')
+  Hint: 
+
+- Class: cmd_question
+  Output: Use $se to look at the standard error.
+  CorrectAnswer: mout1$se
+  AnswerTests: any_of_exprs('mout1$se')
+  Hint: 
+
+- Class: text
+  Output: With the mean and the standard error, the 95% confidence interval can be manually constructed. 
+      Good job on the work!
+
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s18")
+  Hint: 
