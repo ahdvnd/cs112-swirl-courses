@@ -1,0 +1,50 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 19 Sensitivity to Hidden Bias (Endogeneity)
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 19, Sensitivity to Hidden Bias (Endogeneity).
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: Congratulations for making it all the way to session 19 of CS112. 
+      This is often a hard and busy time in the semester.
+
+- Class: text
+  Output: Your job in this session is to browse through a series of dense materials, rather than coding.
+      You will be directed to websites, so please make sure you read the pop-out link carefully.
+
+- Class: video
+  Output: How could taking CS112 help with explaining causation vs. correlation?
+  VideoLink: https://xkcd.com/552/
+
+- Class: video
+  Output: How do you explain causation and correlation to a truck driver?
+  VideoLink: https://twitter.com/erikbryn/status/1309361609849016320
+
+- Class: video
+  Output: Why do we still care about prediction when we have causality?
+  VideoLink: https://xkcd.com/2370/
+
+- Class: video
+  Output: Where does your field of interest lie in this graph?
+  VideoLink: https://xkcd.com/1991/
+
+- Class: text
+  Output: Feel free to browse more xkcd. 
+      Understanding their joke is the one true indicator of a strong grasp in science courses. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s19")
+  Hint: 
