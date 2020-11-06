@@ -55,14 +55,14 @@
 - Class: cmd_question
   Output: We can check whether the scale() function appropriately transformed the education variable.
       Let's calculate the mean of the scaled education. 
-  CorrectAnswer: mean(lalonde_obs$educ)
-  AnswerTests: any_of_exprs('mean(lalonde_obs$educ)')
+  CorrectAnswer: mean(lalonde_obs$educ_scaled)
+  AnswerTests: any_of_exprs('mean(lalonde_obs$educ_scaled)')
   Hint: Use the mean() function.
 
 - Class: cmd_question
   Output: Let's calculate the standard deviation of the scaled education. 
-  CorrectAnswer: sd(lalonde_obs$educ)
-  AnswerTests: any_of_exprs('sd(lalonde_obs$educ)')
+  CorrectAnswer: sd(lalonde_obs$educ_scaled)
+  AnswerTests: any_of_exprs('sd(lalonde_obs$educ_scaled)')
   Hint: Use the sd() function.
 
 - Class: cmd_question
@@ -111,9 +111,9 @@
 
 - Class: mult_question
   Output: Looking at the match balance result, what is the min. p-value after matching? 
-  AnswerChoices: 1;2.22e-16
-  CorrectAnswer: 1
-  AnswerTests: omnitest(correctVal="1")
+  AnswerChoices: 1;2.22e-16;0.31
+  CorrectAnswer: 0.31
+  AnswerTests: omnitest(correctVal="0.31")
   Hint: What is the "After Matching Minimum p.value"?
 
 - Class: cmd_question
@@ -121,8 +121,8 @@
       The only thing we have to change is specifying the outcome variable Y in the Match function.
       Specify the outcome, re78, as the first parameter in Match(Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1).
       Save it to mout1. 
-  CorrectAnswer: mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1)
-  AnswerTests: any_of_exprs('mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1)')
+  CorrectAnswer: mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1, caliper=c(0.01, 1000))
+  AnswerTests: any_of_exprs('mout1 <- Match(Y=lalonde_obs$re78, Tr=Tr, X=X, replace=TRUE, Weight.matrix=genout1, caliper=c(0.01, 1000))')
   Hint: 
 
 - Class: cmd_question
