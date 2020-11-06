@@ -16,9 +16,9 @@
       
 - Class: text
   Output: In this exercise, we will be exploring several parameters and learn how they affect the matching procedure. 
-      Genetic matching consists of 2 main steps, 1) run GenMatch, 2) use the GenMatch output in Match. 
-      Then one can check for the balance and the estimated treatment effect after a satisfactory match is achieved. 
-      For today, we will run the entire matching procedure for questions 5-6 in the pre-class work doc, 
+      Genetic matching consists of several steps, 1) run GenMatch, 2) use the GenMatch output in Match, 
+      3) check the balance with MatchBalance(), and 4) estimate the treatment effect. 
+      For today, we will run the entire matching procedure for Q5-6 in the pre-class work doc, 
       but it's easily replicatable for the other questions once you get the hang of it.
 
 - Class: video
@@ -52,6 +52,18 @@
   AnswerTests: any_of_exprs('lalonde_obs$educ_scaled <- scale(lalonde_obs$educ)[, 1]')
   Hint: Replace the input in the scale(X)[, 1] to get the transformed education. 
 
+- Class: cmd_question
+  Output: We can check whether the scale() function appropriately transformed the education variable.
+      Let's calculate the mean of the scaled education. 
+  CorrectAnswer: mean(lalonde_obs$educ)
+  AnswerTests: any_of_exprs('mean(lalonde_obs$educ)')
+  Hint: Use the mean() function.
+
+- Class: cmd_question
+  Output: Let's calculate the standard deviation of the scaled education. 
+  CorrectAnswer: sd(lalonde_obs$educ)
+  AnswerTests: any_of_exprs('sd(lalonde_obs$educ)')
+  Hint: Use the sd() function.
 
 - Class: cmd_question
   Output: You are asked to match on only age and scaled educ. 
@@ -76,7 +88,7 @@
       (and 1000 for the scaled education). 
       Save the object to genout1.
   CorrectAnswer: genout1 <- GenMatch(Tr=Tr, X=X, replace=TRUE, caliper=c(0.01, 1000))
-  AnswerTests: any_of_exprs('genout1 <- GenMatch(Tr=Tr, X=X, replace=TRUE)')
+  AnswerTests: any_of_exprs('genout1 <- GenMatch(Tr=Tr, X=X, replace=TRUE, caliper=c(0.01, 1000))')
   Hint: If you want to only set different caliper values for each variable, you need to pass a vector c() to indicate the caliper 
       of each variable. Setting caliper=1000 for education means that there's practically no restriction on the variable. 
 
