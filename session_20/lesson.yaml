@@ -1,0 +1,111 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 20 Quantile Regression
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 20, quantile regression.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: Quantile regression is a regression method for estimating these
+      conditional quantile functions. Just as linear regression estimates 
+      the conditional mean function as a linear combination of the predictors, 
+      quantile regression estimates the conditional quantile function as 
+      a linear combination of the predictors.
+  
+- Class: cmd_question
+  Output: We can perform quantile regression in R easily with the 'quantreg' package.
+      First, install the package. Then load the package. First install the package and then
+      load it to proceed.
+  CorrectAnswer: library(quantreg)
+  AnswerTests: any_of_exprs('library("quantreg")', 'library(quantreg)')
+  Hint: Make sure to first install the package if you don't have it installed.
+  
+- Class: cmd_question
+  Output: We are going to use the 'engel' data that comes with the package.
+      The original Engel data is from 1857 and is on the relationship between 
+      food expenditure and household income. Load the data into your environment.
+  CorrectAnswer: data(engel)
+  AnswerTests: any_of_exprs('data(engel)')
+  Hint: 
+      
+- Class: text
+  Output: We can perform quantile regression using the 'rq' function in the
+      package 'quantreg'. We can specify a 'tau' option which tells 'rq' 
+      which conditional quantile we want. The default value for 'tau' 
+      is 0.5 which corresponds to median regression.
+      
+- Class: cmd_question
+  Output: To fit a quantile regression of food expenditure on 
+      income we can use the rq() function and specify the outcome (foodexp),
+      the treatent (income), tau at 0.5, and data. Save the result to an object
+      called rqfit_r50.
+  CorrectAnswer: rqfit_r50 <- rq(foodexp ~ income, tau = .5, data = engel)
+  AnswerTests: any_of_exprs('rqfit_r50 <- rq(foodexp ~ income, tau = .5, data = engel)')
+  Hint:       
+
+- Class: cmd_question
+  Output: Look at the summary of the result but using the object we 
+      created above (rqfit_r50).
+  CorrectAnswer: summary(rqfit_r50)
+  AnswerTests: any_of_exprs('summary(rqfit_r50)')
+  Hint: 
+
+- Class: text
+  Output: In the table above, the 'lower bd' and 'upper bd' columns
+      represent the endpoints of confidence intervals for the model 
+      coefficients.
+
+- Class: cmd_question
+  Output: Now that you learned how to use the 'rq' function,
+      find the quantile effect for the quartile 0.75. Save the results 
+      to an object called rqfit_r75.
+  CorrectAnswer: rqfit_r75 <- rq(foodexp ~ income, tau = 0.75, data = engel)
+  AnswerTests: any_of_exprs('rqfit_r75 <- rq(foodexp ~ income, tau = 0.75, data = engel)')
+  Hint: 
+
+- Class: cmd_question
+  Output: We can also pass a vector of scalars to tau for calculating 
+      the quantile effects for various quantiles. Try passing the vector 
+      c(0.25, 0.50, 0.75) to the tau and find the coefficients.
+  CorrectAnswer: rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)
+  AnswerTests: any_of_exprs('rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)')
+  Hint: 
+
+- Class: figure
+  Output: We can also plot the quantile regression line using the 'plot' and
+      'abline' functions in R.\n
+      plot(foodexp ~ income, data = engel, pch = 16, main = "foodexp ~ income");
+      abline(lm(foodexp ~ income, data = engel), col = "red", lty = 2);
+      abline(rq(foodexp ~ income, data = engel), col = "blue", lty = 2);
+      legend("topright", legend = c("lm", "rq"), col = c("red", "blue"), lty = 2);
+      The quantile regression line is in blue and the linear regression line is
+      in red.
+  Figure: plot_qr.R
+  FigureType: new
+  
+- Class: mult_question
+  Output: Theoretically and in general, which regresion do you think is more robust
+      to outliers?
+  AnswerChoices: Median Regression;Linear Regression
+  CorrectAnswer: Median Regression
+  AnswerTests: omnitest(correctVal='Median Regression')
+  Hint: 
+
+- Class: text
+  Output: Good job! This was a long lesson, but you made it this far!
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s20")
+  Hint: 
