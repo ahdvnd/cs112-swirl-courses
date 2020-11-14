@@ -34,7 +34,7 @@
       The original Engel data is from 1857 and is on the relationship between 
       food expenditure and household income. Load the data into your environment.
   CorrectAnswer: data(engel)
-  AnswerTests: any_of_exprs('data(engel)')
+  AnswerTests: any_of_exprs('data(engel)', 'data("engel")')
   Hint: 
       
 - Class: text
@@ -49,7 +49,7 @@
       the treatent (income), tau at 0.5, and data. Save the result to an object
       called rqfit_r50.
   CorrectAnswer: rqfit_r50 <- rq(foodexp ~ income, tau = .5, data = engel)
-  AnswerTests: any_of_exprs('rqfit_r50 <- rq(foodexp ~ income, tau = .5, data = engel)')
+  AnswerTests: any_of_exprs('rqfit_r50 <- rq(foodexp ~ income, tau = .5, data = engel)', 'rqfit_r50 <- rq(foodexp ~ income, data = engel)')
   Hint:       
 
 - Class: cmd_question
@@ -71,13 +71,28 @@
   CorrectAnswer: rqfit_r75 <- rq(foodexp ~ income, tau = 0.75, data = engel)
   AnswerTests: any_of_exprs('rqfit_r75 <- rq(foodexp ~ income, tau = 0.75, data = engel)')
   Hint: 
+  
+- Class: cmd_question
+  Output: Look at the summary of the result but using the object we 
+      created above (rqfit_r75).
+  CorrectAnswer: summary(rqfit_r75)
+  AnswerTests: any_of_exprs('summary(rqfit_r75)')
+  Hint: 
 
 - Class: cmd_question
   Output: We can also pass a vector of scalars to tau for calculating 
       the quantile effects for various quantiles. Try passing the vector 
-      c(0.25, 0.50, 0.75) to the tau and find the coefficients.
-  CorrectAnswer: rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)
-  AnswerTests: any_of_exprs('rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)')
+      c(0.25, 0.50, 0.75) to the tau and find the coefficients. Save the results
+      to an object called rqfit_vec.
+  CorrectAnswer: rqfit_vec <- rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)
+  AnswerTests: any_of_exprs('rqfit_vec <- rq(foodexp ~ income, tau = c(0.25, 0.50, 0.75), data = engel)')
+  Hint: 
+  
+- Class: cmd_question
+  Output: Look at the summary of the result but using the object we 
+      created above (rqfit_vec).
+  CorrectAnswer: summary(rqfit_vec)
+  AnswerTests: any_of_exprs('summary(rqfit_vec)')
   Hint: 
 
 - Class: figure
