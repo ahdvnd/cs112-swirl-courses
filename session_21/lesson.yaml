@@ -1,0 +1,106 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 21 Synthetic Controls I
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 21, Synthetic Control I.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+
+- Class: text
+  Output: In this lesson, you will implement a simple synthetic control. It will 
+      give you an overview on how it works. Please refer to the documentation as
+      needed. 
+
+- Class: cmd_question
+  Output: If you haven't already installed the package, first install it using
+      install.packages("Synth", repos="http://cran.rstudio.com/"). Then, 
+      load the package.
+  CorrectAnswer: library(Synth)
+  AnswerTests: any_of_exprs('library(Synth)', 'library("Synth")')
+  Hint: 
+  
+- Class: cmd_question
+  Output: We are going to use the simple toy data that come with the package.
+      This dataset is called 'synth.data'. Load the data into your environment.
+  CorrectAnswer: data(synth.data)
+  AnswerTests: any_of_exprs('data("synth.data")', 'data(synth.data)') 
+  Hint: You need to use the data() function. No need to save it to an object.
+  
+- Class: exact_question
+  Output: What's the earliest year the data covers?
+  CorrectAnswer: 1980
+  AnswerTests: omnitest(correctVal = 1980)
+  Hint: Look at the variable year.
+
+- Class: exact_question
+  Output: What's the latest year the data covers?
+  CorrectAnswer: 2000
+  AnswerTests: omnitest(correctVal = 2000)
+  Hint: Look at the variable year.
+  
+- Class: figure
+  Output: In the synth.data dataset, the predictors are X1, X2, and X3, and 
+      Y is the outcome variable. Variables unit.num and name are unit identifiers.
+      Unit 7 is the treatment unit and units 29, 2, 13, 17, 32, and 38 are control units.
+      For your convenience, we have already converted the panel dataset 
+      to a object suitable for running the synth() function by using the dataprep()
+      function. The output is called dataprep.out. Hit enter to continue.
+  Figure: data_prep.R
+  FigureType: new
+  
+- Class: cmd_question
+  Output: Use the subject dataprep.out and the synth() function to identify the weights
+      that create the best possible synthetic control unit for the treated and
+      assign the result to an object called synth.out.
+  CorrectAnswer: synth.out <- synth(dataprep.out)
+  AnswerTests: omnitest(correctExpr='synth.out <- synth(dataprep.out)')
+  Hint: Did you use <- instead of = ?
+  
+- Class: cmd_question
+  Output: Run synth.out$solution.w to check the weights you obtained.
+  CorrectAnswer: synth.out$solution.w
+  AnswerTests: omnitest(correctExpr='synth.out$solution.w')
+  Hint: 
+  
+- Class: mult_question
+  Output: Based on your results in the previous step, 
+      which control unit has the highest weight?
+  AnswerChoices: 17;29;32;38
+  CorrectAnswer: 32
+  AnswerTests: omnitest(correctVal='32')
+  Hint:
+  
+- Class: figure
+  Output: We can summarise the result of the synth() function. To get summary
+      tables for all information, we can use the synth.tab() function in order
+      to compare the treatment and the synthetic control units across the 
+      predictors. The table is shown in your console. Hit enter to continue!
+  Figure: synth_table.R
+  FigureType: new
+  
+- Class: figure
+  Output: We can also look at the summary plots for outcome trajectories 
+      of the treated and the synthetic control unit using the path.plot()
+      function. The figure is shown here. Hit enter to continue!
+  Figure: path_plot.R
+  FigureType: new
+
+- Class: text
+  Output: Good job. This is a friendly introduction to how to implement 
+      synthetic controls. We will be looking at it in more detail in 
+      the next lesson. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "21")
+  Hint:
