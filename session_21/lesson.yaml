@@ -16,8 +16,8 @@
 
 - Class: text
   Output: In this lesson, you will implement a simple synthetic control. It will 
-      give you an overview on how it works. Please refer to the documentation as
-      needed. 
+      give you an overview on how it works. Please refer to the library documentation 
+      as needed. 
 
 - Class: cmd_question
   Output: If you haven't already installed the package, first install it using
@@ -89,7 +89,7 @@
 - Class: figure
   Output: We can also look at the summary plots for outcome trajectories 
       of the treated and the synthetic control unit using the path.plot()
-      function. The figure is shown here. Hit enter to continue!
+      function. The figure is shown on the right. Hit enter to continue!
   Figure: path_plot.R
   FigureType: new
 
