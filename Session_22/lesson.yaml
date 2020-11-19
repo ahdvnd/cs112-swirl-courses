@@ -52,7 +52,38 @@
       synthetic control are 1) data preparation, 2) synthetic control construction,
       and 3) producing results and graphs. 
 
+- Class: text
+  Output: Due to its complexity, we will try to understand some important parameters 
+      the dataprep process. Refer to the help files as needed (?dataprep).
 
+- Class: exact_question
+  Output: There is a parameter called foo. What should you input there?
+  CorrectAnswer: basque
+  AnswerTests: omnitest(correctVal = "basque")
+  Hint: foo specifies the dataframe with the data. 
+
+- Class: mult_question
+  Output: There is a parameter called predictors. What does it refer to?
+  AnswerChoices: The independent variables; The dependent variable
+  CorrectAnswer: The independent variables
+  AnswerTests: omnitest(correctVal = "The independent variables")
+  Hint: 
+  
+- Class: exact_question
+  Output: There is a parameter called unit.variable. It indicates the column that specifies
+      the number that associates with the different units (different regions). 
+      In the basque dataset, what is the column name that indicates this?
+  CorrectAnswer: regionno
+  AnswerTests: omnitest(correctVal = "regionno")
+  Hint: regionname specifies the actual name of the different regions, 
+      is there a column with numbers that correspond to these names?
+  
+- Class: exact_question
+  Output: There is a parameter called time.variable. It indicates the column that 
+      specifies the time variable. In the basque dataset, which variable is this?
+  CorrectAnswer: year
+  AnswerTests: omnitest(correctVal = "year")
+  Hint: Take a look at the dataset. 
       
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
