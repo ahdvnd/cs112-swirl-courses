@@ -114,6 +114,83 @@
   AnswerTests: omnitest(correctVal = 1969)
   Hint: Recall when the treatment was defined earlier. 
 
+- Class: figure
+  Output: The dataprep step is automatically ran here. For the full code, refer to the 
+      bottom of the help file of dataprep (?dataprep). The parameters above are inputted
+      in the dataprep function. The output is called dataprep.out. Hit enter to continue.
+  Figure: data_prep.R
+  FigureType: new
+
+- Class: cmd_question
+  Output: Use the subject dataprep.out and the synth() function to identify the weights
+      that create the best possible synthetic control unit for the treated and
+      assign the result to an object called synth.out.
+  CorrectAnswer: synth.out <- synth(dataprep.out)
+  AnswerTests: omnitest(correctExpr='synth.out <- synth(dataprep.out)')
+  Hint: 
+  
+- Class: cmd_question
+Output: Run synth.out$solution.w to check the weights you obtained.
+CorrectAnswer: synth.out$solution.w
+AnswerTests: omnitest(correctExpr='synth.out$solution.w')
+Hint: 
+  
+- Class: mult_question
+  Output: Based on your results in the previous step, which control unit has the highest weight?
+  AnswerChoices: Cataluna; Madrid; Aragon; Canarias
+  CorrectAnswer: Cataluna
+  AnswerTests: omnitest(correctVal='Cataluna')
+  Hint:
+
+- Class: text
+  Output: There are two graphs we can look at, the path plot and the gaps plot. You can run them below. 
+
+- Class: figure
+  Output: We can also look at the outcome trajectories of the treated and the 
+      synthetic control unit using the path.plot() function. 
+      The figure will be shown on the right. Hit enter to continue!
+  Figure: path_plot.R
+  FigureType: new
+
+- Class: figure
+  Output: We can also look at the difference between the treated and the 
+      synthetic control unit using the gaps.plot() function. 
+      The figure will be shown on the right. Hit enter to continue!
+  Figure: gaps_plot.R
+  FigureType: new
+
+- Class: text
+  Output: Once we are satisfied with our synthetic control, we can try to 
+      estimate the treatment effect. We may be interested in the aggregate
+      treatment effect or the average treatment effect. The former is the sum
+      of the differences in the post-treatment period; the latter is the average 
+      of the differences in the post-treatment period. 
+
+- Class: cmd_question
+  Output: We first calculate the difference between the treatment and the synthetic control.
+      We do so with this, gaps <- dataprep.out$Y1plot - (dataprep.out$Y0plot %*% synth.out$solution.w)
+  CorrectAnswer: gaps <- dataprep.out$Y1plot - (dataprep.out$Y0plot %*% synth.out$solution.w)
+  AnswerTests: omnitest(correctExpr='gaps <- dataprep.out$Y1plot - (dataprep.out$Y0plot %*% synth.out$solution.w)')
+  Hint: 
+  
+- Class: cmd_question
+  Output: To calculate the aggregate treatment effect, we sum up the gaps in the post-treatment
+      period. The period starts in the 16th index and ends in the 43rd, sum(gaps[16:43]). 
+  CorrectAnswer: sum(gaps[16:43])
+  AnswerTests: omnitest(correctExpr='sum(gaps[16:43])')
+  Hint: 
+  
+- Class: cmd_question
+  Output: To calculate the average treatment effect, we average the gaps in the post-treatment
+      period. The period starts in the 16th index and ends in the 43rd, mean(gaps[16:43]). 
+  CorrectAnswer: mean(gaps[16:43])
+  AnswerTests: omnitest(correctExpr='mean(gaps[16:43])')
+  Hint: 
+    
+- Class: text
+  Output: Good job. If you are interested in running synthetic control for your
+      final project. Please reach out to Profs and TAs for more help, as 
+      implementation was the primary focus of the sessions. 
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
