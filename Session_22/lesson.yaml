@@ -64,7 +64,8 @@
 
 - Class: mult_question
   Output: There is a parameter called predictors. What does it refer to?
-  CorrectAnswer: The independent variables; The dependent variable
+  AnswerChoices: The independent variables; The dependent variable
+  CorrectAnswer: The independent variables
   AnswerTests: omnitest(correctVal = "The independent variables")
   Hint: 
 
