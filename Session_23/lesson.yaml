@@ -23,7 +23,7 @@
   Output: a) Why is the all-cause death rate similar in the encouragement group (27)
       and the non-encouragement group (28)?
   AnswerChoices: Just happened to be; Breast cancer screening is randomized; Encouragement is randomized
-  CorrectAnswer: Encouragement is randomized
+  CorrectAnswer: "Encouragement is randomized"
   AnswerTests: any_of_exprs('Encouragement is randomized')
 
 - Class: text
