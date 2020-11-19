@@ -75,15 +75,15 @@
       In the basque dataset, what is the column name that indicates this?
   CorrectAnswer: regionno
   AnswerTests: omnitest(correctVal = "regionno")
-  Hint: regionname specifies the actual name of the different regions, 
-      is there a column with numbers that correspond to these names?
+  Hint: Put your answer around quotations. (regionname specifies the actual name of the different regions, 
+      is there a column with numbers that correspond to these names?)
   
 - Class: exact_question
   Output: There is a parameter called time.variable. It indicates the column that 
       specifies the time variable. In the basque dataset, which variable is this?
   CorrectAnswer: year
   AnswerTests: omnitest(correctVal = "year")
-  Hint: Take a look at the dataset. 
+  Hint: Put your answer around quotations. Take a look at the dataset. 
 
 - Class: exact_question
   Output: There is a parameter called treatment.identifier. It indicates the column
@@ -189,8 +189,9 @@
     
 - Class: text
   Output: Good job. If you are interested in running synthetic control for your
-      final project. Please reach out to Profs and TAs for more help, as 
-      implementation was the primary focus of the sessions. 
+      final project, or you're interested in making placebo in time or in place. 
+      Please reach out to Profs and TAs for more help, as implementation was 
+      not the primary focus of the sessions. 
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
