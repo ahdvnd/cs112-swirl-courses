@@ -1,0 +1,105 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 23 Encouragement Design/Instrumental Variables Estimation
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 23, Encouragement Design/Instrumental Variables Estimation.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: The mathematical basis of the content in this session is rather simple,
+      so we will be focusing on the concepts of encouragement design and instrumental
+      variables. We will discussing select questions from the pre-class work document.
+
+- Class: mult_question
+  Output: a) Why is the all-cause death rate similar in the encouragement group (27)
+      and the non-encouragement group (28)?
+  AnswerChoices: Just happened to be; Breast cancer screening is randomized; Encouragement is randomized
+  CorrectAnswer: Encouragement is randomized
+  AnswerTests: any_of_exprs('Encouragement is randomized')
+
+- Class: text
+  Output: The "intervention" being randomized here is the assignment of encouragement.
+      This is because it's unethical to deny people screening and truly randomize it.
+      Thus, the encouragement and non-encouragement groups are balanced. 
+
+- Class: mult_question
+  Output: b/c) Why are the all-cause death rate different between refused vs. examined?
+  AnswerChoices: Mediators; Lack of randomization; Confounders
+  CorrectAnswer: Confounders
+  AnswerTests: any_of_exprs('Confounders')
+
+- Class: text
+  Output: Confounders may be at play here. The fact that some people accept and other 
+      refused treatment may say something about other characteristics like openness
+      to healthcare or other factors that influence health outcomes. We can't really
+      "randomize" anything here, because refusing and accepting the encouragement are
+      personal choices. Mediators are not relevant in this context. 
+
+- Class: mult_question
+  Output: d) Is comparing the outcome between refused (1.5) vs. examined (1.1) groups unbiased?
+  AnswerChoices: Yes; No
+  CorrectAnswer: No
+  AnswerTests: any_of_exprs('No')
+
+- Class: text
+  Output: It is not! As we discussed in b and c, the two groups are not balanced, because
+      there is likely confounders that bias the results. Looking at the all-cause mortality
+      rate, it seems that the refused group is generally more unhealthy than the accepted 
+      group. Therefore, the estimate (1.5 - 1.1 = 0.4) will likely be an overestimation. 
+
+- Class: exact_question
+  Output: f) What is the intention to treat effect (ITT) of breast-cancer mortality?
+  CorrectAnswer: -0.7
+  AnswerTests: omnitest(correctVal = -0.7)
+  Hint: Look up how ITT is calculated.
+
+- Class: text
+  Output: The ITT for breast-cancer mortality is the difference of breast-cancer mortality
+      between the encouragement and the non-encouragement group. 1.3 - 2.0 = -0.7
+
+- Class: exact_question
+  Output: pre-g) What is the compliance rate? (Round your answer to 3 decimals)
+  CorrectAnswer: 0.652
+  AnswerTests: omnitest(correctVal = 0.652)
+  Hint: 
+
+- Class: text
+  Output: Note that the full formula for compliance rate accounts for the people who received
+      screening in both the encouragement and non-encouragement groups. We simply assume that
+      no one in the non-encouragement group received the screening. 
+      (We should consider whether this is a reasonable assumption)
+
+- Class: exact_question
+  Output: g) What is the local average treatment effect (LATE) of breast-cancer mortality?
+      (Round your answer to 2 decimal points)
+  CorrectAnswer: -1.07
+  AnswerTests: omnitest(correctVal = -1.07)
+  Hint: Look up how LATE is calculated.
+
+- Class: text
+  Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
+      In this case, it's -0.7 / 0.652 = -1.07 
+
+- Class: text
+  Output: The ITT and LATE for all-cause mortality can be easily calculated using the same
+      procedure outlined in f and g. 
+
+- Class: text
+  Output: Next, consider the assumptions required for the LATE calculation.
+      Do you think the method is clever? Bring your thoughts to discuss in class. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s23")
+  Hint: 
