@@ -1,13 +1,13 @@
 - Class: meta
   Course: CS112
-  Lesson: Session 23 Encouragement Design & Instrumental Variables Estimation
+  Lesson: Session 23 Encouragement Design and Instrumental Variables Estimation
   Author: Michael Chen
   Type: Standard
   Organization: Minerva University
   Version: 2.4.5
   
 - Class: text
-  Output: Welcome to the Swirl lesson for CS112 Session 23, Encouragement Design & Instrumental Variables Estimation.
+  Output: Welcome to the Swirl lesson for CS112 Session 23, Encouragement Design and Instrumental Variables Estimation.
       Please note that you can use the function rpt() to go back to the
       previous question. To end your Swirl session, you can type bye().
       After you exit a lesson, you can always resume a lesson by typing 
