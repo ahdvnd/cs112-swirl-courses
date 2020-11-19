@@ -35,7 +35,7 @@
   Output: b/c) Why are the all-cause death rate different between refused vs. examined?
   AnswerChoices: Mediators; Lack of randomization; Confounders
   CorrectAnswer: Confounders
-  AnswerTests: any_of_exprs('Confounders')
+  AnswerTests: omnitest(correctVal = 'Confounders')
 
 - Class: text
   Output: Confounders may be at play here. The fact that some people accept and other 
@@ -48,7 +48,7 @@
   Output: d) Is comparing the outcome between refused (1.5) vs. examined (1.1) groups unbiased?
   AnswerChoices: Yes; No
   CorrectAnswer: No
-  AnswerTests: any_of_exprs('No')
+  AnswerTests: omnitest(correctVal = 'No')
 
 - Class: text
   Output: It is not! As we discussed in b and c, the two groups are not balanced, because
