@@ -130,10 +130,10 @@
   Hint: 
   
 - Class: cmd_question
-Output: Run synth.out$solution.w to check the weights you obtained.
-CorrectAnswer: synth.out$solution.w
-AnswerTests: omnitest(correctExpr='synth.out$solution.w')
-Hint: 
+  Output: Run synth.out$solution.w to check the weights you obtained.
+  CorrectAnswer: synth.out$solution.w
+  AnswerTests: omnitest(correctExpr='synth.out$solution.w')
+  Hint: 
   
 - Class: mult_question
   Output: Based on your results in the previous step, which control unit has the highest weight?
