@@ -84,7 +84,37 @@
   CorrectAnswer: year
   AnswerTests: omnitest(correctVal = "year")
   Hint: Take a look at the dataset. 
-      
+
+- Class: exact_question
+  Output: There is a parameter called treatment.identifier. It indicates the column
+      that specifies the treatment unit in the unit variable specified earlier.
+      In the basque dataset, what is the number that indicates our treatment unit 
+      (Basque Country)? 
+  CorrectAnswer: 17
+  AnswerTests: omnitest(correctVal = 17)
+  Hint: Look for the regionno that correspond to Basque Country. 
+
+- Class: text
+  Output: There is a parameter called controls.identifier. It indicates the column 
+      that specifies the control units that are used to construct the synthetic 
+      control. We will use all the other regions in Spain as controls. Thus, we
+      will use everything BUT Spain (which includes every region) and Basque Country
+      (the treatment unit). 
+
+- Class: text
+  Output: To specify these control units, we will use c(2:16,18). This means we want 
+      all the units with regionno from 2 to 16, and 18. This excludes 1 and 17, which
+      refer to Spain and Basque Country respectively. 
+
+- Class: exact_question
+  Output: Another important parameter is called time.predictors.prior. It indicates the 
+      pretreatment periods over which the values for the outcome predictors should be 
+      averaged. In the basque dataset, what is the latest year of the pretreatment period? 
+  CorrectAnswer: 1969
+  AnswerTests: omnitest(correctVal = 1969)
+  Hint: Recall when the treatment was defined earlier. 
+
+
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
   AnswerChoices: Yes;No
