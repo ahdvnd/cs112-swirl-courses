@@ -20,7 +20,7 @@
       Mostly, we will be learning about the parameters in the dataprep function, which is
       absolutely essential in implementing the synthetic control method. 
 
-Class: text
+- Class: text
   Output: Make sure you have the Synth package installed and loaded. 
   
 - Class: cmd_question
