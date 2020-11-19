@@ -19,42 +19,7 @@
       so we will be focusing on the concepts of encouragement design and instrumental
       variables. We will discussing select questions from the pre-class work document.
 
-- Class: mult_question
-  Output: a) Why is the all-cause death rate similar in the encouragement group (27)
-      and the non-encouragement group (28)?
-  AnswerChoices: Just happened to be; Breast cancer screening is randomized; Encouragement is randomized
-  CorrectAnswer: Encouragement is randomized
-  AnswerTests: any_of_exprs('Encouragement is randomized')
 
-- Class: text
-  Output: The "intervention" being randomized here is the assignment of encouragement.
-      This is because it's unethical to deny people screening and truly randomize it.
-      Thus, the encouragement and non-encouragement groups are balanced. 
-
-- Class: mult_question
-  Output: b/c) Why are the all-cause death rate different between refused vs. examined?
-  AnswerChoices: Mediators; Lack of randomization; Confounders
-  CorrectAnswer: Confounders
-  AnswerTests: any_of_exprs('Confounders')
-
-- Class: text
-  Output: Confounders may be at play here. The fact that some people accept and other 
-      refused treatment may say something about other characteristics like openness
-      to healthcare or other factors that influence health outcomes. We can't really
-      "randomize" anything here, because refusing and accepting the encouragement are
-      personal choices. Mediators are not relevant in this context. 
-
-- Class: mult_question
-  Output: d) Is comparing the outcome between refused (1.5) vs. examined (1.1) groups unbiased?
-  AnswerChoices: Yes; No
-  CorrectAnswer: No
-  AnswerTests: any_of_exprs('No')
-
-- Class: text
-  Output: It is not! As we discussed in b and c, the two groups are not balanced, because
-      there is likely confounders that bias the results. Looking at the all-cause mortality
-      rate, it seems that the refused group is generally more unhealthy than the accepted 
-      group. Therefore, the estimate (1.5 - 1.1 = 0.4) will likely be an overestimation. 
 
 
 - Class: mult_question
