@@ -27,7 +27,7 @@
   AnswerTests: omnitest(correctVal = 'Encouragement is randomized')
 
 - Class: text
-  Output: The "intervention" being randomized here is the assignment of encouragement.
+  Output: Explanation. The "intervention" being randomized here is the assignment of encouragement.
       This is because it's unethical to deny people screening and truly randomize it.
       Thus, the encouragement and non-encouragement groups are balanced. 
 
@@ -38,7 +38,7 @@
   AnswerTests: omnitest(correctVal = 'Confounders')
 
 - Class: text
-  Output: Confounders may be at play here. The fact that some people accept and other 
+  Output: Explanation. Confounders may be at play here. The fact that some people accept and other 
       refused treatment may say something about other characteristics like openness
       to healthcare or other factors that influence health outcomes. We can't really
       "randomize" anything here, because refusing and accepting the encouragement are
@@ -51,7 +51,7 @@
   AnswerTests: omnitest(correctVal = 'No')
 
 - Class: text
-  Output: It is not! As we discussed in b and c, the two groups are not balanced, because
+  Output: Explanation. It is not! As we discussed in b and c, the two groups are not balanced, because
       there is likely confounders that bias the results. Looking at the all-cause mortality
       rate, it seems that the refused group is generally more unhealthy than the accepted 
       group. Therefore, the estimate (1.5 - 1.1 = 0.4) will likely be an overestimation. 
@@ -63,7 +63,7 @@
   Hint: Look up how ITT is calculated.
 
 - Class: text
-  Output: The ITT for breast-cancer mortality is the difference of breast-cancer mortality
+  Output: Explanation. The ITT for breast-cancer mortality is the difference of breast-cancer mortality
       between the encouragement and the non-encouragement group. 1.3 - 2.0 = -0.7
 
 - Class: exact_question
@@ -73,7 +73,7 @@
   Hint: 
 
 - Class: text
-  Output: Note that the full formula for compliance rate accounts for the people who received
+  Output: Explanation. Note that the full formula for compliance rate accounts for the people who received
       screening in both the encouragement and non-encouragement groups. We simply assume that
       no one in the non-encouragement group received the screening. 
       (We should consider whether this is a reasonable assumption)
@@ -86,7 +86,7 @@
   Hint: Look up how LATE is calculated.
 
 - Class: text
-  Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
+  Output: Explanation. The LATE can be estimated from the formula, LATE = ITT / compliance rate.
       In this case, it's -0.7 / 0.652 = -1.07 
 
 - Class: text
