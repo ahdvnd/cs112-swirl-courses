@@ -29,23 +29,12 @@
   CorrectAnswer: data(basque)
   AnswerTests: any_of_exprs('data("basque")', 'data(basque)') 
   Hint: You need to use the data() function. No need to save it to an object.
-  
-- Class: exact_question
-  Output: Take a look at the dataframe, what's the earliest year the data covers?
-  CorrectAnswer: 1955
-  AnswerTests: omnitest(correctVal = 1955)
-  Hint: Look at the variable year.
-
-- Class: exact_question
-  Output: What's the latest year the data covers?
-  CorrectAnswer: 1997
-  AnswerTests: omnitest(correctVal = 1997)
-  Hint: Look at the variable year.
 
 - Class: text
-  Output: For more context, the "exposure" or "treatment" (in this context, terrorist activity)
-      is defined to begin at 1969. Thus, we are trying to make a synthetic control for the 
-      period up to 1969. 
+  Output: The earliest year the data covers is 1955 and the latest year the data
+      covers is 1997. For more context, the "exposure" or "treatment" (in 
+      this context, terrorist activity) is defined to begin at 1969. Thus, 
+      we are trying to make a synthetic control for the period up to 1969. 
 
 - Class: text
   Output: As we saw from the previous swirl lesson, the general procedures in 
@@ -58,6 +47,7 @@
 
 - Class: exact_question
   Output: There is a parameter called foo. What should you input there?
+      Put your answer in quotations.
   CorrectAnswer: basque
   AnswerTests: omnitest(correctVal = "basque")
   Hint: foo specifies the dataframe with the data. 
@@ -73,6 +63,7 @@
   Output: There is a parameter called unit.variable. It indicates the column that specifies
       the number that associates with the different units (different regions). 
       In the basque dataset, what is the column name that indicates this?
+      Put your answer in quotations.
   CorrectAnswer: regionno
   AnswerTests: omnitest(correctVal = "regionno")
   Hint: Put your answer around quotations. (regionname specifies the actual name of the different regions, 
@@ -134,13 +125,6 @@
   CorrectAnswer: synth.out$solution.w
   AnswerTests: omnitest(correctExpr='synth.out$solution.w')
   Hint: 
-  
-- Class: mult_question
-  Output: Based on your results in the previous step, which control unit has the highest weight?
-  AnswerChoices: Cataluna; Madrid; Aragon; Canarias
-  CorrectAnswer: Cataluna
-  AnswerTests: omnitest(correctVal='Cataluna')
-  Hint:
 
 - Class: text
   Output: There are two graphs we can look at, the path plot and the gaps plot. You can run them below. 
