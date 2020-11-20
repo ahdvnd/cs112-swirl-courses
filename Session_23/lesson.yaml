@@ -95,7 +95,7 @@
 
 - Class: text
   Output: Next, consider the assumptions required for the LATE calculation.
-      Do you think the method is clever? Bring your thoughts to discuss in class. 
+      Do you think LATE make sense or it's a limited estimate?
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
