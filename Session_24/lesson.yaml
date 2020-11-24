@@ -84,12 +84,14 @@
   AnswerTests: omnitest(correctVal = 1242.56)
   Hint: Take the difference between the earnings of encouragement and non-encouragement group.
 
-- Class: exact_question
+- Class: cmd_question
   Output: What is the impact of the JTPA program on workers' earning, based on the Wald estimator (LATE)?
       (Round it with no decimals)
-  CorrectAnswer: 1942
-  AnswerTests: any_of_exprs('1941', '1942', '1943')
-  Hint: Look up how to use the Wald estimator is calculated (LATE).
+  CorrectAnswer: round(1242.56/0.64, digits=0)
+  AnswerTests: any_of_exprs('round(1242.56/0.64, digits=0)', 'round(1242.56/0.64, 0)')
+  Hint: Look up how to use the Wald estimator is calculated (LATE). 
+      Use the round() function, with digits as 0. Use the answers you got previously to 
+      estimate the LATE. 
 
 - Class: text
   Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
