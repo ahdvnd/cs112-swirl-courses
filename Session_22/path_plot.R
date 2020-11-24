@@ -1,4 +1,5 @@
 # path plot
+par(mar=c(1,1,1,1))
 path.plot(synth.res = synth.out,
           dataprep.res = dataprep.out,
           Ylab = c("real per-capita GDP (1986 USD, thousand)"),
