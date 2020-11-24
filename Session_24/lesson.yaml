@@ -1,0 +1,103 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 24 Encouragement Design and Instrumental Variables Estimation II
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 24, Encouragement Design/Instrumental Variables Estimation II.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+      
+- Class: text
+  Output: In the second session on encouragement design and instrument variables, we will 
+      take a look at another dataset. Please make sure you have the Impact of Job Training 
+      Provided under the Job Training Partnership Act (JTPA) dataset loaded in your 
+      environment before starting this. You can consult the instruction for importing at 
+      the bottom of the pre-class work. 
+
+- Class: text
+  Output: Make sure you name the dataset as "data". 
+
+- Class: figure
+  Output: We are stratifying our analysis by sex. Let's focus on the female for now
+      (You can easily replicate the same procedure for male). 
+      Here, we subsetted our dataset into female (sex == 0), female_treat 
+      (sex == 0 and assignmt == 1), female_control (sex == 0 and assignmt == 0) 
+      See these subsets in your environment. Hit enter to continue.
+  Figure: subset.R
+  FigureType: new
+
+- Class: cmd_question
+  Output: Let's see if the treatment and control group are similar in age. 
+      What is the age mean in the treatment group?
+  CorrectAnswer: mean(female_treat$age)
+  AnswerTests: any_of_exprs('mean(female_treat$age)') 
+  Hint: Use the mean() function
+
+- Class: cmd_question
+  Output: What is the age mean in the control group?
+  CorrectAnswer: mean(female_control$age)
+  AnswerTests: any_of_exprs('mean(female_control$age)') 
+  Hint: Use the mean() function
+
+- Class: mult_question
+  Output: We can see that the mean of the age for female are extremely close.
+      Do you think examining means are sufficient to conclude that the groups
+      are balanced?
+  AnswerChoices: Yes; No
+  CorrectAnswer: No
+  AnswerTests: omnitest(correctVal = 'No')
+
+- Class: text
+  Output: In addition to means, we could also look at the standard deviation, 
+      plot the distribution, or evaluate it with MatchBalance or other plots. 
+      But for now, let's assume that it's been done, and the groups are balanced. 
+
+- Class: text
+  Output: Next, we will evaluate whether the compliance was perfect. 
+      We do so by calculating the compliance rate, as defined in the Diamond/
+      Hainmueller paper in the last session. 
+
+- Class: exact_question
+  Output: What is the compliance rate among the female in the dataset?
+      (Round your answer to 2 decimal points)
+  CorrectAnswer: 0.64
+  AnswerTests: omnitest(correctVal = 0.64)
+  Hint: compliance = Fraction of Subjects that were treated in the encouraged group - Fraction of Subjects that were treated in the non-encouraged group.
+
+- Class: text
+  Output: Good job. Compliance rate accounts for both the encouragement group and the non-encouragement group. 
+      It will be used to calculate the Wald estimator later. 
+
+- Class: exact_question
+  Output: What is the effect of the encouragement on workers' earning during 30 months
+      after random assignment?
+      (The outcome var is "earnings")
+      (Round it with 2 decimals)
+  CorrectAnswer: 1242.56
+  AnswerTests: omnitest(correctVal = 1242.56)
+  Hint: Take the difference between the earnings of encouragement and non-encouragement group.
+
+- Class: exact_question
+  Output: What is the impact of the JTPA program on workers' earning, based on the Wald estimator (LATE)?
+      (Round it with no decimals)
+  CorrectAnswer: 1942
+  AnswerTests: omnitest(correctVal = 1942)
+  Hint: Look up how to use the Wald estimator is calculated (LATE).
+
+- Class: text
+  Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
+      In this case, it's 1242.55/0.64 = 1942
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s24")
+  Hint: 
