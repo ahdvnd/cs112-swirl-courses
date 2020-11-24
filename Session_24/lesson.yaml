@@ -88,7 +88,7 @@
   Output: What is the impact of the JTPA program on workers' earning, based on the Wald estimator (LATE)?
       (Round it with no decimals)
   CorrectAnswer: 1942
-  AnswerTests: omnitest(correctVal = 1942)
+  AnswerTests: any_of_exprs('1941', '1942', '1943')
   Hint: Look up how to use the Wald estimator is calculated (LATE).
 
 - Class: text
