@@ -7,7 +7,8 @@
   Version: 2.4.5
   
 - Class: text
-  Output: Welcome to the Swirl lesson for CS112 Session 24, Encouragement Design/Instrumental Variables Estimation II.
+  Output: Welcome to the Swirl lesson for CS112 Session 24, 
+      Encouragement Design/Instrumental Variables Estimation II.
       Please note that you can use the function rpt() to go back to the
       previous question. To end your Swirl session, you can type bye().
       After you exit a lesson, you can always resume a lesson by typing 
@@ -22,7 +23,10 @@
       the bottom of the pre-class work. 
 
 - Class: text
-  Output: Make sure you name the dataset as "data". 
+  Output: Make sure you name the dataset as "data". Also note that the data is in
+      .dta format. Think about which package you need to load the data. If you
+      get an error and exit swirl, load the data first and then restart the swirl
+      lesson.
 
 - Class: figure
   Output: We are stratifying our analysis by sex. Let's focus on the female for now
