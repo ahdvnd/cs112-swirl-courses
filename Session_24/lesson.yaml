@@ -22,8 +22,13 @@
       environment before starting this. You can consult the instruction for importing at 
       the bottom of the pre-class work. 
 
+- Class: video
+  Output: Do you want to go to the link where the data is hosted?
+  VideoLink: https://drive.google.com/file/d/0B3ECwzWL2AHgY3JLaGVfZnZQVmc/view
+
 - Class: text
-  Output: Make sure you name the dataset as "data". Also note that the data is in
+  Output: Download the data and move it to your working directory. Then import it
+      into R. Make sure you name the dataset as "data". Also note that the data is in
       .dta format. Think about which package you need to load the data. If you
       get an error and exit swirl, load the data first and then restart the swirl
       lesson.
@@ -51,12 +56,12 @@
   Hint: Use the mean() function
 
 - Class: mult_question
-  Output: We can see that the mean of the age for female are extremely close.
-      Do you think examining means are sufficient to conclude that the groups
-      are balanced?
-  AnswerChoices: Yes; No
-  CorrectAnswer: No
-  AnswerTests: omnitest(correctVal = 'No')
+  Output: Why do you think the two groups are not balanced at least when we look
+      at the variable age and its means across treatment and control?
+      Isn't the encouragment randomized?
+  AnswerChoices: It happens; Encouragment is randomized but receiving treatment isn't; Encouragement is not randomized
+  CorrectAnswer: Encouragment is randomized but receiving treatment isn't
+  AnswerTests: omnitest(correctVal = 'Encouragment is randomized but receiving treatment isn't')
 
 - Class: text
   Output: In addition to means, we could also look at the standard deviation, 
@@ -68,22 +73,22 @@
       We do so by calculating the compliance rate, as defined in the Diamond/
       Hainmueller paper in the last session. 
 
-- Class: exact_question
+- Class: mult_question
   Output: What is the compliance rate among the female in the dataset?
       (Round your answer to 2 decimal points)
-  CorrectAnswer: 0.64
-  AnswerTests: omnitest(correctVal = 0.64)
-  Hint: compliance = Fraction of Subjects that were treated in the encouraged group - Fraction of Subjects that were treated in the non-encouraged group.
+  AnswerChoices: 0.64;0.43;0.76;0.24
+  CorrectAnswer: 0.43
+  AnswerTests: omnitest(correctVal='0.43')
+  Hint: compliance = Fraction of Subjects that were treated in the 
+      encouraged group - Fraction of Subjects that were treated in the non-encouraged group.
 
 - Class: text
   Output: Good job. Compliance rate accounts for both the encouragement group and the non-encouragement group. 
-      It will be used to calculate the Wald estimator later. 
+      It will be used to calculate the Wald estimator later. Did you get an answer equal to 0.43.
 
 - Class: exact_question
   Output: What is the effect of the encouragement on workers' earning during 30 months
-      after random assignment?
-      (The outcome var is "earnings")
-      (Round it with 2 decimals)
+      after random assignment? Note that the outcome var is "earnings". (Round it with 2 decimals)
   CorrectAnswer: 1242.56
   AnswerTests: omnitest(correctVal = 1242.56)
   Hint: Take the difference between the earnings of encouragement and non-encouragement group.
@@ -91,13 +96,13 @@
 - Class: exact_question
   Output: What is the impact of the JTPA program on workers' earning, based on the Wald estimator (LATE)?
       (Round it with no decimals)
-  CorrectAnswer: 1941
-  AnswerTests: omnitest(correctVal = 1941)
+  CorrectAnswer: 2889.67
+  AnswerTests: omnitest(correctVal = 2889.67)
   Hint: Look up how to use the Wald estimator is calculated (LATE).
 
 - Class: text
   Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
-      In this case, it's 1242.55/0.64 = 1941
+      In this case, it's 1242.56/0.43 = 2889.67
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
