@@ -61,7 +61,7 @@
       Isn't the encouragment randomized?
   AnswerChoices: It happens; Encouragment is randomized but receiving treatment isn't; Encouragement is not randomized
   CorrectAnswer: Encouragment is randomized but receiving treatment isn't
-  AnswerTests: omnitest(correctVal = 'Encouragment is randomized but receiving treatment isn't')
+  AnswerTests: omnitest(correctVal = "Encouragment is randomized but receiving treatment isn't")
 
 - Class: text
   Output: In addition to means, we could also look at the standard deviation, 
