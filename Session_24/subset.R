@@ -1,5 +1,12 @@
-data = as.data.frame(data)
-female = subset(data, data$sex == 0)
-female_treat = subset(female, data$assignmt == 1)
-female_control = subset(female, data$assignmt == 0)
+library(dplyr)
+female = data %>% 
+    as.data.frame() %>% 
+    filter(sex == 0)
+    
+
+female_treat = female %>% 
+    filter(assignmt == 1)
+
+female_control = female %>% 
+    filter(assignmt == 0)
 
