@@ -7,7 +7,8 @@
   Version: 2.4.5
   
 - Class: text
-  Output: Welcome to the Swirl lesson for CS112 Session 23, Encouragement Design/Instrumental Variables Estimation I.
+  Output: Welcome to the Swirl lesson for CS112 Session 23, 
+      Encouragement Design/Instrumental Variables Estimation I.
       Please note that you can use the function rpt() to go back to the
       previous question. To end your Swirl session, you can type bye().
       After you exit a lesson, you can always resume a lesson by typing 
@@ -22,7 +23,7 @@
 - Class: mult_question
   Output: a) Why is the all-cause death rate similar in the encouragement group (27)
       and the non-encouragement group (28)?
-  AnswerChoices: Just happened to be; Breast cancer screening is randomized; Encouragement is randomized
+  AnswerChoices: Just happens; Breast cancer screening is randomized; Encouragement is randomized
   CorrectAnswer: Encouragement is randomized
   AnswerTests: omnitest(correctVal = 'Encouragement is randomized')
 
@@ -33,9 +34,9 @@
 
 - Class: mult_question
   Output: b/c) Why are the all-cause death rate different between refused vs. examined?
-  AnswerChoices: Mediators; Lack of randomization; Confounders
-  CorrectAnswer: Confounders
-  AnswerTests: omnitest(correctVal = 'Confounders')
+  AnswerChoices: Covariates that are correlated with outcomes and treatment; All answers; Confounders
+  CorrectAnswer: All answers
+  AnswerTests: omnitest(correctVal = 'All answers')
 
 - Class: text
   Output: Explanation. Confounders may be at play here. The fact that some people accept and other 
@@ -45,32 +46,34 @@
       personal choices. Mediators are not relevant in this context. 
 
 - Class: mult_question
-  Output: d) Is comparing the outcome between refused (1.5) vs. examined (1.1) groups unbiased?
+  Output: d) Is comparing the outcome between refused (1.5) vs. examined (1.1) groups biased?
   AnswerChoices: Yes; No
-  CorrectAnswer: No
-  AnswerTests: omnitest(correctVal = 'No')
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal = 'Yes')
 
 - Class: text
-  Output: Explanation. It is not! As we discussed in b and c, the two groups are not balanced, because
+  Output: Explanation. It is! As we discussed in b and c, the two groups are not balanced, because
       there is likely confounders that bias the results. Looking at the all-cause mortality
       rate, it seems that the refused group is generally more unhealthy than the accepted 
       group. Therefore, the estimate (1.5 - 1.1 = 0.4) will likely be an overestimation. 
 
-- Class: exact_question
+- Class: mult_question
   Output: f) What is the intention to treat effect (ITT) of breast-cancer mortality?
+  AnswerChoices: -0.7; 0.7; -0.2; 0.2
   CorrectAnswer: -0.7
-  AnswerTests: omnitest(correctVal = -0.7)
-  Hint: Look up how ITT is calculated.
+  AnswerTests: omnitest(correctVal='-0.7')
+  Hint: Look up how ITT is calculated in the paper.
 
 - Class: text
   Output: Explanation. The ITT for breast-cancer mortality is the difference of breast-cancer mortality
       between the encouragement and the non-encouragement group. 1.3 - 2.0 = -0.7
 
-- Class: exact_question
+- Class: mult_question
   Output: pre-g) What is the compliance rate? (Round your answer to 3 decimals)
+  AnswerChoices: 0.652; 0.432; 0.754; 0.223
   CorrectAnswer: 0.652
-  AnswerTests: omnitest(correctVal = 0.652)
-  Hint: 
+  AnswerTests: omnitest(correctVal='0.652')
+  Hint: Look up how compliance is calculated in the paper.
 
 - Class: text
   Output: Explanation. Note that the full formula for compliance rate accounts for the people who received
@@ -78,11 +81,11 @@
       no one in the non-encouragement group received the screening. 
       (We should consider whether this is a reasonable assumption)
 
-- Class: exact_question
-  Output: g) What is the local average treatment effect (LATE) of breast-cancer mortality?
-      (Round your answer to 2 decimal points)
+- Class: mult_question
+  Output: pre-g) What is the compliance rate? (Round your answer to 3 decimals)
+  AnswerChoices: -1.07; 1.07; -2.35; 2.35
   CorrectAnswer: -1.07
-  AnswerTests: omnitest(correctVal = -1.07)
+  AnswerTests: omnitest(correctVal='-1.07')
   Hint: Look up how LATE is calculated.
 
 - Class: text
@@ -95,7 +98,7 @@
 
 - Class: text
   Output: Next, consider the assumptions required for the LATE calculation.
-      Do you think LATE make sense or it's a limited estimate?
+      Do you think LATE make sense or it's a limited estimate? Come prepared to the class.
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
