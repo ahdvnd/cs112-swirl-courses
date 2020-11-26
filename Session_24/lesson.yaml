@@ -94,8 +94,8 @@
   Hint: Take the difference between the earnings of encouragement and non-encouragement group.
 
 - Class: exact_question
-  Output: What is the impact of the JTPA program on workers' earning, based on the Wald estimator (LATE)?
-      (Round it with no decimals)
+  Output: What is the impact of the JTPA program on female workers' earning, 
+      based on the Wald estimator (LATE)? (Round it with no decimals)
   CorrectAnswer: 2889.67
   AnswerTests: omnitest(correctVal = 2889.67)
   Hint: Look up how to use the Wald estimator is calculated (LATE).
