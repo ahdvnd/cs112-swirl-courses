@@ -1,3 +1,3 @@
-female = data[which(data$sex == 0),]
-female_treat = female[which(female$assignmt == 1),]
-female_control = female[which(female$assignmt == 0),]
+female = subset(data, sex == 0)
+female_treat = subset(female, assignmt == 1)
+female_control = subset(female, assignmt == 0)
