@@ -88,7 +88,7 @@
       (We should consider whether this is a reasonable assumption)
 
 - Class: mult_question
-  Output: pre-g) What is the compliance rate? (Round your answer to 3 decimals)
+  Output: pre-g) What is the LATE? (Round your answer to 2 decimals)
   AnswerChoices: -1.07; 1.07; -2.35; 2.35
   CorrectAnswer: -1.07
   AnswerTests: omnitest(correctVal='-1.07')
