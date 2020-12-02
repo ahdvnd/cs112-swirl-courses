@@ -33,14 +33,32 @@
       get an error and exit swirl, load the data first and then restart the swirl
       lesson.
 
-- Class: figure
+- Class: text
   Output: We are stratifying our analysis by sex. Let's focus on the female for now
       (You can easily replicate the same procedure for male). 
       Here, we subsetted our dataset into female (sex == 0), female_treat 
       (sex == 0 and assignmt == 1), female_control (sex == 0 and assignmt == 0) 
-      See these subsets in your environment. Hit enter to continue.
-  Figure: subset.R
-  FigureType: new
+
+- Class: cmd_question
+  Output: Here, we subsetted our dataset into female (sex == 0). 
+      Run this, female = data[which(data$sex == 0),]
+  CorrectAnswer: female = data[which(data$sex == 0),]
+  AnswerTests: any_of_exprs('female = data[which(data$sex == 0),]') 
+  Hint: 
+
+- Class: cmd_question
+  Output: Here, then, we subset it into treatment group 
+      Run this, female_treat = female[which(female$assignmt == 1),]
+  CorrectAnswer: female_treat = female[which(female$assignmt == 1),]
+  AnswerTests: any_of_exprs('female_treat = female[which(female$assignmt == 1),]') 
+  Hint: 
+
+- Class: cmd_question
+  Output: Then, control group. 
+      Run this, female_control = female[which(female$assignmt == 0),]
+  CorrectAnswer: female_control = female[which(female$assignmt == 0),]
+  AnswerTests: any_of_exprs('female_control = female[which(female$assignmt == 0),]') 
+  Hint: 
 
 - Class: cmd_question
   Output: Let's see if the treatment and control group are similar in age. 

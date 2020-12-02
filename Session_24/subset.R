@@ -1,7 +1,7 @@
-#library(dplyr)
-#female = data %>% 
-#    as.data.frame() %>% 
-#    filter(sex == 0)
+library(dplyr)
+female = data %>% 
+    as.data.frame() %>% 
+    filter(sex == 0)
     
 #female_treat = female %>% 
 #    filter(assignmt == 1)
