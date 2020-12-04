@@ -38,7 +38,7 @@
   Output: Based on the data generation, what is the test score that gets students into the program?
   AnswerChoices: 75; 100; 40; 10
   CorrectAnswer: 75
-  AnswerTests: omnitest(correctVal=75)
+  AnswerTests: omnitest(correctVal="75")
   Hint: Look at the conditional statement defining program.
 
 - Class: mult_question
