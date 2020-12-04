@@ -1,0 +1,142 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 25 Regression Discontinuity Design
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 25, Regression Discontinuity Design.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+
+- Class: text
+  Output: This is the first of two lessons on regression discontinuity design. 
+      It is a gentle introduction to the method using synthetic data.
+      The goal is to see how the method is implemented in a simple example. 
+
+- Class: text
+  Output: Our synthetic data has 3 variables, test, program (treat), and earn (outcome).
+      Test corresponds to the test score of a student.
+      Program indicates whether the student is admitted to a talent program.
+      Earn reflects the salary of the student.
+
+- Class: text
+  Output: We are interested in finding the treatment effect of the program on earning. 
+
+- Class: text
+  Output: Here is the data-generating process. Refer to it in the next few questions.
+      rdd.data <- tibble(test = runif(1000)*100) %>% 
+      mutate(program = test >= 75) %>% 
+      mutate(earn = runif(1000)*40+10*program+test/2)
+
+- Class: mult_question
+  Output: Based on the data generation, what is the test score that gets students into the program?
+  AnswerChoices: 75; 100; 40; 10
+  CorrectAnswer: 75
+  AnswerTests: omnitest(correctVal=75)
+  Hint: Look at the conditional statement defining program.
+
+- Class: mult_question
+  Output: What is the true treatment effect of the program on earning?
+  AnswerChoices: 75; 100; 40; 10
+  CorrectAnswer: 10
+  AnswerTests: omnitest(correctVal=10)
+  Hint: Look at the coefficient for program when defining earn. 
+
+- Class: mult_question
+  Output: Does test score affect program admission?
+  AnswerChoices: Yes; No
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+
+- Class: mult_question
+  Output: Does test score affect earning?
+  AnswerChoices: Yes; No
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+
+- Class: mult_question
+  Output: Is test score a confounder?
+  AnswerChoices: Yes; No
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+
+- Class: text
+  Output: A confounder is defined as a variable that affects both the treatment and outcome variables. 
+      Here, test is a confounder because it affects program admission (treatment) and earning (outcome). 
+
+- Class: cmd_question
+  Output: Now it's time to code. Copy and paste the data generating process from above. 
+  CorrectAnswer: rdd.data <- tibble(test = runif(1000)*100) %>% mutate(program = test >= 75) %>% mutate(earn = runif(1000)*40+10*program+test/2)
+  AnswerTests: any_of_exprs('rdd.data <- tibble(test = runif(1000)*100) %>% mutate(program = test >= 75) %>% mutate(earn = runif(1000)*40+10*program+test/2)') 
+
+- Class: text
+  Output: An important thing to define in discontinuity design is the bandwidth.
+      Suppose we want a bandwidth of 2. 
+
+- Class: mult_question
+  Output: What is the range of test score that the control group can take on?
+  AnswerChoices: 73-75; 75-77; 73-77; 73-74
+  CorrectAnswer: 73-74
+  AnswerTests: omnitest(correctVal='73-74')
+  Hint: What is the threshold for the program?
+
+- Class: mult_question
+  Output: What is the range of test score that the treatment group can take on?
+  AnswerChoices: 73-75; 75-77; 73-77; 73-74
+  CorrectAnswer: 75-77
+  AnswerTests: omnitest(correctVal='75-77')
+  Hint: What is the threshold for the program?
+
+- Class: cmd_question
+  Output: Now let's subset our data to include only the observations within the bandwidth.
+      Use this format, rdd.data[which("fill something here" < 2),]
+      Save it to an object called filtered.data
+  CorrectAnswer: filtered.data <- rdd.data[which(abs(75-rdd.data$test) < 2),]
+  AnswerTests: any_of_exprs('filtered.data <- rdd.data[which(abs(75-rdd.data$test) < 2),]') 
+  Hint: The difference between the test score and 75 should be lower than 2. 
+      Use the abs() function to find the absolute difference. 
+
+- Class: text
+  Output: Then, let's subset filtered.data into treatment and control groups. 
+
+- Class: cmd_question
+  Output: To subset the control group, use filtered.data[which("insert condition here"),].
+      Save it to an object called filtered.ctrl
+  CorrectAnswer: filtered.ctrl <- filtered.data[which(filtered.data$program==FALSE),]
+  AnswerTests: any_of_exprs('filtered.ctrl <- filtered.data[which(filtered.data$program==FALSE),]', 'filtered.ctrl <- filtered.data[which(filtered.data$test<75),]') 
+  Hint: You can use the program or test variable to subset.
+
+- Class: cmd_question
+  Output: Now with the treatment group, use filtered.data[which("insert condition here"),].
+      Save it to an object called filtered.trt
+  CorrectAnswer: filtered.trt <- filtered.data[which(filtered.data$program==TRUE),]
+  AnswerTests: any_of_exprs('filtered.trt <- filtered.data[which(filtered.data$program==TRUE),]', 'filtered.trt <- filtered.data[which(filtered.data$test>=75),]') 
+  Hint: You can use the program or test variable to subset.
+
+- Class: cmd_question
+  Output: What is the treatment effect?
+  CorrectAnswer: mean(filtered.trt$earn) - mean(filtered.ctrl$earn)
+  AnswerTests: any_of_exprs('mean(filtered.trt$earn) - mean(filtered.ctrl$earn)') 
+  Hint: Take the difference of mean earning between the treatment and control group
+
+- Class: text
+  Output: Compare the treatment effect estimate to the true treatment effect. Think about the following,
+      Is it close?
+      Do you trust this method? 
+      What kind of assumptions is it making?
+
+- Class: text
+  Output: This lesson is inspired by https://nickch-k.github.io/introcausality/Lectures/Lecture_22_Regression_Discontinuity.html#/in-practice. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s25")
+  Hint: 
