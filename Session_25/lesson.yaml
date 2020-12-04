@@ -71,7 +71,7 @@
       Here, test is a confounder because it affects program admission (treatment) and earning (outcome). 
 
 - Class: cmd_question
-  Output: Now it's time to code. Copy and paste the data generating process from above. 
+  Output: Now it's time to code. Copy and paste the data generating process from above. Make sure you have library(dplyr) loaded.
   CorrectAnswer: rdd.data <- tibble(test = runif(1000)*100) %>% mutate(program = test >= 75) %>% mutate(earn = runif(1000)*40+10*program+test/2)
   AnswerTests: any_of_exprs('rdd.data <- tibble(test = runif(1000)*100) %>% mutate(program = test >= 75) %>% mutate(earn = runif(1000)*40+10*program+test/2)') 
 
@@ -98,7 +98,7 @@
       Use this format, rdd.data[which("fill something here" < 2),]
       Save it to an object called filtered.data
   CorrectAnswer: filtered.data <- rdd.data[which(abs(75-rdd.data$test) < 2),]
-  AnswerTests: any_of_exprs('filtered.data <- rdd.data[which(abs(75-rdd.data$test) < 2),]') 
+  AnswerTests: any_of_exprs('filtered.data <- rdd.data[which(abs(75-rdd.data$test) < 2),]', 'filtered.data <- rdd.data[which(abs(rdd.data$test-75) < 2),]') 
   Hint: The difference between the test score and 75 should be lower than 2. 
       Use the abs() function to find the absolute difference. 
 
