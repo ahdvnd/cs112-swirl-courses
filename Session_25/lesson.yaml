@@ -45,7 +45,7 @@
   Output: What is the true treatment effect of the program on earning?
   AnswerChoices: 75; 100; 40; 10
   CorrectAnswer: 10
-  AnswerTests: omnitest(correctVal=10)
+  AnswerTests: omnitest(correctVal="10")
   Hint: Look at the coefficient for program when defining earn. 
 
 - Class: mult_question

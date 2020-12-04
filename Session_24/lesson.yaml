@@ -108,14 +108,14 @@
   Output: What is the effect of the encouragement on workers' earning during 30 months
       after random assignment? Note that the outcome var is "earnings". (Round it with 2 decimals)
   CorrectAnswer: 1242.56
-  AnswerTests: omnitest(correctVal = 1242.56)
+  AnswerTests: omnitest(correctVal = "1242.56")
   Hint: Take the difference between the earnings of encouragement and non-encouragement group.
 
 - Class: exact_question
   Output: What is the impact of the JTPA program on female workers' earning, 
       based on the Wald estimator (LATE)? (Round it with no decimals)
   CorrectAnswer: 2889.67
-  AnswerTests: omnitest(correctVal = 2889.67)
+  AnswerTests: omnitest(correctVal = "2889.67")
   Hint: Look up how to use the Wald estimator is calculated (LATE).
 
 - Class: text
