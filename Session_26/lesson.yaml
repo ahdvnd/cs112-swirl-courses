@@ -136,10 +136,11 @@
   Hint: See the table 
 
 - Class: exact_question
-  Output: What is the bias-corrected 95% confidence interval of the causal estimate?
+  Output: What is the bias-corrected 95% confidence interval of the causal estimate? 
+      Copy and paste from the table, and put them in quotations.
   CorrectAnswer: "[4.648 , 10.372]"
   AnswerTests: omnitest(correctVal = "[4.648 , 10.372]")
-  Hint: Copy and paste from the table, and put them in quotations.
+  Hint: In this format, "[x.xxx , xx.xxx]"
 
 - Class: cmd_question
   Output: Now let's visualize it with a plot. 
@@ -179,7 +180,7 @@
   Output: 4) How to interpret the graphical and numerical results from the RDD analysis. 
 
 - Class: text
-  Output: This lesson is inspired by https://nickch-k.github.io/introcausality/Lectures/Lecture_22_Regression_Discontinuity.html#/in-practice. 
+  Output: This lesson is inspired by https://www.youtube.com/playlist?list=PLS6tnpTr39sFCr8amjT2Ld_FE34i26a3S. 
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
