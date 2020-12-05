@@ -24,7 +24,7 @@
 
 - Class: cmd_question
   Output: We are using a dataset that comes with the library, related to senate voting. 
-      Load the data by using data(rdrobust_RDsenate).
+      Load the data by using data(rdrobust_RDsenate)
   CorrectAnswer: data(rdrobust_RDsenate)
   AnswerTests: any_of_exprs('data(rdrobust_RDsenate)')
 
@@ -110,16 +110,21 @@
 - Class: cmd_question
   Output: Usually the first method, mserd (which uses mean squared error to estimate bandwidth), is a sufficient method. 
       Here, it suggested a bandwidth of h=17.708.
-      Let's plug it into the rdrobust function, like before.  
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708) %>% summary()
-  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708) %>% summary()')
-  Hint: Use the same rdrobust() as before, just changing the h argument. 
+      We do not need to specify the h parameter when we are relying on rdbwselect.
+      We specify a new parameter, bwselect, and set it to equal to 'mserd'. 
+      Let's run the rdrobust function with the appropriate adjustment.  
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd') %>% summary()
+  AnswerTests: any_of_exprs("rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd') %>% summary()")
+  Hint: Use the same rdrobust() as before, just deleting the h argument and adding bwselect.
+
+- Class: text
+  Output: Looking at the h, we confirm that the bandwidth is indeed 17.708.
 
 - Class: cmd_question
   Output: Now let's do the same thing, but add a parameter.
       Put all=TRUE as the last argument.
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708, all=TRUE) %>% summary()
-  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708, all=TRUE) %>% summary()')
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE) %>% summary()
+  AnswerTests: any_of_exprs("rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE) %>% summary()")
 
 - Class: text
   Output: By setting all to true, we get to see the bias-adjusted results. 
@@ -134,7 +139,7 @@
   Output: What is the bias-corrected 95% confidence interval of the causal estimate?
   CorrectAnswer: "[4.648 , 10.372]"
   AnswerTests: omnitest(correctVal = "[4.648 , 10.372]")
-  Hint: Copy and paste from the table.
+  Hint: Copy and paste from the table, and put them in quotations.
 
 - Class: cmd_question
   Output: Now let's visualize it with a plot. 
