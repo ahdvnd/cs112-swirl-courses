@@ -15,7 +15,7 @@
       Hit any key to continue!
 
 - Class: text
-  Output: This is the second of two lessons on regression discontinuity design. 
+  Output: This is the second of two lessons on regression discontinuity design (RDD). 
       After applying the method on synthetic data, we will move on to real data.
       We will also use a library called rdrobust to help with our analysis. 
 
@@ -40,7 +40,7 @@
       Vote is the percentage of vote in year t+1 (our y).
 
 - Class: text
-  Output: The research question is, does the voting result in the previous affect the voting result in the following year?
+  Output: The research question is, does the voting result (winning or losing) in the previous year affect the voting result in the following year?
       It could be framed as a regression discontinuity design question because the winning/losing margin can be very close. 
       When the margin is positive, then the party wins. When the margin is negative, the party loses. 
 
@@ -64,9 +64,9 @@
   Output: The rdrobust() function in the library allows us to define our own bandwidth. 
       The basic use of the function is defining the outcome (y), the covariate (x), the threshold (c), and the bandwidth (h).
       Let's try a bandwidth of 10. 
-      Fill in this, rdrobust(y=, x=, c =, h =) %>% summary(). 
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 10) %>% summary()
-  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 10) %>% summary()')
+      Fill in this, rdrobust(y=, x=, c=, h=) %>% summary(). 
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c=0, h=10) %>% summary()
+  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c=0, h=10) %>% summary()')
   Hint: Threshold is the boundary that separates victories from losses. 
 
 - Class: text
@@ -75,9 +75,9 @@
 
 - Class: cmd_question
   Output: With the same model specification, we can visualize it with a plot. 
-      Fill in this, rdplot(y=, x=, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
-  CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
-  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+      Fill in this, rdplot(y=, x=, binselect='es', h=10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h=10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
   Hint: Fill in the y and x, like before.
 
 - Class: text
@@ -140,7 +140,7 @@
   Output: Now let's visualize it with a plot. 
       Use the rdplot() function, like before, but this time specifying the indicated bandwidth (h).
   CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
-  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+  AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
   Hint: Fill in the y and x, like before. Change h to the suggested bandwidth.
 
 - Class: cmd_question
@@ -148,7 +148,7 @@
       It could give you an idea whether we have confidence in bandwidth region.
       Add the parameter ci=95 between binselect and h. 
   CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
-  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es',ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+  AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es',ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
 
 - Class: text
   Output: It's good to see that we have narrower CIs in the bandwidth region. 
