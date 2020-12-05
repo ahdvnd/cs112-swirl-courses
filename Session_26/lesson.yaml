@@ -1,0 +1,184 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 26 Regression Discontinuity Design II
+  Author: Michael Chen
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the Swirl lesson for CS112 Session 26, Regression Discontinuity Design II.
+      Please note that you can use the function rpt() to go back to the
+      previous question. To end your Swirl session, you can type bye().
+      After you exit a lesson, you can always resume a lesson by typing 
+      swirl() again. However, make sure you use the same name you always use!
+      Hit any key to continue!
+
+- Class: text
+  Output: This is the second of two lessons on regression discontinuity design. 
+      After applying the method on synthetic data, we will move on to real data.
+      We will also use a library called rdrobust to help with our analysis. 
+
+- Class: text
+  Output: First, make sure you have the package "rdrobust" installed and loaded.
+
+- Class: cmd_question
+  Output: We are using a dataset that comes with the library, related to senate voting. 
+      Load the data by using data(rdrobust_RDsenate).
+  CorrectAnswer: data(rdrobust_RDsenate)
+  AnswerTests: any_of_exprs('data(rdrobust_RDsenate)')
+
+- Class: cmd_question
+  Output: Save the dataset to an object called foo.
+      Do so by foo <- rdrobust_RDsenate
+  CorrectAnswer: foo <- rdrobust_RDsenate
+  AnswerTests: any_of_exprs('foo <- rdrobust_RDsenate')
+
+- Class: text
+  Output: There are two variables, margin and vote.
+      Margin is the difference between voting in year t (our x).
+      Vote is the percentage of vote in year t+1 (our y).
+
+- Class: text
+  Output: The research question is, does the voting result in the previous affect the voting result in the following year?
+      It could be framed as a regression discontinuity design question because the winning/losing margin can be very close. 
+      When the margin is positive, then the party wins. When the margin is negative, the party loses. 
+
+- Class: mult_question
+  Output: Is this a sharp or fuzzy RDD? 
+  AnswerChoices: Sharp RDD; Fuzzy RDD
+  CorrectAnswer: Sharp RDD
+  AnswerTests: omnitest(correctVal="Sharp RDD")
+  Hint: What is the threshold? Does margin perfectly determines victory/loss? 
+
+- Class: text
+  Output: This is a sharp RDD because margin = 0 perfectly delineates the senate victories from the losses. 
+      There is nothing fuzzy here. 
+
+- Class: text
+  Output: An important determination in RDD is defining the bandwidth.
+      Bandwidth is the extent from the threshold we are looking left/right to estimate our treatment effect. 
+      In the previous session, we arbitrarily defined 2 as the bandwidth. 
+
+- Class: cmd_question
+  Output: The rdrobust() function in the library allows us to define our own bandwidth. 
+      The basic use of the function is defining the outcome (y), the covariate (x), the threshold (c), and the bandwidth (h).
+      Let's try a bandwidth of 10. 
+      Fill in this, rdrobust(y=, x=, c =, h =) %>% summary(). 
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 10) %>% summary()
+  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 10) %>% summary()')
+  Hint: Threshold is the boundary that separates victories from losses. 
+
+- Class: text
+  Output: Looking at the table produced, the treatment effect estimate is the coef.
+      It comes with standard error, p values, and other statistics stuff.
+
+- Class: cmd_question
+  Output: With the same model specification, we can visualize it with a plot. 
+      Fill in this, rdplot(y=, x=, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 10, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+  Hint: Fill in the y and x, like before.
+
+- Class: text
+  Output: See how the model only fitted on the data within the defined bandwidth. 
+      Visually, the gap at the vertical line at 0 indicates the treatment effect. 
+      Numerically, the estimate is given by the rdrobust() function. 
+
+- Class: text
+  Output: You can use these two functions for your RDD analysis, with great flexibility. 
+
+- Class: text
+  Output: Now, let's revisit the question we posed earlier.
+      How do we determine our bandwidth?
+      It turns out that there are many algorithms that tries to find the optimal bandwidth.
+      The rdrobust library offers multiple data-driven methods to do so.
+
+- Class: cmd_question
+  Output: We use a third function rdbwselect(), to see the bandwidth suggested by each algorithm.
+      The all parameter indicates we want to see all the algorithms. 
+      Fill in this, rdbwselect(y=, x=, all=TRUE) %>% summary()
+  CorrectAnswer: rdbwselect(y=foo$vote, x=foo$margin, all = TRUE) %>% summary()
+  AnswerTests: any_of_exprs('rdbwselect(y=foo$vote, x=foo$margin, all = TRUE) %>% summary()')
+  Hint: Fill in the y and x, like before.
+
+- Class: text
+  Output: Looking at the table, each row indicates an algorithm.
+      BW est. (h) refers to the suggested bandwidth.
+      BW bias (b) refers to the potential bias, which can be adjusted later. 
+
+- Class: cmd_question
+  Output: Usually the first method, mserd (which uses mean squared error to estimate bandwidth), is a sufficient method. 
+      Here, it suggested a bandwidth of h=17.708.
+      Let's plug it into the rdrobust function, like before.  
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708) %>% summary()
+  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708) %>% summary()')
+  Hint: Use the same rdrobust() as before, just changing the h argument. 
+
+- Class: cmd_question
+  Output: Now let's do the same thing, but add a parameter.
+      Put all=TRUE as the last argument.
+  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708, all=TRUE) %>% summary()
+  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c = 0, h = 17.708, all=TRUE) %>% summary()')
+
+- Class: text
+  Output: By setting all to true, we get to see the bias-adjusted results. 
+
+- Class: exact_question
+  Output: What is the bias-corrected causal estimate?
+  CorrectAnswer: 7.510
+  AnswerTests: omnitest(correctVal = "7.510")
+  Hint: See the table 
+
+- Class: exact_question
+  Output: What is the bias-corrected 95% confidence interval of the causal estimate?
+  CorrectAnswer: "[4.648 , 10.372]"
+  AnswerTests: omnitest(correctVal = "[4.648 , 10.372]")
+  Hint: Copy and paste from the table.
+
+- Class: cmd_question
+  Output: Now let's visualize it with a plot. 
+      Use the rdplot() function, like before, but this time specifying the indicated bandwidth (h).
+  CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+  Hint: Fill in the y and x, like before. Change h to the suggested bandwidth.
+
+- Class: cmd_question
+  Output: Another parameter in the rdplot() function is confidence interval. 
+      It could give you an idea whether we have confidence in bandwidth region.
+      Add the parameter ci=95 between binselect and h. 
+  CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+  AnswerTests: any_of_exprs('rdplot(y=foo$vote, x=foo$margin, binselect='es',ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')')
+
+- Class: text
+  Output: It's good to see that we have narrower CIs in the bandwidth region. 
+      Based on our result, we can see that having won a vote at the senate at time t
+      has an effect of 7.5 on the vote share at time t+1. 
+      The confidence interval is between 4 and 10, meaning we have confidence for the 
+      causal direction.
+
+- Class: text
+  Output: That wraps up the introduction to the rdrobust package. 
+      We learned several things.
+
+- Class: text
+  Output: 1) How to conduct RDD analysis with rdrobust with any bandwidth of our choosing.
+
+- Class: text
+  Output: 2) How to do some visualization with RDD, with confidence interval and different bandwidths.
+
+- Class: text
+  Output: 3) How to utilize algorithms that smart people came up with to select proper bandwidths.
+
+- Class: text
+  Output: 4) How to interpret the graphical and numerical results from the RDD analysis. 
+
+- Class: text
+  Output: This lesson is inspired by https://nickch-k.github.io/introcausality/Lectures/Lecture_22_Regression_Discontinuity.html#/in-practice. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s26")
+  Hint: 
