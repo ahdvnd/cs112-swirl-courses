@@ -26,7 +26,7 @@
   Output: We are using a dataset that comes with the library, related to senate voting. 
       Load the data by using data(rdrobust_RDsenate)
   CorrectAnswer: data(rdrobust_RDsenate)
-  AnswerTests: any_of_exprs('data(rdrobust_RDsenate)')
+  AnswerTests: any_of_exprs('data(rdrobust_RDsenate)', 'data("rdrobust_RDsenate")')
 
 - Class: cmd_question
   Output: Save the dataset to an object called foo.
@@ -64,9 +64,9 @@
   Output: The rdrobust() function in the library allows us to define our own bandwidth. 
       The basic use of the function is defining the outcome (y), the covariate (x), the threshold (c), and the bandwidth (h).
       Let's try a bandwidth of 10. 
-      Fill in this, rdrobust(y=, x=, c=, h=) %>% summary(). 
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c=0, h=10) %>% summary()
-  AnswerTests: any_of_exprs('rdrobust(y=foo$vote, x=foo$margin, c=0, h=10) %>% summary()')
+      Fill in this, summary(rdrobust(y=, x=, c=, h=)). 
+  CorrectAnswer: summary(rdrobust(y=foo$vote, x=foo$margin, c=0, h=10))
+  AnswerTests: any_of_exprs('summary(rdrobust(y=foo$vote, x=foo$margin, c=0, h=10))')
   Hint: Threshold is the boundary that separates victories from losses. 
 
 - Class: text
