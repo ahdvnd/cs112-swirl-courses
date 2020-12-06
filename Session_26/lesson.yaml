@@ -97,9 +97,9 @@
 - Class: cmd_question
   Output: We use a third function rdbwselect(), to see the bandwidth suggested by each algorithm.
       The all parameter indicates we want to see all the algorithms. 
-      Fill in this, rdbwselect(y=, x=, all=TRUE) %>% summary()
-  CorrectAnswer: rdbwselect(y=foo$vote, x=foo$margin, all = TRUE) %>% summary()
-  AnswerTests: any_of_exprs('rdbwselect(y=foo$vote, x=foo$margin, all = TRUE) %>% summary()')
+      Fill in this, summaryrdbwselect(y=, x=, all=TRUE))
+  CorrectAnswer: summary(rdbwselect(y=foo$vote, x=foo$margin, all = TRUE))
+  AnswerTests: any_of_exprs('summary(rdbwselect(y=foo$vote, x=foo$margin, all = TRUE))')
   Hint: Fill in the y and x, like before.
 
 - Class: text
@@ -109,42 +109,44 @@
 
 - Class: cmd_question
   Output: Usually the first method, mserd (which uses mean squared error to estimate bandwidth), is a sufficient method. 
-      Here, it suggested a bandwidth of h=17.708.
+      Here, it suggested a bandwidth of almost 17.7.
       We do not need to specify the h parameter when we are relying on rdbwselect.
       We specify a new parameter, bwselect, and set it to equal to 'mserd'. 
       Let's run the rdrobust function with the appropriate adjustment.  
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd') %>% summary()
-  AnswerTests: any_of_exprs("rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd') %>% summary()")
+  CorrectAnswer: summary(rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd'))
+  AnswerTests: any_of_exprs("summary(rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd'))")
   Hint: Use the same rdrobust() as before, just deleting the h argument and adding bwselect.
 
 - Class: text
-  Output: Looking at the h, we confirm that the bandwidth is indeed 17.708.
+  Output: Looking at the h, we confirm that the bandwidth is roughly 17.7.
 
 - Class: cmd_question
   Output: Now let's do the same thing, but add a parameter.
       Put all=TRUE as the last argument.
-  CorrectAnswer: rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE) %>% summary()
-  AnswerTests: any_of_exprs("rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE) %>% summary()")
+  CorrectAnswer: summary(rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE))
+  AnswerTests: any_of_exprs("summary(rdrobust(y=foo$vote, x=foo$margin, c = 0, bwselect='mserd', all=TRUE))")
 
 - Class: text
   Output: By setting all to true, we get to see the bias-adjusted results. 
 
 - Class: exact_question
-  Output: What is the bias-corrected causal estimate?
-  CorrectAnswer: 7.510
-  AnswerTests: omnitest(correctVal = "7.510")
-  Hint: See the table 
+  Output: What is the bias-corrected causal estimate? Round to 1 decimal.
+  CorrectAnswer: 7.5
+  AnswerTests: omnitest(correctVal = "7.5")
+  Hint: See the table. Round to 1 decimal.
 
 - Class: exact_question
-  Output: What is the bias-corrected 95% confidence interval of the causal estimate? 
-      Copy and paste from the table, and put them in quotations.
-  CorrectAnswer: "[4.648 , 10.372]"
+  Output: What is the bias-corrected 95% confidence interval of the causal estimate rom the 
+      bias-corrected estimate? Copy and paste from the table, and put them in quotations.
+      Round numbers to 1 decimal.
+  CorrectAnswer: "[4.6 , 10.4]"
   AnswerTests: omnitest(correctVal = "[4.648 , 10.372]")
-  Hint: In this format, "[x.xxx , xx.xxx]"
+  Hint: In this format, "[x.x , xx.x]". Round to 1 decimal.
 
 - Class: cmd_question
   Output: Now let's visualize it with a plot. 
       Use the rdplot() function, like before, but this time specifying the indicated bandwidth (h).
+      Copy the following code as is: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
   CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
   AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
   Hint: Fill in the y and x, like before. Change h to the suggested bandwidth.
@@ -155,6 +157,7 @@
       Add the parameter ci=95 between binselect and h. 
   CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
   AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es',ci=95, h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
+  Hint: Add the ci argument after the binselect argument.
 
 - Class: text
   Output: It's good to see that we have narrower CIs in the bandwidth region. 
