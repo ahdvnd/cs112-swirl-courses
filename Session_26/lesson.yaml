@@ -140,7 +140,7 @@
       bias-corrected estimate? Copy and paste from the table, and put them in quotations.
       Round numbers to 1 decimal.
   CorrectAnswer: "[4.6 , 10.4]"
-  AnswerTests: omnitest(correctVal = "[4.648 , 10.372]")
+  AnswerTests: omnitest(correctVal = "[4.6 , 10.4]")
   Hint: In this format, "[x.x , xx.x]". Round to 1 decimal.
 
 - Class: cmd_question
