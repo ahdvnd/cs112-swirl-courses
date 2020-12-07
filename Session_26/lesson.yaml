@@ -146,7 +146,7 @@
 - Class: cmd_question
   Output: Now let's visualize it with a plot. 
       Use the rdplot() function, like before, but this time specifying the indicated bandwidth (h).
-      Copy the following code as is: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
+      Copy the following code as is, rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
   CorrectAnswer: rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')
   AnswerTests: any_of_exprs("rdplot(y=foo$vote, x=foo$margin, binselect='es', h = 17.708, x.label='Vote Share in Election at time t', y.label= 'Vote Share in Election at time t+1')")
   Hint: Fill in the y and x, like before. Change h to the suggested bandwidth.
