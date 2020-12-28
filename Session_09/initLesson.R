@@ -5,12 +5,7 @@
 
 # swirl_options(swirl_logging = TRUE)
 
-library(Matching)
-data(lalonde)
-
 calc_rmse <- function(ytrue, ypred) {
   res <- sum((ytrue - ypred)**2)
   return(sqrt(res/length(ypred)))
 }
-
-set.seed(112)

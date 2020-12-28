@@ -23,8 +23,18 @@
   AnswerTests: any_of_exprs('library(tree)')
   Hint: To install, install.packages("tree"). To load, library(tree).
 
-- Class: text
-  Output: Our trusty lalonde dataset is automatically loaded in the beginning of the session.
+- Class: cmd_question
+  Output: Then load the package Matching. If you haven't installed it yet, you
+      should install it first.
+  CorrectAnswer: library(Matching)
+  AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")')
+  Hint: After installation, use the library() function.
+  
+- Class: cmd_question
+  Output: Now, let's load the lalonde data from the packate Matching.
+  CorrectAnswer: data(lalonde)
+  AnswerTests: any_of_exprs('data(lalonde)', 'data("lalonde")')
+  Hint: Use the data() function.
 
 - Class: cmd_question
   Output: Let's set a seed to make sure our tree turns out the same. Set seed to 112.
@@ -127,7 +137,7 @@
 - Class: cmd_question
   Output: Use the calc_rmse function to calculate the test set error.
   CorrectAnswer: calc_rmse(lalonde.test$re75, test.pred)
-  AnswerTests: omnitest(correctVal = calc_rmse(lalonde.test$re75, test.pred))
+  AnswerTests: any_of_exprs('calc_rmse(lalonde.test$re75, test.pred)')
   Hint: Change this, calc_rmse(ytrue, ypred)
   
 - Class: mult_question
