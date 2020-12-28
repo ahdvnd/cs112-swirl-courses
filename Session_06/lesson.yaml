@@ -20,15 +20,9 @@
       how using a logistic regression we can predict the probability of having
       a heart disease given a person characteristics.
 
-- Class: cmd_question
-  Output: Let's load the dataset first. The dataset's url is
-      https://bit.ly/heart_attack_data and is in .csv format. Use the appropriate
-      function to load the dataset first and save it to an object called ha_data.
-  CorrectAnswer: ha_data <- read.csv("https://bit.ly/heart_attack_data")
-  AnswerTests: expr_uses_func('read.csv')
-  Hint: Which function do we usually use to import csv files? 
-      You don't need to use any other argument. Make sure you use "<-"
-      for assignment and not "=".
+- Class: text
+  Output: The data is already loaded in your environment and is called ha_data so
+      you don't have to load it. 
 
 - Class: text
   Output: As we said, the data includes patients' data on the presence of heart
