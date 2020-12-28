@@ -15,9 +15,10 @@
       Hit any key to continue!
       
 - Class: text
-  Output: In this exercise, we will be exploring several parameters and learn how they affect the matching procedure. 
-      Genetic matching consists of several steps, 1) run GenMatch, 2) use the GenMatch output in Match, 
-      3) check the balance with MatchBalance(), and 4) estimate the treatment effect. 
+  Output: In this exercise, we will be exploring several parameters and learn how 
+      they affect the matching procedure. Genetic matching consists of several 
+      steps, 1) run GenMatch, 2) use the GenMatch output in Match, 3) check the 
+      balance with MatchBalance(), and 4) estimate the treatment effect. 
       For today, we will run the entire matching procedure for Q5-6 in the pre-class work doc, 
       but it's easily replicatable for the other questions once you get the hang of it.
 
@@ -25,13 +26,11 @@
   Output: Do you want to access the doc link to the Genetic Matching Exercises?
   VideoLink: https://docs.google.com/document/d/1b4yIh2oOOR-Nd5zgARheMBE19zqmPcq72YcRnw5MITY/edit
 
-- Class: cmd_question
+- Class: text
   Output: Let's first load the lalonde dataset WITH non-experiment observations. 
-      We are trying to match the treated units from the RCT with the units from the observational study to estimate the treatment effect. 
-      Load the data from https://tinyurl.com/yxzo52ez and save it as lalonde_obs. 
-  CorrectAnswer: lalonde_obs <- read.csv("https://tinyurl.com/yxzo52ez")
-  AnswerTests: any_of_exprs('lalonde_obs <- read.csv("https://tinyurl.com/yxzo52ez")') 
-  Hint: Use the read.csv() function.
+      We are trying to match the treated units from the RCT with the units from 
+      the observational study to estimate the treatment effect. The data is 
+      automatically loaded in your environment and is called lalonde_obs.
 
 - Class: cmd_question
   Output: Let's look at the head of the data.

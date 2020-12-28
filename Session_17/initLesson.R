@@ -5,3 +5,10 @@
 
 # swirl_options(swirl_logging = TRUE)
 
+.get_course_path <- function(){
+    tryCatch(swirl:::swirl_courses_dir(),
+             error = function(c) {file.path(find.package("swirl"),"Courses")}
+    )
+}
+
+lalonde_obs <- read.csv(file.path(.get_course_path(), "cs112-swirl-courses", "Session_17", "lalonde_obs.csv"))

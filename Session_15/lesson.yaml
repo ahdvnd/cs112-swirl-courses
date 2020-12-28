@@ -47,6 +47,13 @@
       and intimidate opposition parties and supress votes. Press any key to continue!
 
 - Class: cmd_question
+  Output: Now load the package dplyr that you've used before.
+      If you haven't installed it yet, you should install it.
+  CorrectAnswer: library(dplyr)
+  AnswerTests: any_of_exprs('library(dplyr)', 'library("dplyr")')
+  Hint: Load the package using the library() function. 
+
+- Class: cmd_question
   Output: Let's take a look at the data. Use the fuction glimpse() from the dplyr
       package to take a look at the data.
   CorrectAnswer: glimpse(glynn_ichino)

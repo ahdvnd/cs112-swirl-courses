@@ -20,15 +20,11 @@
       Then, we will move on to genetic matching. We will try to interpret 
       the match balance result to see how well we have matched our units.
 
-- Class: cmd_question
+- Class: text
   Output: This original data file is in a .dta format which means it a Stata native file.
       Stata is another statistical software that is a lot more limited than R but is
-      still used in for statistical analysis. For your convenience, the data is tranformed 
-      into a csv link. Let's load the data from the following 
-      link http://bit.ly/lalonde_obs. Save the data into an object called lalonde_obs
-  CorrectAnswer: lalonde_obs <- read.csv("http://bit.ly/lalonde_obs")
-  AnswerTests: any_of_exprs('lalonde_obs <- read.csv("http://bit.ly/lalonde_obs")') 
-  Hint: Use the read.csv() function.
+      still used in for statistical analysis. For your convenience, the data is already loaded
+      in your environment and is called lalonde_obs.
 
 - Class: cmd_question
   Output: Let's look at the head of the data.
