@@ -28,16 +28,19 @@
 
 - Class: text
   Output: Download the data and move it to your working directory. Then import it
-      into R. Make sure you name the dataset as "data". Also note that the data is in
-      .dta format. Think about which package you need to load the data. If you
+      into R. Let us know if you have difficulty downloading the data.
+      Make sure you name the dataset as "data". Also note that the data is in
+      .dta format. Google which package you need to load the data. If you
       get an error and exit swirl, load the data first and then restart the swirl
       lesson.
 
 - Class: text
   Output: We are stratifying our analysis by sex. Let's focus on the female for now
       (You can easily replicate the same procedure for male). 
+      The variable indicating assignment is called assignmt and the variable
+      indicating treatment is called training.
       Here, we subsetted our dataset into female (sex == 0), female_treat 
-      (sex == 0 and assignmt == 1), female_control (sex == 0 and assignmt == 0) 
+      (sex == 0 and training == 1), female_control (sex == 0 and training == 0) 
 
 - Class: cmd_question
   Output: Here, we subsetted our dataset into female (sex == 0). 
@@ -48,34 +51,21 @@
 
 - Class: cmd_question
   Output: Here, then, we subset it into treatment group 
-      Run this, female_treat = female[which(female$assignmt == 1),]
-  CorrectAnswer: female_treat = female[which(female$assignmt == 1),]
-  AnswerTests: any_of_exprs('female_treat = female[which(female$assignmt == 1),]') 
+      Run this, female_treat = female[which(female$training == 1),]
+  CorrectAnswer: female_treat = female[which(female$training == 1),]
+  AnswerTests: any_of_exprs('female_treat = female[which(female$training == 1),]') 
   Hint: 
 
 - Class: cmd_question
   Output: Then, control group. 
-      Run this, female_control = female[which(female$assignmt == 0),]
-  CorrectAnswer: female_control = female[which(female$assignmt == 0),]
-  AnswerTests: any_of_exprs('female_control = female[which(female$assignmt == 0),]') 
+      Run this, female_control = female[which(female$training == 0),]
+  CorrectAnswer: female_control = female[which(female$training == 0),]
+  AnswerTests: any_of_exprs('female_control = female[which(female$training == 0),]') 
   Hint: 
 
-- Class: cmd_question
-  Output: Let's see if the treatment and control group are similar in age. 
-      What is the age mean in the treatment group?
-  CorrectAnswer: mean(female_treat$age)
-  AnswerTests: any_of_exprs('mean(female_treat$age)') 
-  Hint: Use the mean() function
-
-- Class: cmd_question
-  Output: What is the age mean in the control group?
-  CorrectAnswer: mean(female_control$age)
-  AnswerTests: any_of_exprs('mean(female_control$age)') 
-  Hint: Use the mean() function
-
 - Class: mult_question
-  Output: Why do you think the two groups are not balanced at least when we look
-      at the variable age and its means across treatment and control?
+  Output: the two groups (treated and control) are not necessarily balanced. 
+      Why do you think the two groups are not balanced across treatment and control?
       Isn't the encouragment randomized?
   AnswerChoices: It happens; Encouragment is randomized but receiving treatment isn't; Encouragement is not randomized
   CorrectAnswer: Encouragment is randomized but receiving treatment isn't
@@ -95,14 +85,16 @@
   Output: What is the compliance rate among the female in the dataset?
       (Round your answer to 2 decimal points)
   AnswerChoices: 0.64;0.43;0.76;0.24
-  CorrectAnswer: 0.43
-  AnswerTests: omnitest(correctVal='0.43')
+  CorrectAnswer: 0.64
+  AnswerTests: omnitest(correctVal='0.64')
   Hint: compliance = Fraction of Subjects that were treated in the 
-      encouraged group - Fraction of Subjects that were treated in the non-encouraged group.
+      encouraged group out of all encouraged individuals - Fraction 
+      of Subjects that were treated in the non-encouraged group out of all
+      non-encouraged individuals.
 
 - Class: text
   Output: Good job. Compliance rate accounts for both the encouragement group and the non-encouragement group. 
-      It will be used to calculate the Wald estimator later. Did you get an answer equal to 0.43.
+      It will be used to calculate the Wald estimator later. Did you get an answer equal to 0.64.
 
 - Class: exact_question
   Output: What is the effect of the encouragement on workers' earning during 30 months
@@ -114,13 +106,13 @@
 - Class: exact_question
   Output: What is the impact of the JTPA program on female workers' earning, 
       based on the Wald estimator (LATE)? (Round it with no decimals)
-  CorrectAnswer: 2889.67
-  AnswerTests: omnitest(correctVal = "2889.67")
-  Hint: Look up how to use the Wald estimator is calculated (LATE).
+  CorrectAnswer: 1941.5
+  AnswerTests: omnitest(correctVal = "1941.5")
+  Hint: Look up how the Wald estimator is calculated (LATE).
 
 - Class: text
   Output: The LATE can be estimated from the formula, LATE = ITT / compliance rate.
-      In this case, it's 1242.56/0.43 = 2889.67
+      In this case, it's 1242.56/0.64 = 1941.5
 
 - Class: mult_question
   Output: "Would you like the code-generator to generate a code for you?"
