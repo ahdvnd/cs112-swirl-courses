@@ -41,14 +41,15 @@
 - Class: cmd_question
   Output: Now you can create the dependent variable, y, based on the values created and the formula, y = 1000*x1 + 100*x2 + 10*x3. Noise will be 10*rnorm(200).
   CorrectAnswer: y <- 1000*x1 + 100*x2 + 10*x3 + 10*rnorm(200)
-  AnswerTests: omnitest(correctExpr='y <- 1000*x1 + 100*x2 + 10*x3 + 10*rnorm(200)')
-  Hint: You need to include the noise after the independent variables. Make sure you use <- instead of the = sign.
+  AnswerTests: any_of_exprs('y <- 1000*x1 + 100*x2 + 10*x3 + 10*rnorm(200)')
+  Hint: You need to include the noise after the independent variables. 
+      Make sure you use <- instead of the = sign.
     
 - Class: cmd_question
   Output: To wrap it up, you should create a dataframe to combine the independent variables and the dependent variable. 
       Use the appropriate function to combine the variables to a dataframe called df.
   CorrectAnswer: df <- data.frame(x1, x2, x3, y)
-  AnswerTests: omnitest(correctExpr='df <- data.frame(x1, x2, x3, y)')
+  AnswerTests: any_of_exprs('df <- data.frame(x1, x2, x3, y)')
   Hint: You need to put the variables in this order, x1, x2, x3, y. 
 
 - Class: mult_question

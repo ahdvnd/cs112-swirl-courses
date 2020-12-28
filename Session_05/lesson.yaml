@@ -14,10 +14,12 @@
       swirl() again. However, make sure you use the same name you always use!
 
 - Class: text
-  Output: In this lesson, you will 1) run a simple regression with an interaction term, 2) run a simulation based on the regression, and 3) compare the simulated and analytical estimates. 
+  Output: In this lesson, you will 1) run a simple regression with an interaction term, 
+      2) run a simulation based on the regression, and 3) compare the simulated and analytical estimates. 
 
 - Class: cmd_question
-  Output: Let's load the Matching library first.
+  Output: Let's load the Matching library first. If you haven't installed the 
+      package yet, install it first and then load the package. 
   CorrectAnswer: library(Matching)
   AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")')
   Hint: Fill in the argument for library().
@@ -25,7 +27,7 @@
 - Class: cmd_question
   Output: Now, let's import our lovely lalonde dataset from the Matching library. 
   CorrectAnswer: data(lalonde)  
-  AnswerTests: omnitest(correctVal = data(lalonde))
+  AnswerTests: any_of_exprs('data(lalonde)')
   Hint: Fill in the argument for data().
 
 - Class: cmd_question

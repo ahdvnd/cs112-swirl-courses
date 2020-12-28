@@ -41,20 +41,20 @@
   AnswerTests: any_of_exprs('y_pred <- predict(lm1, test_df)')
   Hint: Use the predict() function, and include the linear regression object (lm1) and test set (test_df) in the argument. 
 
-- Class: exact_question
+- Class: cmd_question
   Output: Now we are going to calculate the RMSE from the provided function, calc_rmse().
       This function has two arguments (inputs), true y and predicted y. Note that the true y
       is the actual y values from the test_df data.
   CorrectAnswer: calc_rmse(test_df$y, y_pred)
-  AnswerTests: omnitest(correctVal = calc_rmse(test_df$y, y_pred))
+  AnswerTests: any_of_exprs('calc_rmse(test_df$y, y_pred)')
   Hint: Fill in the arguments for calc_rmse(). Remember the arguments are y_pred and y_true. 
 
-- Class: exact_question
+- Class: cmd_question
   Output: Now we are going to calculate the R-squared from the provided function, calc_rsquared(). 
       This function also has two arguments (inputs), true y and predicted y. Note that the true y
       is the actual y values from the test_df data.
   CorrectAnswer: calc_rsquared(test_df$y, y_pred)
-  AnswerTests: omnitest(correctVal = calc_rsquared(test_df$y, y_pred))
+  AnswerTests: any_of_exprs('calc_rsquared(test_df$y, y_pred)')
   Hint: Fill in the arguments for calc_rsquared().
 
 - Class: mult_question
