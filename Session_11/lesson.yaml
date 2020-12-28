@@ -21,13 +21,8 @@
       lalonde data set. Hit any key to continue!
 
 - Class: text
-  Output: Let's download the data from the following link 
-      "http://bit.ly/lalonde_observational" This is a direct link and the data 
-      is in csv format. Use the approapriate function in R to load the csv file
-      into your environment. Assign the data to an object call lalonde_obs.
-      If you are having difficulties with firewalls in your country, make sure
-      you download the file first and locally load it into your environment.
-      Hit any key to continue!
+  Output: The data is already loaded and is in your environment. 
+      The object is called lalonde_obs.
 
 - Class: cmd_question
   Output: Let's look at the head of the data. Again, make sure you have loaded
@@ -109,7 +104,6 @@
   CorrectAnswer: No
   AnswerTests: omnitest(correctVal='No')
   Hint: 
-      
       
 - Class: text
   Output: If you answered No to the previous question, you are right. When we change
