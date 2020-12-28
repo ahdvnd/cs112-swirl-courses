@@ -27,7 +27,7 @@
 - Class: cmd_question
   Output: Now, let's import our lovely lalonde dataset from the Matching library. 
   CorrectAnswer: data(lalonde)  
-  AnswerTests: any_of_exprs('data(lalonde)')
+  AnswerTests: any_of_exprs('data(lalonde)', 'data("lalonde")')
   Hint: Fill in the argument for data().
 
 - Class: cmd_question
