@@ -11,6 +11,4 @@
     )
 }
 
-students <- read.csv(file.path(.get_course_path(), "cs112-swirl-courses", "Session_01", "students.csv"))
-
-
+students <- read.csv(file.path(.get_course_path(), "cs112-swirl-courses", "Session_02", "students.csv"))

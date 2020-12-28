@@ -1,0 +1,108 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 2 Synthesis, Situating the Content
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to your second Swirl lesson for CS112. Swirl teaches you 
+      R programming interactively from your console in RStudio. To do 
+      this part of the assignment, follow these steps and let us know 
+      if you run into any issues. At the end of the exercise, when you 
+      complete all steps, you will get a unique code that you have to 
+      paste in the Google Forms link provided at the end of the exercise 
+      including your name. Please note that you can use the function 
+      rpt() to go back to the previous question. To end your Swirl session,
+      you can type bye(). After you exit a lesson, you can always resume
+      a lesson by typing swirl() again. However, make sure you use the same 
+      name you always use! Press any key to continue!
+
+- Class: text
+  Output: This is your second swirl lesson. You might still be struggling with
+      R and Swirl. Best way to deal with such issues is to first double check your
+      answer. If you think it's right, then see if a simple Googling of the error
+      you get finds the solution for you. If you're still stuck, post your problem
+      in the class forum. One of the TAs or Profs. will get back to your question
+      quickly. Press any key to continue!
+
+- Class: text
+  Output: In this exercise, we'll continue working with some very basic commands in R.
+      Press any key to continue!
+      
+- Class: text
+  Output: A data frame contains 1 or more rows and 1 or more columns. It's therefore
+      technically a n by m matrix. Each column is usually a variable (vector) with 
+      a name and each row is an observation in your data. Let's say you have data 
+      on age and major of students at a university on 1000 students. Then you can
+      present and store your data in a 1000 by 2 data. Each column would be one of the
+      age or major variables. Each row would be a student. Press any key to continue!
+
+- Class: cmd_question
+  Output: When you started this swirl lesson, a data frame has been automatically
+      loaded in your environments. It's named students and you can find it in 
+      your environment in the top right corner of your R. Type View(students) to
+      take a look at the data. You can then click on x to close the window and 
+      come back to the swirl exercise.
+  CorrectAnswer: View(students)
+  AnswerTests: any_of_exprs('View(students)')
+  Hint: 
+      
+- Class: cmd_question
+  Output: To check how many rows are in this data set, we can use the nrow() function.
+      Use the function to find the number of rows in the data set students. 
+  CorrectAnswer: nrow(students)
+  AnswerTests: any_of_exprs('nrow(students)')
+  Hint: Use the function nrow()
+  
+- Class: cmd_question
+  Output: To check how many columns are in this data set, we can use the ncol() function.
+      Use the function to find the number of columns in the data set students. 
+  CorrectAnswer: ncol(students)
+  AnswerTests: any_of_exprs('ncol(students)')
+  Hint: Use the function ncol()
+  
+- Class: cmd_question
+  Output: To see the column names (variable names) in the data, you can use the
+      function colnames(). Use this function to see what variables exist in the
+      data set students. 
+  CorrectAnswer: colnames(students)
+  AnswerTests: any_of_exprs('colnames(students)')
+  Hint: Use the function colnames()
+  
+- Class: cmd_question
+  Output: To call a specific column in the data frame, we can use the $ sign.
+      For instance, we can use students$major to see the vector of all majors.
+      Type students$major to see what is shown.
+  CorrectAnswer: students$major
+  AnswerTests: any_of_exprs('students$major')
+  Hint: 
+  
+- Class: cmd_question
+  Output: Now that you now how to use the $ sign, use the mean() function to find
+      the mean of the vector age in the data set. 
+  CorrectAnswer: mean(students$age)
+  AnswerTests: any_of_exprs('mean(students$age)')
+  Hint: Use the mean() function. 
+
+- Class: cmd_question
+  Output: Use the max() function to find the highest age in the data set. 
+  CorrectAnswer: max(students$age)
+  AnswerTests: any_of_exprs('max(students$age)')
+  Hint: Use the max() function. 
+
+- Class: text
+  Output: Congratulations! You have finished your second lesson in swirl. There will
+      be a swirl exercise for each section. You are required to complete the swirl
+      exercise before that session as your pre-class work. In the next step, there
+      will be a unique code generated for you. You should copy and paste the code
+      in the google form link that is provided to you and submit your pre-class work.
+      You are responsible to correctly spell your name. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s02")
+  Hint: 
