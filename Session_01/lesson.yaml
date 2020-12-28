@@ -1,0 +1,88 @@
+- Class: meta
+  Course: CS112
+  Lesson: Session 1 Introduction
+  Author: Aboozar Hadavand
+  Type: Standard
+  Organization: Minerva University
+  Version: 2.4.5
+  
+- Class: text
+  Output: Welcome to the first Swirl lesson for CS112. Swirl teaches you 
+      R programming interactively from your console in RStudio. To do 
+      this part of the assignment, follow these steps and let us know 
+      if you run into any issues. At the end of the exercise, when you 
+      complete all steps, you will get a unique code that you have to 
+      paste in the Google Forms link provided at the end of the exercise 
+      including your name. Please note that you can use the function 
+      rpt() to go back to the previous question. To end your Swirl session,
+      you can type bye(). After you exit a lesson, you can always resume
+      a lesson by typing swirl() again. However, make sure you use the same 
+      name you always use! Press any key to continue!
+
+- Class: text
+  Output: This is your first swirl lesson. You might run into issues in the
+      beginning but once you resolve them, you should be good for the rest of
+      the semester. You should let us or the TAs know if you run into issues
+      that you cannot resolve. Press any key to continue!
+
+- Class: text
+  Output: In this exercise, we'll work with some very basic commands in R.
+      Press any key to continue!
+
+- Class: cmd_question
+  Output: Let's create a vector of numbers called "letters" that contains the
+      english letters "A", "B", and "C". Use the <- for assigning the values to 
+      the object. Also because this is a vector of characters, you should put 
+      each value inside quotation marks. 
+  CorrectAnswer: letters <- c("A", "B", "C")
+  AnswerTests: any_of_exprs('letters <- c("A", "B", "C")')
+  Hint: Did you use <- for assignment? Also did you save the vector to an object
+      called letters? Also did you use c() for creating the vector?
+      
+- Class: cmd_question
+  Output: Now that you have created the vector, let's take a look at the object
+      letters. You can call that object and see what's in it by just typing its
+      name. Do so in this step.
+  CorrectAnswer: letters
+  AnswerTests: any_of_exprs('letters')
+  Hint: 
+  
+- Class: cmd_question
+  Output: You can call a specific element in an object by using brackets. For
+      instance, if we want to know the second elements in the object letters, 
+      we simply type letters[2]. Use this command to check the second element of
+      the object letters.
+  CorrectAnswer: letters[2]
+  AnswerTests: any_of_exprs('letters[2]')
+  Hint: 
+
+- Class: cmd_question
+  Output: Now, let's create a vector of numbers. Let's create a vector called
+      numbers that contains the numbers 1, 2, 3, 5, 8, 13, 21.
+  CorrectAnswer: numbers <- c(1, 2, 3, 5, 8, 13, 21)
+  AnswerTests: any_of_exprs('numbers <- c(1, 2, 3, 5, 8, 13, 21)')
+  Hint: Did you use <- for assignment? Also did you save the vector to an object
+      called letters? Also did you use c() for creating the vector?
+
+- Class: cmd_question
+  Output: Because this is a numerical vector, we can use functions that we can
+      apply to numbers such as min, max, median, and mean. Use the mean function
+      to find the mean of the vector numbers. 
+  CorrectAnswer: mean(numbers)
+  AnswerTests: any_of_exprs('mean(numbers)')
+  Hint: 
+
+- Class: text
+  Output: This is it. You have finished your first lesson in swirl. There will
+      be a swirl exercise for each section. You are required to complete the swirl
+      exercise before that session as your pre-class work. In the next step, there
+      will be a unique code generated for you. You should copy and paste the code
+      in the google form link that is provided to you and submit your pre-class work.
+      You are responsible to correctly spell your name. 
+
+- Class: mult_question
+  Output: "Would you like the code-generator to generate a code for you?"
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: cs112_credit(941, "s01")
+  Hint: 
