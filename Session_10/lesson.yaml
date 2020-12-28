@@ -64,28 +64,18 @@
       The mean squared error and R^2 value are also reported.
 
 - Class: cmd_question
-<<<<<<< HEAD
-  Output: Let's calculate the rmse value of this model using the test set. First, let's generate the predictions.
-      Save the predictions to an object called bag.test.pred.
-=======
   Output:  Let's see how our model performs predicting the test data. Save the 
       predictions to an object called bag.test.pred. The test data is called 
       'lalonde.test'. You don't need to specify any other argument.
->>>>>>> f8f92a371281510d9fcd3452d232517d8ecc98a7
   CorrectAnswer: bag.test.pred <- predict(bag.lalonde, lalonde.test)
   AnswerTests: any_of_exprs('bag.test.pred <- predict(bag.lalonde, lalonde.test)')
   Hint: Remember we put the model and the test set as arguments in predict().
 
 - Class: cmd_question
-<<<<<<< HEAD
-  Output: Now we can use the calc_rmse function (already loaded) to calculate the training set error.
-      Save the result to an object called rmse.bag.test.
-=======
   Output: Let's calculate the rmse value of this model using the test set. 
       Use the calc_rmse function (already loaded) to calculate the test set error.
       Save the result to an object called rmse.bag.test. You have to first enter
       the observed values and then the predicted values.
->>>>>>> f8f92a371281510d9fcd3452d232517d8ecc98a7
   CorrectAnswer: rmse.bag.test <- calc_rmse(lalonde.test$re75, bag.test.pred)
   AnswerTests: any_of_exprs('rmse.bag.test <- calc_rmse(lalonde.test$re75, bag.test.pred)')
   Hint: Change this, calc_rmse(ytrue, ypred)
@@ -102,11 +92,8 @@
   AnswerTests: omnitest(correctVal='3')
   Hint: Square root of 10 is ~3. 
 
-- Class: cmd_question
-  Output: Let's set a seed to make sure our trees turns out the same way. Set seed to 112.
-  CorrectAnswer: set.seed(112)
-  AnswerTests: any_of_exprs('set.seed(112)')
-  Hint: set.seed(112)
+- Class: text
+  Output: We've already set a seed so our trees should turn out the same way.
 
 - Class: cmd_question
   Output: Now, use the randomForest() function to make a random forest.
