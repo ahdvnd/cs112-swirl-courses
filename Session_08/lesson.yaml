@@ -13,11 +13,18 @@
       After you exit a lesson, you can always resume a lesson by typing 
       swirl() again. However, make sure you use the same name you always use!
       
-- Class: text
-  Output: When you started this swirl lesson, the Matching and boot packages
-      were automatically loaded in your environment. If you got an error
-      make sure you reinstall packages Matching and boot. We also 
-      loaded the data lalonde in your environment. So you're good to go.
+- Class: cmd_question
+  Output: First load the package Matching. If you haven't installed it yet, you
+      should install it first.
+  CorrectAnswer: library(Matching)
+  AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")')
+  Hint: After installation, use the library() function.
+  
+- Class: cmd_question
+  Output: Now, let's load the lalonde data from the packate Matching.
+  CorrectAnswer: data(lalonde)
+  AnswerTests: any_of_exprs('data(lalonde)', 'data("lalonde")')
+  Hint: Use the data() function.
 
 - Class: cmd_question
   Output: Remember, to make your code replicable especially when you use random
