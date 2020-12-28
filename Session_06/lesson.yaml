@@ -70,22 +70,22 @@
   Output: Let's split the data to test and train. For that, you can simply run
       this code train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5)). 
       This code just creates the indices for the training data.
-  CorrectAnswer: train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5))
-  AnswerTests: any_of_exprs('train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5))')
+  CorrectAnswer: train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5))
+  AnswerTests: any_of_exprs('train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5))')
   Hint: Just copy and run the code in the question text with the semicolons in between.
 
 - Class: cmd_question
   Output: Now, let's create the training set by using the indices we created in
       previous step. You can simply run the code ha_train<-ha_data[train_ind,]
-  CorrectAnswer: ha_train<-ha_data[train_ind,]
-  AnswerTests: any_of_exprs('ha_train<-ha_data[train_ind,]')
+  CorrectAnswer: ha_train <- ha_data[train_ind,]
+  AnswerTests: any_of_exprs('ha_train <- ha_data[train_ind,]')
   Hint: Just copy and run the code in the question text with the semicolons in between.
 
 - Class: cmd_question
   Output: Finally, let's create the test set by using the indices we created in
       previous step. You can simply run the code ha_test<-ha_data[-train_ind,]
-  CorrectAnswer: ha_test<-ha_data[-train_ind,]
-  AnswerTests: any_of_exprs('ha_test<-ha_data[-train_ind,]')
+  CorrectAnswer: ha_test <- ha_data[-train_ind,]
+  AnswerTests: any_of_exprs('ha_test <- ha_data[-train_ind,]')
   Hint: Just copy and run the code in the question text with the semicolons in between.
 
 - Class: cmd_question

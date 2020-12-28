@@ -58,7 +58,7 @@
 - Class: cmd_question
   Output: Let's load the lalonde data from the packate Matching.
   CorrectAnswer: data(lalonde)
-  AnswerTests: any_of_exprs('data(lalonde)')
+  AnswerTests: any_of_exprs('data(lalonde)', 'data("lalonde")')
   Hint: Use the data() function.
   
 - Class: cmd_question
