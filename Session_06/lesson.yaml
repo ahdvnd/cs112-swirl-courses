@@ -68,10 +68,10 @@
 
 - Class: cmd_question
   Output: Let's split the data to test and train. For that, you can simply run
-      this code train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5)). 
+      this code train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5)). 
       This code just creates the indices for the training data.
   CorrectAnswer: train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5))
-  AnswerTests: any_of_exprs('train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5))')
+  AnswerTests: any_of_exprs('train_ind <- sort(sample(nrow(ha_data), nrow(ha_data)*.5))', 'train_ind = sort(sample(nrow(ha_data), nrow(ha_data)*.5))')
   Hint: Just copy and run the code in the question text with the semicolons in between.
 
 - Class: cmd_question
