@@ -143,7 +143,7 @@
 - Class: mult_question
   Output: Based on your results, which error is higher?
   AnswerChoices: Test set error;Training set error
-  CorrectAnswer: Test set error
+  CorrectAnswer: Training set error
   AnswerTests: omnitest(correctVal='Test set error')
   Hint: Look at the numbers you got from the previous steps.
 
