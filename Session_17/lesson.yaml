@@ -26,6 +26,13 @@
       still used in for statistical analysis. For your convenience, the data is already loaded
       in your environment and is called lalonde_obs.
 
+
+- Class: cmd_question
+  Output: We need to first load the Matching libarary. Load it in your environment.
+  CorrectAnswer: library(Matching)
+  AnswerTests: any_of_exprs('library(Matching)', 'library("Matching")') 
+  Hint: 
+
 - Class: cmd_question
   Output: Let's look at the head of the data.
   CorrectAnswer: head(lalonde_obs)
